@@ -1,0 +1,561 @@
+.container {}
+
+/*每个模块标题*/
+
+.index-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.index-title p {
+  font-size: 24px;
+  color: #333;
+  line-height: 38px;
+  height: 38px;
+  width: 200px;
+  overflow: hidden;
+  display: block;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+.index-title-right {
+  float: right;
+  display: inline-block;
+}
+
+.index-title span {
+  width: 200px;
+  height: 26px;
+  font-size: 14px;
+  color: #b1b1b1;
+  line-height: 26px;
+  overflow: hidden;
+}
+
+/*每个模块标题*/
+
+
+/*作者模块*/
+
+.author-box {
+  background: #F9FAFC;
+}
+
+.author-box-layout {
+  width: 1200px;
+  background: #F9FAFC;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding: 120px 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.author-img {
+  width: 180px;
+  height: 180px;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.author-img img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.1, 1.1);
+}
+
+.author-text {
+  text-align: center;
+  color: #475669;
+}
+
+.author-text span {
+  font-size: 14px;
+}
+
+.author-name {
+  font-weight: 400;
+  font-size: 24px;
+
+  margin: 20px 0 0 0;
+}
+
+.author-company {
+  color: #8492A6;
+  margin: 20px;
+  display: inline-block;
+}
+
+/*作者模块*/
+
+
+/*技能模块*/
+
+.skill-box {}
+
+.skill-box-layout {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+.skill-title {
+  font-size: 16px;
+  color: #8492A6;
+  margin: 20px;
+  font-weight: 500;
+}
+
+.skill-list img {
+  height: 44px;
+  margin: 20px 20px;
+}
+
+.skill-box-content {
+  text-align: center;
+}
+
+/*技能模块*/
+
+
+/*案例模块*/
+
+.index-title-bottom {
+  display: none;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.showcase-box {
+
+  background: #F9FAFC;
+}
+
+.showcase-box-header {
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.showcase-box-layout {
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding: 120px 0;
+  background: #F9FAFC;
+}
+
+.showcase-box-content {
+  width: 1215px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.case-content {
+  width: 390px;
+  height: 260px;
+  background: #ccc;
+  margin: 0 15px 15px 0;
+}
+
+.case-content {
+  overflow: hidden;
+  flex-direction: column;
+  transition: all 0.3s ease-out 0s;
+}
+
+.case-content:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-out 0s;
+}
+
+
+
+.case-img {
+  width: 100%;
+  height: 100%;
+  background-image: url("");
+  background-size: 100%;
+  overflow: hidden;
+  transition: all 0.3s ease-out 0s;
+}
+
+.case-img img {
+  float: none;
+  width: 100%;
+  height: auto;
+  transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.case-img:hover img {
+  transform: scale(1.1, 1.1)
+}
+
+.case-title {
+  display: flex;
+  height: 72px;
+  align-items: center;
+  background: #fff;
+  transition: all 0.3s ease-out 0s;
+}
+
+.case-content:hover .case-img {
+  height: 188px;
+  transition: all 0.3s ease-out 0s;
+}
+
+
+.case-title-text {
+  margin-left: 20px;
+  width: 100%;
+}
+
+.case-title-text p {
+  color: #1F2D3D;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.case-title-text span {
+  color: #99A9BF;
+  font-size: 12px;
+}
+
+.case-more {
+  margin-right: 20px;
+}
+
+.case-more-icon {
+  width: 40px;
+  height: 40px;
+  background: #09BDFE;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(9, 189, 254, 0.5);
+}
+
+/*案例模块*/
+
+
+/*我能做什么？*/
+
+.service_img {
+  display: inline;
+}
+
+.service_img img {
+  float: left;
+  width: 240px;
+  height: 150px;
+}
+
+.service_info {
+  float: left;
+  width: 278px;
+  height: 200px;
+  padding: 25px 0 0 30px;
+  text-align: left;
+  margin-top: 0px;
+}
+
+.service-box {
+  height: 336px;
+}
+
+.service-box-layout {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 92px 0;
+  height: 152px;
+}
+
+.service-box-header {
+  width: 300px;
+  float: left;
+  padding-top: 25px;
+}
+
+.service-box-content {
+  width: 900px;
+}
+
+
+/*我能做什么？*/
+
+
+/*关于本站*/
+
+.about-box {
+  background: #F9FAFC;
+}
+
+.about-box-layout {
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding: 90px 0;
+  background: #F9FAFC;
+}
+
+.about-box-content p {
+  margin: 0;
+  color: #5E6D82;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.about-box-content {
+  display: flex;
+}
+
+/*关于本站*/
+
+
+/*博客模块*/
+
+.blog-box {
+  background: #fff;
+}
+
+.blog-box-layout {
+  width: 1258px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding: 90px 0;
+}
+
+.blog-box-content {
+  display: flex;
+  margin-left: 29px;
+  align-items: center;
+  height: 500px;
+}
+
+.blog-content {
+  width: 350px;
+  height: 358px;
+  border: 1px solid #f2f2f2;
+  background-color: #fff;
+  margin-right: 58px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all .6s cubic-bezier(.215, .61, .355, 1) 0s;
+}
+
+.blog-text {
+  width: 270px;
+  height: 258px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all .6s cubic-bezier(.215, .61, .355, 1) 0s;
+}
+
+.blog-date-text {
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blog-content h2 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: normal;
+  color: #5E6D82;
+}
+
+.blog-content h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #1F2D3D;
+  line-height: 28px;
+  padding-bottom: 20px;
+}
+
+.blog-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #5E6D82;
+}
+
+.blog-date {
+  width: 100%;
+  height: 100px;
+  background: #EFF2F7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .6s cubic-bezier(.215, .61, .355, 1) 0s;
+}
+
+.blog-content:hover {
+  height: 420px;
+  background: #09BDFE;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+}
+
+.blog-content:hover .blog-text {
+  height: 320px;
+  color: #fff;
+}
+
+.blog-content:hover .blog-text h4 {
+  color: #fff;
+}
+
+.blog-content:hover .blog-date h2 {
+  color: #09BDFE;
+}
+
+.blog-content:hover .blog-date p {
+  color: #09BDFE;
+}
+
+.blog-content:hover .blog-text p {
+  color: #fff;
+}
+
+.blog-content:hover .more-style {
+  display: inline;
+}
+
+/*博客模块*/
+
+
+/*当屏幕尺寸小于1024px时，应用下面的CSS样式*/
+
+@media screen and (max-width: 1024px) {}
+
+
+/*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+
+@media screen and (max-width: 760px) {
+  /*每个模块标题*/
+  .showcase-box-header {
+    width: 100%;
+    text-align: center;
+  }
+  .index-title p {
+    width: 100%;
+  }
+  .index-title {
+    justify-content: center;
+  }
+  .index-title-right {
+    display: none;
+  }
+  /*每个模块标题*/
+  /*作者模块*/
+  .author-box-layout {
+    width: 100%;
+    padding: 120px 20px;
+  }
+  .author-text {}
+  .author-text span {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: left;
+  }
+  /*作者模块*/
+  /*技能模块*/
+  .skill-box-layout {
+    width: 100%;
+  }
+  .skill-list img {}
+  /*技能模块*/
+  /*案例模块*/
+   .index-title-right {
+    display: none;
+  }
+  .index-title-bottom {
+    display: flex;
+  }
+  .showcase-box-layout {
+    width: 100%;
+  }
+  .showcase-box-header {
+    width: 100%;
+  }
+  .showcase-box-content {
+    width: 100%;
+    justify-content: center;
+  }
+  .showcase-box-content a {
+    margin: 0 2% 4%;
+    width: 45%;
+  }
+  .case-content {
+    width: 100%;
+    height: 120px;
+  }
+  .case-title {
+    display: none;
+  }
+  /*案例模块*/
+  /*我能做什么*/
+  .service-box-layout {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 40px 0;
+    height: auto;
+  }
+
+  .service-box-header {
+    width: 100%;
+    text-align: center;
+  }
+  .service-box-content {
+    width: 100%;
+  }
+  .service_img img {
+    width: 100px;
+    height: 60px;
+    margin-top: 40px;
+  }
+  /*我能做什么*/
+  /*关于本站*/
+  .about-box-layout {
+    width: 100%;
+    padding: 40px 20px;
+  }
+  .about-box-content img {
+    display: none;
+  }
+  /*关于本站*/
+  /*博客模块*/
+  .blog-box-layout {
+    width: 100%;
+  }
+  .blog-box-content {
+    flex-flow: column;
+    height: 100%;
+    margin: 0;
+  }
+  .blog-content {
+    margin: 10px 10px;
+  }
+  /*博客模块*/
+}
+
+
+@media screen and (min-width: 760px) {}
