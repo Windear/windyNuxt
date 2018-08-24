@@ -45,7 +45,7 @@ export default {
     return {
       title: "404",
       meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
       ]
     }
   },
@@ -66,7 +66,7 @@ export default {
     setTimeout(function() {
       window.top.location.href = "/";
     }, 5000);
-        //默认footer需要显示1
+    //默认footer需要显示1
     this.$store.commit('updateFooterWidth', 1);
   },
   //定义函数

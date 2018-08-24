@@ -2,8 +2,8 @@
   <div class="detailsBody">
     <div class="detailsHeader">
       <div class="detailsTop">
-        <img class="litterImg" :src="litterImg">
-        <!-- <div class="litterImg" :style="'background-image: url('+ip +'/media/'+litterImg.img+');'"></div> -->
+        <!-- <img class="litterImg" :src="litterImg"> -->
+        <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
         <div class="detailsTextBox">
           <div class="textTitle">{{projectData.projectTitle}}</div>
           <div class="dateAndCopyright">{{projectData.projectDate}} ©{{projectData.projectCopyright}}</div>
@@ -60,15 +60,16 @@ export default {
       litterImg: {},
       //作者
       author: "",
-      //
+      //title页面标题
+      title: "windy设计详情",
     }
   },
   //自定义头部
   head() {
     return {
-      title: this.projectData.projectTitle,
+      title: this.title,
       meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
       ]
     }
   },
@@ -129,6 +130,8 @@ export default {
           this.projectData = res;
           this.author = this.projectData.projectCopyright.toLowerCase();
           this.litterImg = this.ip + '/media/' + this.projectData.projectPic;
+          //传入页面标题
+          this.title = res.projectTitle;
         } else {
           alert("网络错误")
         }

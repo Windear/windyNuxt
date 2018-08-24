@@ -21,48 +21,6 @@
       </div>
     </div>
     <!-- 作者模块 -->
-    <!-- 技能模块 -->
-    <div class="skill-box">
-      <div class="skill-box-layout">
-        <div class="index-title showcase-box-header">
-          <div>
-            <p>技能</p>
-            <span>SKILL</span>
-          </div>
-        </div>
-        <div class="skill-box-content gray">
-          <p class="skill-title">产品分析</p>
-          <div class="skill-list">
-            <img src="~/assets/img/skillImg/xmind.png" alt="">
-            <img src="~/assets/img/skillImg/axure.png" alt="">
-            <img src="~/assets/img/skillImg/ppt.png" alt="">
-            <img src="~/assets/img/skillImg/word.png" alt="">
-            <img src="~/assets/img/skillImg/excel.png" alt="">
-          </div>
-          <p class="skill-title">UI设计</p>
-          <div class="skill-list">
-            <img src="~/assets/img/skillImg/sketch.png" alt="">
-            <img src="~/assets/img/skillImg/ps.png" alt="">
-            <img src="~/assets/img/skillImg/ai.png" alt="">
-            <img src="~/assets/img/skillImg/c4d.png" alt="">
-          </div>
-          <p class="skill-title">程序开发</p>
-          <div class="skill-list">
-            <img src="~/assets/img/skillImg/vue.png" alt="">
-            <img src="~/assets/img/skillImg/django.png" alt="">
-            <img src="~/assets/img/skillImg/jquery.png" alt="">
-          </div>
-          <div style="height:20px;"></div>
-          <p class="skill-title">还有...</p>
-          <div class="skill-list">
-            <img src="~/assets/img/skillImg/wow.png" alt="">
-            <img src="~/assets/img/skillImg/sc.png" alt="">
-            <img src="~/assets/img/skillImg/db.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 技能模块 -->
     <!-- 案例模块 -->
     <div class="showcase-box">
       <div class="showcase-box-layout">
@@ -107,6 +65,48 @@
       </div>
     </div>
     <!-- 案例模块 -->
+    <!-- 技能模块 -->
+    <div class="skill-box">
+      <div class="skill-box-layout">
+        <div class="index-title showcase-box-header">
+          <div>
+            <p>技能</p>
+            <span>SKILL</span>
+          </div>
+        </div>
+        <div class="skill-box-content gray">
+          <p class="skill-title">产品分析</p>
+          <div class="skill-list">
+            <img src="~/assets/img/skillImg/xmind.png" alt="">
+            <img src="~/assets/img/skillImg/axure.png" alt="">
+            <img src="~/assets/img/skillImg/ppt.png" alt="">
+            <img src="~/assets/img/skillImg/word.png" alt="">
+            <img src="~/assets/img/skillImg/excel.png" alt="">
+          </div>
+          <p class="skill-title">UI设计</p>
+          <div class="skill-list">
+            <img src="~/assets/img/skillImg/sketch.png" alt="">
+            <img src="~/assets/img/skillImg/ps.png" alt="">
+            <img src="~/assets/img/skillImg/ai.png" alt="">
+            <img src="~/assets/img/skillImg/c4d.png" alt="">
+          </div>
+          <p class="skill-title">程序开发</p>
+          <div class="skill-list">
+            <img src="~/assets/img/skillImg/vue.png" alt="">
+            <img src="~/assets/img/skillImg/django.png" alt="">
+            <img src="~/assets/img/skillImg/jquery.png" alt="">
+          </div>
+          <div style="height:20px;"></div>
+          <p class="skill-title">还有...</p>
+          <div class="skill-list">
+            <img src="~/assets/img/skillImg/wow.png" alt="">
+            <img src="~/assets/img/skillImg/sc.png" alt="">
+            <img src="~/assets/img/skillImg/db.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 技能模块 -->
     <!-- 我能做什么？ -->
     <div class="service-box">
       <div class="service-box-layout">
@@ -286,7 +286,7 @@ export default {
     return {
       title: "武汉UI设计/APP设计/WEB开发/系统开发/软件设计 Windy。",
       meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
       ]
     }
   },

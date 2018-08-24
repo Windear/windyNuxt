@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import cache from './cache'
 // 全局的 axios 默认值
 //axios.defaults.baseURL = 'https://apis.map.qq.com/';
 //axios.defaults.timeout = 10000;
@@ -7,43 +7,55 @@ import axios from 'axios';
 
 export default {
   //请求设计分类
-  getDesignCate({ commit, state }, params) {
-    return axios({
+  async getDesignCate({ commit, state }, params) {
+    return await axios({
       url: 'design/cate',
       method: 'get',
       params,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
     });
   },
   //请求设计列表
-  getDesignList({ commit, state }, params) {
-    return axios({
+  async getDesignList({ commit, state }, params) {
+    return await axios({
       url: 'design/designList',
       method: 'get',
       params,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
     });
   },
   //请求设计详情
-  getDesignData({ commit, state }, params) {
-    return axios({
+  async getDesignData({ commit, state }, params) {
+    return await axios({
       url: '/design/details/' + params,
       method: 'get',
       //params,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
     });
   },
   //请求项目列表
-  postProjectList({ commit, state }, params) {
-    return axios({
+  async postProjectList({ commit, state }, params) {
+    return await axios({
       url: 'design/project',
       method: 'post',
       data: params,
+
     });
   },
   //请求案例列表
-  getCaseList({ commit, state }, params) {
-    return axios({
+  async getCaseList({ commit, state }, params) {
+    return await axios({
       url: '/design/caseList',
       method: 'get',
-      params,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
     });
   }
 }

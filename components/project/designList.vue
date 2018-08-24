@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="pagination">
-          <el-pagination @current-change="handleCurrentChange" :page-size="8" layout="total,prev, pager, next" :total="UIlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :page-size="12" layout="total,prev, pager, next" :total="UIlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
         </div>
       </div>
       <div class="bodyitem" v-if="body.text=='插画/原画'">
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="pagination">
-          <el-pagination @current-change="handleCurrentChange" :page-size="8" layout="total,prev, pager, next" :total="CGlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :page-size="12" layout="total,prev, pager, next" :total="CGlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
         </div>
       </div>
       <div class="bodyitem" v-if="body.text=='平面设计'">
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="pagination">
-          <el-pagination @current-change="handleCurrentChange" :page-size="8" layout="total,prev, pager, next" :total="PMlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :page-size="12" layout="total,prev, pager, next" :total="PMlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
         </div>
       </div>
       <div class="bodyitem" v-if="body.text=='3D设计'">
@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="pagination">
-          <el-pagination @current-change="handleCurrentChange" :page-size="8" layout="total,prev, pager, next" :total="DDDlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :page-size="12" layout="total,prev, pager, next" :total="DDDlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
         </div>
       </div>
       <div class="bodyitem" v-if="body.text=='动效设计'">
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="pagination">
-          <el-pagination @current-change="handleCurrentChange" :page-size="8" layout="total,prev, pager, next" :total="DXlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :page-size="12" layout="total,prev, pager, next" :total="DXlistData.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
         </div>
       </div>
     </div>
@@ -79,11 +79,12 @@
 </template>
 <script type="text/javascript">
 export default {
+
   //该页面的控制数据
   data() {
     return {
       //ip地址
-      ip:this.$store.state.ip,
+      ip: this.$store.state.ip,
       listTitleId: 0,
       //设计分类
       listTitle: [],
@@ -116,12 +117,12 @@ export default {
 
   },
   created() {
-    this.getDesignCate();
-    this.getDesignList();
+
   },
   //进入页面执行的函数
   mounted() {
-
+    this.getDesignCate();
+    this.getDesignList();
   },
   //定义函数
   methods: {
@@ -151,7 +152,7 @@ export default {
           //console.log(res);
           this.listsDatas = res;
           this.toList();
-          this.toListData(0, 8);
+          this.toListData(0, 12);
           //this.newList();
         } else {
           alert("网络错误")
@@ -184,7 +185,7 @@ export default {
     //点击标题
     clickPage(index) {
       this.listTitleId = index;
-      this.toListData(0, 8);
+      this.toListData(0, 12);
     },
     //将列表传8条到listData
     toListData(start, end) {
@@ -197,7 +198,7 @@ export default {
     //点击翻页
     handleCurrentChange(val) {
       //console.log(`当前页: ${nowPage}`);
-      this.toListData((val - 1) * 8, val * 8);
+      this.toListData((val - 1) * 12, val * 12);
       //回到顶部
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
@@ -256,7 +257,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
 .listBody {}
@@ -352,6 +352,8 @@ export default {
 
 
 
+
+
 /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
 
 @media screen and (max-width: 760px) {
@@ -392,7 +394,7 @@ export default {
     margin: 0 2% 4%;
     width: 45%;
   }
-  .listMask{
+  .listMask {
     margin: 0 2% 4%;
     width: 45%;
     display: none;
@@ -402,14 +404,14 @@ export default {
     width: 100%;
     height: 140px;
   }
-  .listText{
+  .listText {
     margin: 0 2% 4%;
   }
-  .listDate{
-     margin: 0 2% 4%;
+  .listDate {
+    margin: 0 2% 4%;
   }
-  .listLine{
-     margin: 0 2% 4%;
+  .listLine {
+    margin: 0 2% 4%;
   }
 }
 

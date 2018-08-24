@@ -2,8 +2,10 @@
   <div>
     <nav-bar/>
     <div style="height:80px"></div>
-    <nuxt/>
-    <page-footer v-if = "footerWidth !=0" ></page-footer>
+
+      <nuxt/>
+
+    <page-footer v-if="footerWidth !=0"></page-footer>
     <!-- 微信模态框 -->
     <wechat/>
     <!-- 微信模态框 -->
@@ -26,7 +28,7 @@ export default {
 
   },
   computed: {
-        //底部宽度变化
+    //底部宽度变化
     footerWidth() {
       return this.$store.getters.getFooterWidth;
     }
@@ -44,7 +46,7 @@ export default {
       //console.log("onresize:" + that.bodyWidth)
       that.bodyWidth = document.body.clientWidth;
       that.$store.commit('updateBodyWidth', that.bodyWidth);
-    }, 100);  
+    }, 100);
 
   },
   components: {
@@ -132,8 +134,17 @@ button {
   font-family: 'Hiragino Sans GB', 'Helvetica Neue', 'Microsoft Yahei';
   -webkit-font-smoothing: antialiased;
 }
-body, ul, h1, h2, h3, p, pre, figure {
-    margin: 0;
-    padding: 0;
+
+body,
+ul,
+h1,
+h2,
+h3,
+p,
+pre,
+figure {
+  margin: 0;
+  padding: 0;
 }
+
 </style>

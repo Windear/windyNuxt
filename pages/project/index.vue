@@ -19,19 +19,19 @@
 import baidu from 'static/js/baidu.js'
 
 import designList from '~/components/project/designList'; //设计列表
-import projectList from '~/components/project/projectList';//项目列表
+import projectList from '~/components/project/projectList'; //项目列表
 export default {
 
   //该页面的控制数据
   data() {
     return {}
   },
-   //自定义头部
+  //自定义头部
   head() {
     return {
       title: "武汉UI设计师Windy作品列表，项目展示，设计展示",
       meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
       ]
     }
   },
@@ -48,7 +48,7 @@ export default {
     this.$store.commit('updateNavBarActive', '2');
     //百度统计
     baidu.baidu("我的案例");
-        //默认footer需要显示1
+    //默认footer需要显示1
     this.$store.commit('updateFooterWidth', 1);
   },
   //定义函数
@@ -93,12 +93,16 @@ p {
 }
 
 
+
 /*标题样式*/
+
+
 /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
 
 @media screen and (max-width: 760px) {
-  .text-title{
+  .text-title {
     display: none;
   }
 }
+
 </style>

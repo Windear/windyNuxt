@@ -1,4 +1,5 @@
 const resolve = require('path').resolve
+const LRU = require('lru-cache')
 
 module.exports = {
   /*
@@ -16,11 +17,24 @@ module.exports = {
     ]
   },
   router: {
-    extendRoutes (routes) {
+    extendRoutes(routes) {
       routes.push({
         name: 'custom',
         path: '*',
         component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
+  },
+
+  /*
+   ** 缓存配置项
+   */
+  //全局缓存
+  render: {
+    bundleRenderer: {
+      cache: require('lru-cache')({
+        max: 1000,
+        maxAge: 1000 * 60 * 15
       })
     }
   },
@@ -69,7 +83,7 @@ module.exports = {
       '/design',
       {
         // target: 'http://www.5windy.com:5001/design',
-        target: 'http://127.0.0.1:5001/design',
+        target: 'http://5windy.com:5001/design',
         pathRewrite: {
           '^/design': '/',
         }
@@ -96,4 +110,3 @@ module.exports = {
   ],
 
 }
-

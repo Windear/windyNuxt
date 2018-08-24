@@ -20,7 +20,7 @@ export default {
     return {
       title: "UI设计素材下载",
       meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
+                { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
       ]
     }
   },

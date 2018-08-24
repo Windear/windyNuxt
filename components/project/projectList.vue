@@ -150,6 +150,7 @@ export default {
   font-size: 18px;
   font-weight: 400px;
   margin-bottom: 8px;
+  width: 280px;
 }
 
 .projectText {
