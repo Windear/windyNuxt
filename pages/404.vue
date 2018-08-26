@@ -7,7 +7,7 @@
         </div>
         <div class="bg-right">
           <div class="bg-text">
-            <h3>哎呀！404错误，页面找不到了。</h3>
+            <h3>找不到设计师Windy?试着刷新一下。</h3>
             <p>不过没关系，返回首页或者后退就可以了…</p>
             <p class="countDown"><span id="mysetTimeout">5</span>s 后自动返回首页。</p>
           </div>
@@ -45,7 +45,8 @@ export default {
     return {
       title: "404",
       meta: [
-        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+        { hid: 'description',content: '找不到设计师Windy?试着刷新一下。'}
       ]
     }
   },

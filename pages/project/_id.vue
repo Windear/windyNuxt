@@ -69,7 +69,8 @@ export default {
     return {
       title: this.title,
       meta: [
-        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+        { hid: 'description',content:this.projectData.projectSynopsis}
       ]
     }
   },

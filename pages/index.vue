@@ -10,11 +10,9 @@
           <p class="author-name">Windy</p>
           <span class="author-company">现任职于 东风设计研究院有限公司 高级UI设计师/前端工程师</span>
           <br>
-          <span>2011年毕业于武汉轻工大学，艺术设计专业。7年互联网产品开发经验，全栈产品设计师。
-</span>
+          <span>2011年毕业于武汉轻工大学，艺术设计专业。7年互联网产品开发经验，全栈产品设计师。</span>
           <br>
-          <span>拥有APP开发(IOS,Android,WEB)、社交软件开发、企业级网页应用开发、MES、BAS、物联网设计开发等经验。
-</span>
+          <span>拥有APP开发(IOS,Android,WEB)、社交软件开发、企业级网页应用开发、MES、BAS、物联网设计开发等经验。</span>
           <br>
           <span>曾服务于：华晨宝马、东风日产、东风本田、东风特汽等多家知名企业。</span>
         </div>
@@ -163,17 +161,8 @@
         </div>
         <div class="about-box-content">
           <div>
-            <p class="">
-              欢迎来到我的个人网站。我是一名网站设计者，同时也是网站开发者。本网站也是我的一个学习项目，也是我的项目展示平台。
-            </p>
-            <p class="">
-              本网站数据库采用MySQL，后台使用python的Django框架，前端使用vue.js作为展示层。是现在比较流行的MVVM架构模式。
-            </p>
-            <p class="">
-              大家可以很直观的从本网站了解到本人的产品设计能力，产品开发能力以及产品规划能力。
-            </p>
-            <p class="">
-              若有什么意见和建议或者合作的想法，欢迎点击右上角联系本人。谢谢大家。
+            <p class="" v-html="about">
+
             </p>
           </div>
           <div>
@@ -279,6 +268,8 @@ export default {
       //ip地址
       ip: this.$store.state.ip,
       caseList: [],
+      //关于本站
+      about: "欢迎来到5windy的个人网站。我是一名UI设计师，同时也是网站开发者，大家可以叫我设计师Windy。本网站也是我的一个学习项目，也是我的项目展示平台。 <br> 本网站数据库采用MySQL， 后台使用python的Django框架， 前端使用vue.js作为展示层。 是现在比较流行的MVVM架构模式。 <br> 大家可以很直观的从本网站了解到本人的产品设计能力， 产品开发能力以及产品规划能力。 <br> 若有什么意见和建议或者合作的想法， 欢迎点击右上角联系本人。 谢谢大家。 "
     }
   },
   //自定义头部
@@ -286,7 +277,11 @@ export default {
     return {
       title: "武汉UI设计/APP设计/WEB开发/系统开发/软件设计 Windy。",
       meta: [
-        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' }
+        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+        { hid: 'description',content:this.about}
+      ],
+      link: [
+        { rel: "canonical", href: "https://5windy.com/" }
       ]
     }
   },

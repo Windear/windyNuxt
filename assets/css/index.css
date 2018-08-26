@@ -491,7 +491,14 @@
   .skill-box-layout {
     width: 100%;
   }
-  .skill-list img {}
+  .skill-list img {
+    height: 24px;
+    margin: 16px;
+  }
+  .skill-title{
+    font-size: 14px;
+    margin: 10px;
+  }
   /*技能模块*/
   /*案例模块*/
   .index-title-right {
