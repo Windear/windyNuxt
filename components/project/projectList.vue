@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       //ip地址
-      ip:this.$store.state.ip,
+      ip: this.$store.state.ip,
       projectLists: [],
       projectListsData: [],
 
@@ -167,6 +167,8 @@ export default {
 
 
 
+
+
 /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
 
 @media screen and (max-width: 760px) {
@@ -200,6 +202,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     height: 24px;
+    font-size: 16px;
   }
   .projectText {
     width: 100%;

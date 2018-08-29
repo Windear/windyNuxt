@@ -2,9 +2,7 @@
   <div>
     <nav-bar/>
     <div style="height:80px"></div>
-
-      <nuxt/>
-
+    <nuxt/>
     <page-footer v-if="footerWidth !=0"></page-footer>
     <!-- 微信模态框 -->
     <wechat/>

@@ -351,9 +351,6 @@ export default {
 
 
 
-
-
-
 /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
 
 @media screen and (max-width: 760px) {
@@ -385,6 +382,10 @@ export default {
     color: #324057;
     border: 0px;
   }
+  .listBox:hover .listMask {
+    display: none;
+    transition: all 0.3s ease-out 0s;
+  }
   .listHeader a.active {
     background: #EFF2F7;
     color: #20A0FF;
@@ -406,6 +407,11 @@ export default {
   }
   .listText {
     margin: 0 2% 4%;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 24px;
   }
   .listDate {
     margin: 0 2% 4%;

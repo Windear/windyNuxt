@@ -27,18 +27,6 @@ module.exports = {
   },
 
   /*
-   ** 缓存配置项
-   */
-  //全局缓存
-  render: {
-    bundleRenderer: {
-      cache: require('lru-cache')({
-        max: 1000,
-        maxAge: 1000 * 60 * 15
-      })
-    }
-  },
-  /*
    ** Customize the progress bar color
    */
   loading: { color: '#3B8070' },
