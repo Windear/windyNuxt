@@ -139,7 +139,7 @@ export default {
     //点击分类，查询该分类列表
     uploadCate(cate){
       this.$store.commit('updateResourcesCate', cate);
-      this.$router.push({ path: '/resources/' + cate, query: { resourcesCate: cate } });
+      // this.$router.push({ path: '/resources/' + cate, query: { resourcesCate: cate } });
     },
     //打开微信二维码
     postWeChatCenterDialogVisibleTrue() {

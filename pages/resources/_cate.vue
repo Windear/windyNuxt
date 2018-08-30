@@ -16,10 +16,7 @@
         </li>
 
       </ul>
-      <div  v-if="resourcesList==''">
-      <img src="~/static/img/artwork.png" width="500">
-      <p>windy还没有收藏该类别的素材哟，再等等吧~</p>
-      </div>
+      <not-found v-if="resourcesList==''"></not-found>
     </div>
   </div>
 </template>
@@ -27,6 +24,7 @@
 //引入百度统计
 import baidu from 'static/js/baidu.js'
 import ScrollBar from '~/components/scroll_bar.vue' //通知栏
+import notFound from '~/components/not_found.vue' //通知栏
 export default {
 
   //该页面的控制数据
@@ -99,6 +97,7 @@ export default {
   //增加控件
   components: {
     ScrollBar,
+    notFound,
   }
 }
 
@@ -178,6 +177,7 @@ export default {
   opacity: 0;
   transition: opacity 0.2s;
 }
+
 
 @media screen and (max-width: 760px) {
   .container {

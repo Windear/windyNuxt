@@ -9,6 +9,7 @@
 import baidu from 'static/js/baidu.js'
 import ScrollBar from '~/components/scroll_bar.vue' //通知栏
 import resourece from '~/components/resource/resourceList.vue' //素材列表
+
 export default {
 
   //该页面的控制数据
@@ -20,7 +21,7 @@ export default {
     return {
       title: "UI设计素材下载",
       meta: [
-                { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+                { hid: 'Windy设计', name: '有爱设计', content: 'sketch素材下载，XD素材下载，C4D素材下载，GIF小动图下载。' },
                 { hid: 'description',content:'sketch素材。sketch资源。sketch下载。'}
       ]
     }
