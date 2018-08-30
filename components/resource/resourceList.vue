@@ -4,7 +4,9 @@
     <ul class="img-list">
       <li>
         <div class="thumbnail">
-          <a href="http://sketch.cm/resources/1858" target="_blank"><img data-original="http://cdn.linni.com/tesla-app-concept-thumb@2x.jpg?imageView2/0/w/560/q/100" src="http://cdn.linni.com/tesla-app-concept-thumb@2x.jpg?imageView2/0/w/560/q/100" style="display: inline;"></a>
+          <a href="http://sketch.cm/resources/1858" target="_blank">
+            <img data-original="http://cdn.linni.com/tesla-app-concept-thumb@2x.jpg?imageView2/0/w/560/q/100" src="http://cdn.linni.com/tesla-app-concept-thumb@2x.jpg?imageView2/0/w/560/q/100" style="display: inline;">
+          </a>
           <div class="info">
           </div>
         </div>
@@ -145,7 +147,10 @@
 export default {
   //该页面的控制数据
   data() {
-    return {}
+    return {
+      //列表
+      data_list:[],
+    }
   },
   //父控件传过来的参数
   props: {
@@ -155,12 +160,34 @@ export default {
   wacth: {
 
   },
+  //监听函数
+  computed: {
+    resourcesCate() {
+      return this.$store.getters.getResourcesCate;
+    }
+  },
   //进入页面执行的函数
   mounted() {
-
+    this.getResourcesList();
   },
   //定义函数
-  methods: {},
+  methods: {
+    //获取设计列表
+    getResourcesList() {
+      let params = this.resourcesCate;
+      this.$store.dispatch('getResourcesList', params).then((response) => {
+        let res = response.data;
+        if (response.statusText === "OK" && response.status === 200) {
+          //console.log(res);
+          this.data_list = res;
+        } else {
+          alert("网络错误")
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    },
+  },
   //增加控件
   components: {
 
@@ -190,7 +217,6 @@ export default {
 .img-list li {
   float: left;
   margin: 0 20px 20px 0;
-
 }
 
 .img-list img:hover {
@@ -221,7 +247,7 @@ export default {
   height: 210px;
   border-radius: 4px;
   outline: none;
-    transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
 }
 
 .img-list li:nth-child(4n),

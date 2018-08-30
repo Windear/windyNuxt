@@ -12,7 +12,12 @@
               <li :style="active==2?'color:#20A0FF;':''">我的案例</li>
             </a>
             <a href="javascript:;" @click="openMaterial">
-              <li :style="active==3?'color:#20A0FF;':''">我的素材</li>
+              <li :style="active==3?'color:#20A0FF;':''" class="resources">
+                我的素材
+                <ul>
+                  <a v-for="cate in resource_type" :href="'/resources/'+ cate.num"><li  @click="uploadCate(cate.num)" >{{cate.val}}</li></a>
+                </ul>
+              </li>
             </a>
           </ul>
         </div>
@@ -44,17 +49,17 @@
         </a>
       </ul>
     </div>
-
   </div>
 </template>
 <script type="text/javascript">
-
 export default {
   //该页面的控制数据
   data() {
     return {
       scrollType: false,
       showMenu: false,
+      //素材分类
+      resource_type: [],
     }
   },
   //父控件传过来的参数
@@ -79,6 +84,8 @@ export default {
     this.$nextTick(() => {
       window.addEventListener('scroll', this.onScroll)
     });
+    //获取素材分类
+    this.getResourcesCate();
   },
   //定义函数
   methods: {
@@ -113,6 +120,26 @@ export default {
       } else {
         self.scrollType = false;
       }
+    },
+    //获取分类列表
+    getResourcesCate() {
+      let params = "";
+      this.$store.dispatch('getResourcesCate', params).then((response) => {
+        let res = response.data;
+        if (response.statusText === "OK" && response.status === 200) {
+          //console.log(res);
+          this.resource_type = res;
+        } else {
+          alert("网络错误")
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    },
+    //点击分类，查询该分类列表
+    uploadCate(cate){
+      this.$store.commit('updateResourcesCate', cate);
+      this.$router.push({ path: '/resources/' + cate, query: { resourcesCate: cate } });
     },
     //打开微信二维码
     postWeChatCenterDialogVisibleTrue() {
@@ -151,6 +178,11 @@ export default {
   background: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   height: 140px;
+}
+
+.text-link li {
+  height: 60px;
+  line-height: 60px;
 }
 
 .menu-list li {
@@ -279,6 +311,41 @@ export default {
 }
 
 
+
+/*素材模块弹出*/
+
+.resources:hover ul {
+  display: inline;
+}
+
+.resources ul {
+  display: none;
+  position: absolute;
+  margin-left: -10px;
+  width: 100px;
+  /*margin-top: 16px;*/
+}
+
+.resources ul li {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  background: #324057;
+  width: 100%;
+}
+
+.resources ul li:hover {
+  color: #fff;
+  background: #475669;
+}
+
+.resources ul li {
+  color: #fff;
+  font-size: 14px;
+}
+
+
+/*素材模块弹出*/
 
 
 /*当屏幕尺寸大于760px时，应用下面的CSS样式*/

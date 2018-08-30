@@ -23,4 +23,8 @@ export default {
   updateFooterWidth(state, footerWidth) {
     state.footerWidth = footerWidth;
   },
+  //素材请求分类
+  updateResourcesCate(state, resourcesCate) {
+    state.resourcesCate = resourcesCate;
+  },
 }

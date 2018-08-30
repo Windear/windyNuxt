@@ -13,5 +13,6 @@ export default {
     projectId:"",
     //footer宽度
     footerWidth:"1",
-
+    //素材请求分类
+    resourcesCate:"0",
 }

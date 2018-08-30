@@ -68,12 +68,12 @@ module.exports = {
   // },
   proxy: [
     [
-      '/design',
+      '/api',
       {
-        // target: 'http://www.5windy.com:5001/design',
-        target: 'http://5windy.com:5001/design',
+        target: 'http://127.0.0.1:8000/',
+        // target: 'http://5windy.com:5001/',
         pathRewrite: {
-          '^/design': '/',
+          '^/api': '/',
         }
       }
     ]

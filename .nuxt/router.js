@@ -4,9 +4,10 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const _7b2e9b23 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
-const _c024c71a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
 const _51cd33d7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
+const _c024c71a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
 const _64178002 = () => import('../pages/project/_id.vue' /* webpackChunkName: "pages/project/_id" */).then(m => m.default || m)
+const _98a0cf02 = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
 const _7eae024d = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
@@ -73,19 +74,24 @@ export function createRouter () {
 			name: "resources"
 		},
 		{
-			path: "/404",
-			component: _c024c71a,
-			name: "404"
-		},
-		{
 			path: "/project",
 			component: _51cd33d7,
 			name: "project"
 		},
 		{
+			path: "/404",
+			component: _c024c71a,
+			name: "404"
+		},
+		{
 			path: "/project/:id",
 			component: _64178002,
 			name: "project-id"
+		},
+		{
+			path: "/resources/:cate",
+			component: _98a0cf02,
+			name: "resources-cate"
 		},
 		{
 			path: "/",

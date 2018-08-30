@@ -18,4 +18,8 @@ export default {
   getFooterWidth(state) {
     return state.footerWidth;
   },
+  //返回素材请求分类
+  getResourcesCate(state) {
+    return state.resourcesCate;
+  },
 }
