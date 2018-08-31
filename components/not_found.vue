@@ -1,6 +1,6 @@
 <template>
   <div class="notFound">
-    <img src="~/static/img/notfound.png" width="500">
+    <img src="~/static/img/notfound.png" width="400">
     <p>Windy还没有收藏该类素材哟，再等等吧~</p>
   </div>
 </template>

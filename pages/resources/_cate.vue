@@ -1,30 +1,29 @@
 <template>
   <div class="homeBody">
-    <scroll-bar></scroll-bar>
+        <scroll-bar></scroll-bar>
     <div class="container">
       <h2 class="title-box">素材</h2>
       <ul class="img-list">
         <li v-for="item in resourcesList">
           <div class="thumbnail">
-            <a href="javascript:;" target="_blank">
+            <a :href="'/resources/data/'+item.resourcesId" target="_blank">
             <img :data-original="ip +'/media/'+item.resourcesImg" :src="ip +'/media/'+item.resourcesImg" style="display: inline;">
           	</a>
             <div class="info">
             </div>
           </div>
-          <p><a href="javascript:;" target="_blank">{{item.resourcesTitle}}</a></p>
+          <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
         </li>
-
       </ul>
-      <not-found v-if="resourcesList==''"></not-found>
+      <not-found v-if="notfound"></not-found>
     </div>
   </div>
 </template>
 <script type="text/javascript">
 //引入百度统计
 import baidu from 'static/js/baidu.js'
+import notFound from '~/components/not_found.vue' //未找到
 import ScrollBar from '~/components/scroll_bar.vue' //通知栏
-import notFound from '~/components/not_found.vue' //通知栏
 export default {
 
   //该页面的控制数据
@@ -36,6 +35,8 @@ export default {
       resourcesCate: this.$route.query.resourcesCate,
       //素材列表
       resourcesList: [],
+      //是否显示notfound
+      notfound:false,
     }
   },
   //自定义头部
@@ -43,7 +44,7 @@ export default {
     return {
       title: "UI设计素材下载",
       meta: [
-        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+        { hid: '有爱设计', name: '有爱设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
         { hid: 'description', content: 'sketch素材。sketch资源。sketch下载。' }
       ]
     }
@@ -86,7 +87,7 @@ export default {
           this.resourcesList = res;
         } else {
           // alert("网络错误")
-          this.resourcesList = [];
+          this.notfound = true;
         }
       }).catch((err) => {
         console.error(err);
@@ -182,6 +183,9 @@ export default {
 @media screen and (max-width: 760px) {
   .container {
     width: 100%;
+  }
+    .title-box{
+    margin-left: 2%;
   }
   .img-list li {
     margin: 0 2% 4%;

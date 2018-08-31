@@ -6,11 +6,11 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: '5windy',
+    title: '有爱设计',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: '有爱设计', name: 'description', content: '有爱设计，Windy设计小站，这里可以有各种素材资源，sketch，XD，等等。欢迎大家前来观看。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -70,8 +70,8 @@ module.exports = {
     [
       '/api',
       {
-        // target: 'http://127.0.0.1:8000/',
-        target: 'http://5windy.com:5001/',
+        target: 'http://127.0.0.1:8000/',
+        // target: 'http://5windy.com:5001/',
         pathRewrite: {
           '^/api': '/',
         }

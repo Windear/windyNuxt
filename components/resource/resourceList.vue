@@ -272,6 +272,9 @@ export default {
 }
 
 @media screen and (max-width: 760px) {
+  .title-box{
+    margin-left: 2%;
+  }
   .container {
     width: 100%;
   }

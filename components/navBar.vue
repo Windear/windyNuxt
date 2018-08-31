@@ -15,7 +15,9 @@
               <li :style="active==3?'color:#20A0FF;':''" class="resources">
                 我的素材
                 <ul>
-                  <a v-for="cate in resource_type" :href="'/resources/'+ cate.num"><li  @click="uploadCate(cate.num)" >{{cate.val}}</li></a>
+                  <a v-for="cate in resource_type" :href="'/resources/'+ cate.num">
+                    <li @click="uploadCate(cate.num)">{{cate.val}}</li>
+                  </a>
                 </ul>
               </li>
             </a>
@@ -49,6 +51,15 @@
         </a>
       </ul>
     </div>
+    <!-- 素材分类移动列表 -->
+    <div v-if="active==3" style="width: 100%;">
+      <ul class="resources-list">
+        <a v-for="(cate,key) in resource_type" :href="'/resources/'+ cate.num">
+          <li @click="uploadCate(cate.num)" :style="resources_active == cate.num?'color:#20A0FF;':''">{{cate.val}}</li>
+        </a>
+      </ul>
+    </div>
+    <!-- 素材分类移动列表 -->
   </div>
 </template>
 <script type="text/javascript">
@@ -58,8 +69,10 @@ export default {
     return {
       scrollType: false,
       showMenu: false,
+      showResources: false,
       //素材分类
       resource_type: [],
+      resources_active: 0,
     }
   },
   //父控件传过来的参数
@@ -72,20 +85,24 @@ export default {
     },
     bodyWidth() {
       return this.$store.getters.getBodyWidth;
-    }
+    },
+
   },
   //监听函数
   wacth: {
 
+
   },
   //进入页面执行的函数
   mounted() {
-    this.$store.commit('updateNavBarActive', '1');
+    // this.$store.commit('updateNavBarActive', '1');
     this.$nextTick(() => {
       window.addEventListener('scroll', this.onScroll)
     });
     //获取素材分类
     this.getResourcesCate();
+    //素材分类列表选中
+    this.resources_active = String(window.location.href.split('/').pop());
   },
   //定义函数
   methods: {
@@ -137,7 +154,7 @@ export default {
       });
     },
     //点击分类，查询该分类列表
-    uploadCate(cate){
+    uploadCate(cate) {
       this.$store.commit('updateResourcesCate', cate);
       // this.$router.push({ path: '/resources/' + cate, query: { resourcesCate: cate } });
     },
@@ -213,7 +230,7 @@ export default {
 }
 
 .container_nav {
-  width: 80rem;
+  width: 1200px;
   overflow: hidden;
   margin: 0 10px;
   height: 80px;
@@ -312,6 +329,12 @@ export default {
 
 
 
+
+
+
+
+
+
 /*素材模块弹出*/
 
 .resources:hover ul {
@@ -344,13 +367,62 @@ export default {
   font-size: 14px;
 }
 
+.resources-list {
+  display: none;
+  width: 100%;
+  background: #EFF2F7;
+  height: 50px;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+
+.resources-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.resources-list li {
+  /*  display: inline-block;*/
+  width: 60px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+
+
+
+
+
+
 
 /*素材模块弹出*/
+
+
+/*当屏幕小于760*/
+
+@media screen and (max-width: 760px) {
+  .resources-list {
+    display: -webkit-box;
+    ;
+  }
+}
+
+
+
+
+
+
+
 
 
 /*当屏幕尺寸大于760px时，应用下面的CSS样式*/
 
 @media screen and (min-width: 760px) {
+
   .menu-list {
     display: none;
   }

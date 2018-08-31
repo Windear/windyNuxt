@@ -1,7 +1,22 @@
 <template>
   <div class="homeBody">
     <scroll-bar></scroll-bar>
-    <resourece/>
+    <div class="container">
+      <h2 class="title-box">素材</h2>
+      <ul class="img-list">
+        <li v-for="item in resourcesList">
+          <div class="thumbnail">
+            <a :href="'/resources/data/'+item.resourcesId" target="_blank">
+            <img :data-original="ip +'/media/'+item.resourcesImg" :src="ip +'/media/'+item.resourcesImg" style="display: inline;">
+            </a>
+            <div class="info">
+            </div>
+          </div>
+          <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
+        </li>
+      </ul>
+      <not-found v-if="notfound"></not-found>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
@@ -14,7 +29,16 @@ export default {
 
   //该页面的控制数据
   data() {
-    return {}
+    return {
+      //ip地址
+      ip: this.$store.state.ip,
+      //传过来的值
+      resourcesCate: this.$route.query.resourcesCate,
+      //素材列表
+      resourcesList: [],
+      //是否显示notfound
+      notfound:false,
+    }
   },
   //自定义头部
   head() {
@@ -42,9 +66,29 @@ export default {
     baidu.baidu("我的案例");
     //默认footer需要显示1
     this.$store.commit('updateFooterWidth', 1);
+    this.getResourcesList();
   },
   //定义函数
-  methods: {},
+  methods: {
+    //请求分类列表
+    getResourcesList() {
+      //获取projectId
+      let params = 0;
+      //let params = localStorage.getItem("projectId");
+      this.$store.dispatch('getResourcesList', params).then((response) => {
+        let res = response.data;
+        if (res.state!="err") {
+          this.resourcesList = res;
+        } else {
+          // alert("网络错误")
+          this.notfound = true;
+        }
+      }).catch((err) => {
+        console.error(err);
+        this.$router.push({ path: '/404' });
+      });
+    },
+  },
   //增加控件
   components: {
     ScrollBar,
@@ -54,8 +98,100 @@ export default {
 
 </script>
 <style scoped lang="css">
-/*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+.container,
+.tool-container {
+  width: 1180px;
+  overflow: hidden;
+  margin: 0 auto;
+}
 
-@media screen and (max-width: 760px) {}
+.title-box {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.img-list {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.img-list li {
+  float: left;
+  margin: 0 20px 20px 0;
+}
+
+.img-list img:hover {
+  transition: all 0.3s ease-out 0s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.img-list li a,
+.plugin-list li a,
+.video-list li a,
+.tool-list li a {
+  display: block;
+  line-height: 0;
+}
+
+
+.img-list p a,
+.plugin-list p a,
+.video-list p a,
+.tool-list p a {
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.img-list img {
+  width: 280px;
+  height: 210px;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease-out 0s;
+}
+
+.img-list li:nth-child(4n),
+.plugin-list li:nth-child(4n),
+.video-list li:nth-child(4n),
+.tool-list li:nth-child(5n) {
+  margin-right: 0;
+}
+
+.img-list .thumbnail .info,
+.plugin-list .thumbnail .info,
+.tool-list .thumbnail .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+
+@media screen and (max-width: 760px) {
+  .container {
+    width: 100%;
+  }
+    .title-box{
+    margin-left: 2%;
+  }
+  .img-list li {
+    margin: 0 2% 4%;
+    width: 46%;
+  }
+
+  .img-list img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
 
 </style>
+

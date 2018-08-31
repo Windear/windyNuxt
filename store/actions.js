@@ -79,4 +79,14 @@ export default {
       })
     });
   },
+  //请求素材详情
+  async getResourcesData({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/details/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }
