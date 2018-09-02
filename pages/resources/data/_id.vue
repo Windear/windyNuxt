@@ -6,7 +6,7 @@
         <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
         <div class="detailsTextBox">
           <div class="textTitle">{{projectData.resourcesTitle}}</div>
-          <div class="dateAndCopyright">©{{projectData.resourcesCopyright}}</div>
+          <div class="dateAndCopyright">© {{projectData.resourcesCopyright}}</div>
           <div class="detailsTag">
             <a v-for="tag in tags" class="tag" href="javascript:;">{{tag}}</a>
           </div>
@@ -99,7 +99,7 @@ export default {
     //百度统计
     baidu.baidu("素材详情");
     //传入navBar的选择状态
-    this.$store.commit('updateNavBarActive', '3');
+    this.$store.commit('updateNavBarActive', '');
     document.documentElement.scrollTop = 0;
     //this.changyan();
    this.getResourcesData();

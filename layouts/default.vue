@@ -129,8 +129,8 @@ dd,
 li,
 div,
 button {
-  font-family: 'Hiragino Sans GB', 'Helvetica Neue', 'Microsoft Yahei';
-  -webkit-font-smoothing: antialiased;
+/*  font-family: 'Hiragino Sans GB', 'Helvetica Neue', 'Microsoft Yahei';
+  -webkit-font-smoothing: antialiased;*/
 }
 
 body,
