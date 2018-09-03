@@ -4,7 +4,7 @@
     <div class="container">
       <h2 class="title-box">素材</h2>
       <ul class="img-list">
-        <li v-for="item in resourcesList">
+        <li v-for="item in newList">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
             <img :data-original="ip +'/media/'+item.resourcesImg" :src="ip +'/media/'+item.resourcesImg" style="display: inline;">
@@ -16,6 +16,9 @@
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
+      <div class="pagination">
+        <el-pagination background="#eff2f5" @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -36,8 +39,10 @@ export default {
       resourcesCate: this.$route.query.resourcesCate,
       //素材列表
       resourcesList: [],
+      //新分页素材列表
+      newList:[],
       //是否显示notfound
-      notfound:false,
+      notfound: false,
     }
   },
   //自定义头部
@@ -45,8 +50,13 @@ export default {
     return {
       title: "UI设计素材下载",
       meta: [
+<<<<<<< HEAD
                 { hid: 'Windy设计', name: '有爱设计', content: 'sketch素材下载，XD素材下载，C4D素材下载，GIF小动图下载。' },
                 { hid: 'description',content:'sketch素材。sketch资源。sketch下载。'},
+=======
+        { hid: 'Windy设计', name: '有爱设计', content: 'sketch素材下载，XD素材下载，C4D素材下载，GIF小动图下载。' },
+        { hid: 'description', content: 'sketch素材。sketch资源。sketch下载。' }
+>>>>>>> 803415314d7d323c369c0c0f2a8512794accb4c9
       ]
     }
   },
@@ -77,8 +87,9 @@ export default {
       //let params = localStorage.getItem("projectId");
       this.$store.dispatch('getResourcesList', params).then((response) => {
         let res = response.data;
-        if (res.state!="err") {
+        if (res.state != "err") {
           this.resourcesList = res;
+          this.toListData(0, 20);
         } else {
           // alert("网络错误")
           this.notfound = true;
@@ -87,6 +98,18 @@ export default {
         console.error(err);
         this.$router.push({ path: '/404' });
       });
+    },
+    //点击翻页
+    handleCurrentChange(val) {
+      //console.log(`当前页: ${nowPage}`);
+      this.toListData((val - 1) * 20, val * 20);
+      //回到顶部
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    },
+     //将列表传8条到listData
+    toListData(start, end) {
+      this.newList = this.resourcesList.slice(start, end);
     },
   },
   //增加控件
@@ -173,12 +196,24 @@ export default {
   transition: opacity 0.2s;
 }
 
+.pagination{padding: 10px 0;}
+
 
 @media screen and (max-width: 760px) {
   .container {
     width: 100%;
   }
-    .title-box{
+
+  .img-list p a,
+  .plugin-list p a,
+  .video-list p a {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .title-box {
     margin-left: 2%;
   }
   .img-list li {
@@ -194,4 +229,3 @@ export default {
 }
 
 </style>
-

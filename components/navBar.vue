@@ -328,13 +328,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
 /*素材模块弹出*/
 
 .resources:hover ul {
@@ -373,31 +366,19 @@ export default {
   background: #EFF2F7;
   height: 50px;
   -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  -webkit-overflow-x: scroll;
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
-
-.resources-list::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
-}
-
-.resources-list li {
-  /*  display: inline-block;*/
-  width: 60px;
+.resources-list li{
+  padding: 0 10px;
   height: 50px;
   line-height: 50px;
   text-align: center;
+  white-space:nowrap;
 }
-
-
-
-
-
-
-
 
 /*素材模块弹出*/
 
@@ -406,18 +387,10 @@ export default {
 
 @media screen and (max-width: 760px) {
   .resources-list {
-    display: -webkit-box;
-    ;
+    /*display: -webkit-box;*/
+      display: flex;
   }
 }
-
-
-
-
-
-
-
-
 
 /*当屏幕尺寸大于760px时，应用下面的CSS样式*/
 

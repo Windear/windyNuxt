@@ -365,6 +365,7 @@ export default {
     margin-bottom: 20px;
     background: #EFF2F7;
     overflow-x: scroll;
+     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     line-height: 44px;
   }
@@ -376,6 +377,7 @@ export default {
     border-radius: 4px;
     color: #475669;
     transition: all 0s ease-out 0s;
+    display: inline;
   }
   .listHeader a:hover {
     background: #fff;

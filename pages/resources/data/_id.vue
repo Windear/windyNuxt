@@ -6,7 +6,7 @@
         <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
         <div class="detailsTextBox">
           <div class="textTitle">{{projectData.resourcesTitle}}</div>
-          <div class="dateAndCopyright">©{{projectData.resourcesCopyright}}</div>
+          <div class="dateAndCopyright">© {{projectData.resourcesCopyright}}</div>
           <div class="detailsTag">
             <a v-for="tag in tags" class="tag" href="javascript:;">{{tag}}</a>
           </div>
