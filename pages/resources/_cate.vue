@@ -17,7 +17,7 @@
       </ul>
       <not-found v-if="notfound"></not-found>
       <div class="pagination">
-        <el-pagination background="#eff2f5" @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
       </div>
     </div>
   </div>
@@ -50,7 +50,8 @@ export default {
       title: "UI设计素材下载",
       meta: [
         { hid: '有爱设计', name: '有爱设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
-        { hid: 'description', content: 'sketch素材。sketch资源。sketch下载。' }
+        { hid: 'description', content: 'sketch素材。sketch资源。sketch下载。' },
+        { hid: '有爱设计', content: '欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。' }
       ]
     }
   },
@@ -196,7 +197,10 @@ export default {
   opacity: 0;
   transition: opacity 0.2s;
 }
-.pagination{padding: 10px 0;}
+
+.pagination {
+  padding: 10px 0;
+}
 
 @media screen and (max-width: 760px) {
   .container {

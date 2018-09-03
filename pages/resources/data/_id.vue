@@ -11,12 +11,15 @@
             <a v-for="tag in tags" class="tag" href="javascript:;">{{tag}}</a>
           </div>
         </div>
-        <a :href="this.ip + '/media/' + projectData.resourcesDownload">
-          <div class="downloadBtn" v-if="author!= 'windy'">
-            <div class="btnIcon"></div>
-            <div class="btnText">本地下载</div>
-          </div>
-        </a>
+        <div class="btn-box">
+          <a :href="this.ip + '/media/' + projectData.resourcesDownload" class="download">
+            <div class="downloadBtn" v-if="author!= 'windy'">
+              <div class="btnIcon"></div>
+              <div class="btnText">本地下载</div>
+            </div>
+          </a>
+          <a href="javascript:;" class="baiducloud" @click="dialogVisible = true"></a>
+        </div>
       </div>
     </div>
     <div class="details">
@@ -38,6 +41,21 @@
       </transition>
       <!-- <div id="SOHUCS" :sid="projectId"></div> -->
     </div>
+    <!-- 弹出框 -->
+    <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="40%" custom-class="cloud_dialog">
+      <div class="cloud_down" v-if="cloudDown!=0" v-for="item in cloudDown">
+        <div class="baiduyun" v-if="item.drive_type==1">
+          <img src="~/static/img/cloud.png" width="20px"><span>百度云盘</span>
+        </div>
+        <p v-if="item.drive_pw">提取码"{{item.drive_pw}}"已复制</p>
+        <p v-if="!item.drive_pw">该资源可直接下载</p>
+        <a :href="item.drive_url" target="_blank">
+          <el-button type="primary" size="mini">前往下载</el-button>
+        </a>
+      </div>
+      <span v-if="cloudDown==0">此资源没有网盘链接哟~不好意思呀。</span>
+    </el-dialog>
+    <!-- 弹出框 -->
   </div>
 </template>
 <script type="text/javascript">
@@ -65,7 +83,11 @@ export default {
       //title页面标题
       title: "windy设计详情",
       //该素材的tag
-      tags:[],
+      tags: [],
+      //网盘下载地址
+      cloudDown: [],
+      //是否显示弹出框
+      dialogVisible: false
     }
   },
   //自定义头部
@@ -73,8 +95,10 @@ export default {
     return {
       title: this.title,
       meta: [
-        { hid: 'Windy设计', name: 'Windy设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
-        { hid: 'description',content:this.projectData.projectSynopsis}
+        { hid: '有爱设计', name: '有爱设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
+        { hid: 'description', content: this.projectData.projectSynopsis },
+        { hid: '有爱设计', content: '欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。' }
+
       ]
     }
   },
@@ -102,7 +126,8 @@ export default {
     this.$store.commit('updateNavBarActive', '');
     document.documentElement.scrollTop = 0;
     //this.changyan();
-   this.getResourcesData();
+    this.getResourcesData();
+    this.getResourcesCloud();
     //默认footer不需要显示0
     this.$store.commit('updateFooterWidth', 0);
   },
@@ -117,7 +142,7 @@ export default {
         conf: 'prod_a13b2e3f57b739f379a9d121e340340d'
       });
     },
-    //请求设计详情
+    //请求素材详情
     getResourcesData() {
       //如果projectId没有传过来，或者没有
       if (this.projectId === undefined) {
@@ -147,6 +172,38 @@ export default {
         this.$router.push({ path: '/404' });
       });
     },
+    //请求素材网盘地址
+    getResourcesCloud() {
+      //如果projectId没有传过来，或者没有
+      if (this.projectId === undefined) {
+        //获取该页面URL最后一个数字，并赋值给这个页面的id
+        let aaa = String(window.location.href.split('/').pop());
+        this.projectId = aaa;
+      };
+      //获取projectId
+      let params = this.projectId;
+      //let params = localStorage.getItem("projectId");
+      this.$store.dispatch('getResourcesCloud', params).then((response) => {
+        let res = response.data;
+        if (res.state != "err") {
+          //console.log(res);
+          this.cloudDown = res;
+        } else {
+          this.cloudDown = 0;
+        }
+      }).catch((err) => {
+        console.error(err);
+        //this.$router.push({ path: '/404' });
+      });
+    },
+    //弹出框函数
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    }
   },
   //增加控件
   components: {
@@ -156,16 +213,16 @@ export default {
 
 </script>
 <style lang="css">
-.tag{
+.tag {
   height: 32px;
   background: #f6f9fa;
   font-size: 14px;
-  color:#95a5a6!important;
+  color: #95a5a6!important;
   line-height: 32px;
   display: inline-block;
   padding: 0 12px;
   border-radius: 4px;
-  margin-right: 10px; 
+  margin-right: 10px;
   margin-bottom: 10px;
 }
 
@@ -177,7 +234,7 @@ export default {
   color: #000;
 }
 
-.detailBody img{
+.detailBody div img {
   width: 1080px;
 }
 
@@ -208,8 +265,8 @@ export default {
 .detailsTextBox {
   height: 200px;
   margin-left: 30px;
-  width: 850px;
   min-width: 400px;
+  width: 840px;
 }
 
 .textTitle {
@@ -234,9 +291,6 @@ export default {
   height: 44px;
   background-color: #458CFF;
   border-radius: 4px;
-  position: absolute;
-  top: 20px;
-  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -370,5 +424,62 @@ export default {
     opacity: 100%;
   }
 }
+
+.btn-box {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+
+.download {
+  display: inline-block;
+}
+
+.baiducloud {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  background: url(~/static/img/cloud.png) no-repeat 50% 50% / 22px 22px;
+  font-size: 0;
+  vertical-align: middle;
+  border: 1px solid #458CFF;
+  border-radius: 4px;
+}
+
+
+
+/*网盘弹窗*/
+
+.cloud_dialog {
+  min-width: 320px;
+}
+
+.cloud_down {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cloud_down p {
+  line-height: 20px;
+  color: #00C58C;
+}
+
+.baiduyun {
+  display: flex;
+  align-items: center;
+}
+
+.baiduyun span {
+  margin-left: 10px;
+  line-height: 20px;
+  display: inline-block;
+}
+
+
+
+/*网盘弹窗*/
 
 </style>

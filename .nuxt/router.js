@@ -3,13 +3,13 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _18d17f03 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
-const _62415f5a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
-const _78978fb7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
-const _6b3d6a98 = () => import('../pages/resources/data/_id.vue' /* webpackChunkName: "pages/resources/data/_id" */).then(m => m.default || m)
-const _51527c5f = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
-const _116413df = () => import('../pages/project/_id.vue' /* webpackChunkName: "pages/project/_id" */).then(m => m.default || m)
-const _8ffb83a6 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _7b2e9b23 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
+const _c024c71a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
+const _51cd33d7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
+const _7bad3a94 = () => import('../pages/resources/data/_id.vue' /* webpackChunkName: "pages/resources/data/_id" */).then(m => m.default || m)
+const _98a0cf02 = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
+const _64178002 = () => import('../pages/project/_id.vue' /* webpackChunkName: "pages/project/_id" */).then(m => m.default || m)
+const _7eae024d = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -71,42 +71,42 @@ export function createRouter () {
     routes: [
 		{
 			path: "/resources",
-			component: _18d17f03,
+			component: _7b2e9b23,
 			name: "resources"
 		},
 		{
 			path: "/404",
-			component: _62415f5a,
+			component: _c024c71a,
 			name: "404"
 		},
 		{
 			path: "/project",
-			component: _78978fb7,
+			component: _51cd33d7,
 			name: "project"
 		},
 		{
 			path: "/resources/data/:id?",
-			component: _6b3d6a98,
+			component: _7bad3a94,
 			name: "resources-data-id"
 		},
 		{
 			path: "/resources/:cate",
-			component: _51527c5f,
+			component: _98a0cf02,
 			name: "resources-cate"
 		},
 		{
 			path: "/project/:id",
-			component: _116413df,
+			component: _64178002,
 			name: "project-id"
 		},
 		{
 			path: "/",
-			component: _8ffb83a6,
+			component: _7eae024d,
 			name: "index"
 		},
 		{
 			path: "*",
-			component: _62415f5a,
+			component: _c024c71a,
 			name: "custom"
 		}
     ],

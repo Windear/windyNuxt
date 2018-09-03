@@ -89,4 +89,14 @@ export default {
       })
     });
   },
+  //请求素材详情的网盘地址
+  async getResourcesCloud({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/cloud/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }
