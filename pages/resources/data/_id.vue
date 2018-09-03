@@ -234,7 +234,7 @@ export default {
   color: #000;
 }
 
-.detailBody div img {
+.detailBody img {
   width: 1080px;
 }
 
