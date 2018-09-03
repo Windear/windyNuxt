@@ -46,7 +46,7 @@ export default {
       title: "UI设计素材下载",
       meta: [
                 { hid: 'Windy设计', name: '有爱设计', content: 'sketch素材下载，XD素材下载，C4D素材下载，GIF小动图下载。' },
-                { hid: 'description',content:'sketch素材。sketch资源。sketch下载。'}
+                { hid: 'description',content:'sketch素材。sketch资源。sketch下载。'},
       ]
     }
   },

@@ -99,7 +99,7 @@ export default {
     //百度统计
     baidu.baidu("素材详情");
     //传入navBar的选择状态
-    this.$store.commit('updateNavBarActive', '3');
+    this.$store.commit('updateNavBarActive', '');
     document.documentElement.scrollTop = 0;
     //this.changyan();
    this.getResourcesData();
@@ -166,6 +166,7 @@ export default {
   padding: 0 12px;
   border-radius: 4px;
   margin-right: 10px; 
+  margin-bottom: 10px;
 }
 
 .detailsBody {
@@ -176,7 +177,7 @@ export default {
   color: #000;
 }
 
-.detailBody div img{
+.detailBody img{
   width: 1080px;
 }
 
