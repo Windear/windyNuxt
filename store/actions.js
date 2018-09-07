@@ -99,4 +99,24 @@ export default {
       })
     });
   },
+  //素材访问量接口
+  async getResourcesLooked({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/looked_num/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //素材下载量接口
+  async getResourcesDownloads({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/download_num/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

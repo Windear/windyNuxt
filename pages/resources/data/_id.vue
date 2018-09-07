@@ -12,8 +12,8 @@
           </div>
         </div>
         <div class="btn-box">
-          <a :href="this.ip + '/media/' + projectData.resourcesDownload" class="download">
-            <div class="downloadBtn" v-if="author!= 'windy'">
+          <a :href="this.ip + '/media/' + projectData.resourcesDownload" class="download" v-if="author!= 'windy'" @click="getResourcesDownloads()">
+            <div class="downloadBtn" >
               <div class="btnIcon"></div>
               <div class="btnText">本地下载</div>
             </div>
@@ -51,7 +51,7 @@
         </div>
         <p v-if="item.drive_pw" >提取码"{{item.drive_pw}}"<a href="javascript:;" class="clipboard-btn" v-clipboard="item.drive_pw" @success="onCopy(key)" @error="onError(key)" ><span v-if="clipboardVal!=key&&clipboardVal!='err'">点击复制</span><span class="clipboardVal-success" v-if="clipboardVal==key">复制成功</span><span v-if="clipboardVal=='err'">复制失败，请自信复制</span></a></p>
         <p v-if="!item.drive_pw">该资源可直接下载</p>
-        <a :href="item.drive_url" target="_blank">
+        <a :href="item.drive_url" target="_blank" @click="getResourcesDownloads()">
           <el-button type="primary" size="mini">前往下载</el-button>
         </a>
       </div>
@@ -133,6 +133,8 @@ export default {
     //this.changyan();
     this.getResourcesData();
     this.getResourcesCloud();
+    //访问量
+    this.getResourcesLooked();
     //默认footer不需要显示0
     this.$store.commit('updateFooterWidth', 0);
   },
@@ -196,6 +198,44 @@ export default {
         } else {
           this.cloudDown = 0;
         }
+      }).catch((err) => {
+        console.error(err);
+        //this.$router.push({ path: '/404' });
+      });
+    },
+    //素材访问量
+    getResourcesLooked() {
+      //如果projectId没有传过来，或者没有
+      if (this.projectId === undefined) {
+        //获取该页面URL最后一个数字，并赋值给这个页面的id
+        let aaa = String(window.location.href.split('/').pop());
+        this.projectId = aaa;
+      };
+      //获取projectId
+      let params = this.projectId;
+      //let params = localStorage.getItem("projectId");
+      this.$store.dispatch('getResourcesLooked', params).then((response) => {
+        let res = response.data;
+        //以后有需要添加显示浏览量
+      }).catch((err) => {
+        console.error(err);
+        //this.$router.push({ path: '/404' });
+      });
+    },
+    //素材下载量
+    getResourcesDownloads() {
+      //如果projectId没有传过来，或者没有
+      if (this.projectId === undefined) {
+        //获取该页面URL最后一个数字，并赋值给这个页面的id
+        let aaa = String(window.location.href.split('/').pop());
+        this.projectId = aaa;
+      };
+      //获取projectId
+      let params = this.projectId;
+      //let params = localStorage.getItem("projectId");
+      this.$store.dispatch('getResourcesDownloads', params).then((response) => {
+        let res = response.data;
+        //以后有需要添加显示浏览量
       }).catch((err) => {
         console.error(err);
         //this.$router.push({ path: '/404' });
