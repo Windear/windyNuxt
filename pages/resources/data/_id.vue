@@ -18,7 +18,8 @@
               <div class="btnText">本地下载</div>
             </div>
           </a>
-          <a href="javascript:;" class="baiducloud" @click="dialogVisible = true"></a>
+          <a href="javascript:;" class="baiducloud"  @click="dialogVisible = true"></a>
+         
         </div>
       </div>
     </div>
@@ -43,16 +44,18 @@
     </div>
     <!-- 弹出框 -->
     <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="40%" custom-class="cloud_dialog">
-      <div class="cloud_down" v-if="cloudDown!=0" v-for="item in cloudDown">
+
+      <div class="cloud_down" v-if="cloudDown!=0" v-for="(item,key) in cloudDown">
         <div class="baiduyun" v-if="item.drive_type==1">
           <img src="~/static/img/cloud.png" width="20px"><span>百度云盘</span>
         </div>
-        <p v-if="item.drive_pw">提取码"{{item.drive_pw}}"已复制</p>
+        <p v-if="item.drive_pw" >提取码"{{item.drive_pw}}"<a href="javascript:;" class="clipboard-btn" v-clipboard="item.drive_pw" @success="onCopy(key)" @error="onError(key)" ><span v-if="clipboardVal!=key&&clipboardVal!='err'">点击复制</span><span class="clipboardVal-success" v-if="clipboardVal==key">复制成功</span><span v-if="clipboardVal=='err'">复制失败，请自信复制</span></a></p>
         <p v-if="!item.drive_pw">该资源可直接下载</p>
         <a :href="item.drive_url" target="_blank">
           <el-button type="primary" size="mini">前往下载</el-button>
         </a>
       </div>
+
       <span v-if="cloudDown==0">此资源没有网盘链接哟~不好意思呀。</span>
     </el-dialog>
     <!-- 弹出框 -->
@@ -87,7 +90,9 @@ export default {
       //网盘下载地址
       cloudDown: [],
       //是否显示弹出框
-      dialogVisible: false
+      dialogVisible: false,
+      //复制剪切板按钮文字
+      clipboardVal:'',
     }
   },
   //自定义头部
@@ -203,7 +208,15 @@ export default {
           done();
         })
         .catch(_ => {});
-    }
+    },
+    //剪切板复制成功
+    onCopy(key){
+      this.clipboardVal = key;
+    },
+    // 复制失败
+    onError(e){
+      this.clipboardVal = 'err';
+    },
   },
   //增加控件
   components: {
@@ -460,6 +473,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .cloud_down p {
@@ -478,7 +492,14 @@ export default {
   display: inline-block;
 }
 
-
+.clipboard-btn:link{
+  color: #458CFF;
+  text-decoration:underline;
+  margin-left: 20px;
+}
+.clipboardVal-success{
+  color: #00C58C;
+}
 
 /*网盘弹窗*/
 

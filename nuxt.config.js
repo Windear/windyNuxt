@@ -70,8 +70,8 @@ module.exports = {
     [
       '/api',
       {
-        target: 'http://127.0.0.1:8000/',
-        // target: 'http://5windy.com:5001/',
+        // target: 'http://127.0.0.1:8000/',
+        target: 'http://5windy.com:5001/',
         pathRewrite: {
           '^/api': '/',
         }
@@ -91,7 +91,8 @@ module.exports = {
     comments: true
   },
   plugins: [
-    { src: '~plugins/element-ui', ssr: true }
+    { src: '~plugins/element-ui', ssr: true },
+    { src: '~plugins/clipboard', ssr: true }
   ],
   css: [
     { src: 'element-ui/lib/theme-chalk/index.css' }
