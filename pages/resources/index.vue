@@ -156,7 +156,7 @@ export default {
         // 将获得的数组加入到formatList里面去
         for (var i = 0; i < res.length; i++) {
           this.formatList.push(res[i].toUpperCase());
-          console.log(this.formatList);
+          // console.log(this.formatList);
         }
       }).catch((err) => {
         console.error(err);
