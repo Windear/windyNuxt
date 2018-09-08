@@ -49,7 +49,7 @@
         <div class="baiduyun" v-if="item.drive_type==1">
           <img src="~/static/img/cloud.png" width="20px"><span>百度云盘</span>
         </div>
-        <p v-if="item.drive_pw" >提取码"{{item.drive_pw}}"<a href="javascript:;" class="clipboard-btn" v-clipboard="item.drive_pw" @success="onCopy(key)" @error="onError(key)" ><span v-if="clipboardVal!=key&&clipboardVal!='err'">点击复制</span><span class="clipboardVal-success" v-if="clipboardVal==key">复制成功</span><span v-if="clipboardVal=='err'">复制失败，请自信复制</span></a></p>
+        <p v-if="item.drive_pw" >提取码"{{item.drive_pw}}"<a href="javascript:;" class="clipboard-btn" v-clipboard="item.drive_pw" @success="onCopy(key)" @error="onError(key)" ><span v-if="clipboardVal!=key&&clipboardVal!='err'">点击复制</span><span class="clipboardVal-success" v-if="clipboardVal==key">复制成功</span><span v-if="clipboardVal=='err'">复制失败，请自行复制</span></a></p>
         <p v-if="!item.drive_pw">该资源可直接下载</p>
         <a :href="item.drive_url" target="_blank" @click="getResourcesDownloads()">
           <el-button type="primary" size="mini">前往下载</el-button>
@@ -92,7 +92,7 @@ export default {
       //是否显示弹出框
       dialogVisible: false,
       //复制剪切板按钮文字
-      clipboardVal:'',
+      clipboardVal:'no',
     }
   },
   //自定义头部

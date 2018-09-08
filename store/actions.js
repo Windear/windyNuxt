@@ -119,4 +119,26 @@ export default {
       })
     });
   },
+  //获取格式分类列表
+  async getResourcesFormat({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/format',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //通过格式分类获取素材列表
+  //获取格式分类列表
+  async postResourcesFormatList({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/type',
+      method: 'post',
+      data:params,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

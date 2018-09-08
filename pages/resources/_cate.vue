@@ -3,6 +3,10 @@
     <scroll-bar></scroll-bar>
     <div class="container">
       <h2 class="title-box">素材</h2>
+      <div class="design_format">
+        <span>格式:</span>
+        <a v-for="(format,key) in formatList" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format)">{{format}}</a>
+      </div>
       <ul class="img-list">
         <li v-for="item in newList">
           <div class="thumbnail">
@@ -42,6 +46,10 @@ export default {
       newList: [],
       //是否显示notfound
       notfound: false,
+      //格式列表
+      formatList: ["全部"],
+      //选中的格式筛选
+      formatIndex: 0,
     }
   },
   //自定义头部
@@ -71,8 +79,10 @@ export default {
     baidu.baidu("我的素材");
     //默认footer需要显示1
     this.$store.commit('updateFooterWidth', 1);
-    //获取列表
+    //获取素材列表
     this.getResourcesList();
+    //获取格式分类
+    this.getResourcesFormat();
   },
   //定义函数
   methods: {
@@ -101,6 +111,54 @@ export default {
         this.$router.push({ path: '/404' });
       });
     },
+
+    //通过格式分类获取素材列表
+    postResourcesFormatList(key, format) {
+      //如果projectId没有传过来，或者没有
+      if (this.resourcesCate === undefined) {
+        //获取该页面URL最后一个数字，并赋值给这个页面的id
+        let aaa = String(window.location.href.split('/').pop());
+        this.resourcesCate = aaa;
+      };
+
+      this.formatIndex = key;
+      if (format == "全部") {
+        this.getResourcesList();
+      } else {
+        let params = { "type": format.toLowerCase() ,"cate":this.resourcesCate};
+
+        this.$store.dispatch('postResourcesFormatList', params).then((response) => {
+          let res = response.data;
+          if (res.state != "err") {
+            this.resourcesList = res;
+            this.toListData(0, 20);
+            this.notfound = false;
+          } else {
+            // alert("网络错误")
+            this.newList = [];
+            this.notfound = true;
+          }
+        }).catch((err) => {
+          console.error(err);
+        });
+      };
+    },
+
+    //请求格式分类
+    getResourcesFormat() {
+      let params = "";
+      this.$store.dispatch('getResourcesFormat', params).then((response) => {
+        let res = response.data;
+        // 将获得的数组加入到formatList里面去
+        for (var i = 0; i < res.length; i++) {
+          this.formatList.push(res[i].toUpperCase());
+          console.log(this.formatList);
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
+    },
+
     //点击翻页
     handleCurrentChange(val) {
       //console.log(`当前页: ${nowPage}`);
@@ -201,6 +259,45 @@ export default {
 .pagination {
   padding: 10px 0;
 }
+
+/*格式分类*/
+
+.design_format {
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.design_format span {
+  font-weight: 400;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.format_btn {
+  display: inline-block;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+  line-height: 28px;
+  transition: all 0.3s ease-out 0s;
+}
+
+.format_btn_active {
+  background: #458CFF;
+  color: #fff;
+  transition: all 0.3s ease-out 0s;
+}
+
+.format_btn:hover {
+  background: #D3DCE6;
+  color: #fff;
+  transition: all 0.3s ease-out 0s;
+}
+
+/*格式分类*/
 
 @media screen and (max-width: 760px) {
   .container {
