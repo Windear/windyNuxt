@@ -92,7 +92,8 @@ module.exports = {
   },
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
-    { src: '~plugins/clipboard', ssr: true }
+    { src: '~plugins/clipboard', ssr: true },
+    { src: '~plugins/vue-lazyload', ssr: true }
   ],
   css: [
     { src: 'element-ui/lib/theme-chalk/index.css' }

@@ -11,7 +11,7 @@
         <li v-for="item in newList">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
-            <img :data-original="ip +'/media/'+item.resourcesImg" :src="ip +'/media/'+item.resourcesImg" style="display: inline;">
+            <img  v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" style="display: inline;">
             </a>
             <div class="info">
             </div>
@@ -21,7 +21,7 @@
       </ul>
       <not-found v-if="notfound"></not-found>
       <div class="pagination">
-        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;"></el-pagination>
+        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
     </div>
   </div>
@@ -51,6 +51,8 @@ export default {
       formatList: ["全部"],
       //选中的格式筛选
       formatIndex: 0,
+      //分页当前页数
+      currentPage:1,
     }
   },
   //自定义头部
@@ -113,6 +115,7 @@ export default {
     //通过格式分类获取素材列表
     postResourcesFormatList(key, format) {
       this.formatIndex = key;
+      this.currentPage = 1;
       if (format == "全部") {
         this.getResourcesList();
       } else {

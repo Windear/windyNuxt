@@ -38,7 +38,7 @@
           <a :href="'/project/'+list.caseId" v-for="list in caseList" target="_blank" @click="openDetails(list.caseId)">
             <div class="case-content">
               <div class="case-img">
-                <img :src="''+ ip +'/media/' + list.caseImg " alt="">
+                <img v-lazy="''+ ip +'/media/' + list.caseImg " :key="list.caseImg" alt="">
               </div>
               <div class="case-title">
                 <div class="case-title-text">

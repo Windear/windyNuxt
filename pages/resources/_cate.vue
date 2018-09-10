@@ -11,7 +11,7 @@
         <li v-for="item in newList">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
-            <img :data-original="ip +'/media/'+item.resourcesImg" :src="ip +'/media/'+item.resourcesImg" style="display: inline;">
+            <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" style="display: inline;">
             </a>
             <div class="info">
             </div>
