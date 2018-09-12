@@ -35,10 +35,10 @@
         </div>
         <div class="showcase-box-content">
           <!-- 每个案例 -->
-          <a :href="'/project/'+list.caseId" v-for="list in caseList" target="_blank" @click="openDetails(list.caseId)">
+          <a :href="'/project/'+list.caseId" v-for="list in caseList" :key="list.id" target="_blank" @click="openDetails(list.caseId)">
             <div class="case-content">
               <div class="case-img">
-                <img v-lazy="''+ ip +'/media/' + list.caseImg " :key="list.caseImg" alt="">
+                <img v-lazy="''+ ip +'/media/' + list.caseImg " :key="list.id" alt="">
               </div>
               <div class="case-title">
                 <div class="case-title-text">
@@ -162,7 +162,7 @@
         <div class="about-box-content">
           <div>
             <p class="" v-html="about">
-
+  
             </p>
           </div>
           <div>
@@ -257,76 +257,89 @@
     <!-- 博客模块 -->
   </div>
 </template>
+
 <script>
-//引入百度统计
-import baidu from 'static/js/baidu.js'
-
-export default {
-  //该页面的控制数据
-  data() {
-    return {
-      //ip地址
-      ip: this.$store.state.ip,
-      caseList: [],
-      //关于本站
-      about: "欢迎来到5windy的个人网站。我是一名UI设计师，同时也是网站开发者，大家可以叫我设计师Windy。本网站也是我的一个学习项目，也是我的项目展示平台。 <br> 本网站数据库采用MySQL， 后台使用python的Django框架， 前端使用vue.js作为展示层。 是现在比较流行的MVVM架构模式。 <br> 大家可以很直观的从本网站了解到本人的产品设计能力， 产品开发能力以及产品规划能力。 <br> 若有什么意见和建议或者合作的想法， 欢迎点击右上角联系本人。 谢谢大家。 "
-    }
-  },
-  //自定义头部
-  head() {
-    return {
-      title: "有爱设计 武汉UI设计/APP设计/WEB开发/系统开发/软件设计 Windy。",
-      meta: [
-        { hid: '有爱设计', name: '有爱设计', content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。' },
-        { hid: '有爱设计',content:this.about},
-        { hid: '有爱设计',content:'欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。'},
-        {name:"baidu-site-verification", content:"cREPbQjkep"}
-      ],
-      link: [
-        { rel: "canonical", href: "https://5windy.com/" }
-      ]
-    }
-  },
-  //进入页面执行的函数
-  mounted() {
-    document.documentElement.scrollTop = 0;
-    this.$store.commit('updateNavBarActive', '1');
-    this.getCaseList();
-    baidu.baidu("我的首页");
-    //默认footer需要显示1
-    this.$store.commit('updateFooterWidth', 1);
-  },
-  //定义函数
-  methods: {
-    //请求设计列表
-    getCaseList() {
-      //this.params.touser = this.$store.state.userNameList;
-      let params = "";
-      this.$store.dispatch('getCaseList', params).then((response) => {
-        let res = response.data;
-        if (response.statusText === "OK" && response.status === 200) {
-          //console.log(res);
-          this.caseList = res;
-
-        } else {
-          alert("网络错误")
-        }
-      }).catch((err) => {
-        console.error(err);
-      });
+  //引入百度统计
+  import baidu from 'static/js/baidu.js'
+  
+  export default {
+    //该页面的控制数据
+    data() {
+      return {
+        //ip地址
+        ip: this.$store.state.ip,
+        caseList: [],
+        //关于本站
+        about: "欢迎来到5windy的个人网站。我是一名UI设计师，同时也是网站开发者，大家可以叫我设计师Windy。本网站也是我的一个学习项目，也是我的项目展示平台。 <br> 本网站数据库采用MySQL， 后台使用python的Django框架， 前端使用vue.js作为展示层。 是现在比较流行的MVVM架构模式。 <br> 大家可以很直观的从本网站了解到本人的产品设计能力， 产品开发能力以及产品规划能力。 <br> 若有什么意见和建议或者合作的想法， 欢迎点击右上角联系本人。 谢谢大家。 "
+      }
     },
-    //打开详情页
-    openDetails(index) {
-      localStorage.setItem("projectId", index);
+    //自定义头部
+    head() {
+      return {
+        title: "有爱设计 武汉UI设计/APP设计/WEB开发/系统开发/软件设计 Windy。",
+        meta: [{
+            hid: '有爱设计',
+            name: '有爱设计',
+            content: '武汉UI设计师Windy的个人网站，武汉市UI设计，网页开发，APP设计，交互设计，就找5windy。'
+          },
+          {
+            hid: '有爱设计',
+            content: this.about
+          },
+          {
+            hid: '有爱设计',
+            content: '欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。'
+          },
+          {
+            name: "baidu-site-verification",
+            content: "cREPbQjkep"
+          }
+        ],
+        link: [{
+          rel: "canonical",
+          href: "https://5windy.com/"
+        }]
+      }
     },
-  },
-  components: {
-
+    //进入页面执行的函数
+    mounted() {
+      document.documentElement.scrollTop = 0;
+      this.$store.commit('updateNavBarActive', '1');
+      this.getCaseList();
+      baidu.baidu("我的首页");
+      //默认footer需要显示1
+      this.$store.commit('updateFooterWidth', 1);
+    },
+    //定义函数
+    methods: {
+      //请求设计列表
+      getCaseList() {
+        //this.params.touser = this.$store.state.userNameList;
+        let params = "";
+        this.$store.dispatch('getCaseList', params).then((response) => {
+          let res = response.data;
+          if (response.statusText === "OK" && response.status === 200) {
+            //console.log(res);
+            this.caseList = res;
+  
+          } else {
+            alert("网络错误")
+          }
+        }).catch((err) => {
+          console.error(err);
+        });
+      },
+      //打开详情页
+      openDetails(index) {
+        localStorage.setItem("projectId", index);
+      },
+    },
+    components: {
+  
+    }
   }
-}
-
 </script>
-<style scoped lang="css">
-@import '~/assets/css/index.css';
 
+<style scoped lang="css">
+  @import '~/assets/css/index.css';
 </style>
