@@ -11,5 +11,6 @@
     }
     .bg img{
         margin: 120px auto;
+        width: 336px;
     }
 </style>

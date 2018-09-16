@@ -223,7 +223,7 @@
   }
   
   .nav {
-    background: #324057;
+    background: #0F2237;
     height: 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     justify-content: center;
@@ -286,7 +286,7 @@
     color: #fff;
     list-style-type: none;
     float: left;
-    font-size: 18px;
+    font-size: 16px;
     margin-right: 40px;
     font-weight: 350;
     transition: all 0.3s ease-out 0s;
@@ -352,13 +352,13 @@
     height: 40px;
     line-height: 40px;
     padding-left: 10px;
-    background: #324057;
+    background: #0F2237;
     width: 100%;
   }
   
   .resources ul li:hover {
     color: #fff;
-    background: #475669;
+    background: #0F2C4B;
   }
   
   .resources ul li {
