@@ -119,8 +119,23 @@ export default {
 
 .cooyright a {}
 
+
+@media screen and (max-width: 1200px) {
+  .footer {
+    width: 1200px;
+  }
+  .line {
+    display: none;
+  }
+  .copyright {
+    position: static;
+
+  }
+}
 @media screen and (max-width: 760px) {
-  .footer {}
+  .footer {
+    width: 100%;
+  }
   .footerLayout{
     width: 100%;
   }
@@ -136,5 +151,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>

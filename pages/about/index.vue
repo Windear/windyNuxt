@@ -1,65 +1,78 @@
 <template>
-  <div class="homeBody">
-    <scroll-bar></scroll-bar>
-    <div class="container">
-      <h2 class="title-box">素材</h2>
-      <div class="design_format">
-        <span>格式:</span>
-        <a v-for="(format,key) in formatList" :key="format.id" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format)">{{format}}</a>
+  <div class="container">
+    <!-- 作者模块 -->
+    <div class="author-box">
+      <div class="author-box-layout">
+        <div class="author-img">
+          <img src="~/assets/author.jpg" alt="">
+        </div>
+        <div class="author-text">
+          <p class="author-name">Windy</p>
+          <span class="author-company">现任职于 东风设计研究院有限公司 高级UI设计师/前端工程师</span>
+          <br>
+          <span>2011年毕业于武汉轻工大学，艺术设计专业。7年互联网产品开发经验，全栈产品设计师。</span>
+          <br>
+          <span>拥有APP开发(IOS,Android,WEB)、社交软件开发、企业级网页应用开发、MES、BAS、物联网设计开发等经验。</span>
+          <br>
+          <span>曾服务于：华晨宝马、东风日产、东风本田、东风特汽等多家知名企业。</span>
+        </div>
+      </div>
+    </div>
+    <!-- 作者模块 -->
+    <!-- 作品模块 -->
+    <div class="bodylist">
+      <div class="text-title">
+        <h2>作品欣赏</h2>
+        <p>Windy作品分类，包含练习</p>
       </div>
       <ul class="img-list">
         <li v-for="item in newList" :key="item.id">
           <div class="thumbnail">
-            <a :href="'/resources/data/'+item.resourcesId" target="_blank">
-              <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" style="display: inline;">
+            <a :href="'/project/'+item.pk" target="_blank">
+              <img v-lazy="ip +'/media/'+item.fields.picture" :key="item.pk" style="display: inline;">
             </a>
-            <div class="info">
-            </div>
+            
           </div>
-          <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
+          <p><a :href="'/project/'+item.pk" target="_blank">{{item.fields.title}}</a></p>
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
       <div class="pagination">
-        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="designList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
     </div>
+    <!-- 作品模块 -->
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
   //引入百度统计
   import baidu from 'static/js/baidu.js'
-  import ScrollBar from '~/components/scroll_bar.vue' //通知栏
-  import resourece from '~/components/resource/resourceList.vue' //素材列表
   
   export default {
-  
     //该页面的控制数据
     data() {
       return {
         //ip地址
         ip: this.$store.state.ip,
+  
         //传过来的值
         resourcesCate: this.$route.query.resourcesCate,
         //素材列表
-        resourcesList: [],
+        designList: [],
         //新分页素材列表
         newList: [],
         //是否显示notfound
         notfound: false,
-        //格式列表
-        formatList: ["全部"],
-        //选中的格式筛选
-        formatIndex: 0,
         //分页当前页数
         currentPage: 1,
+  
       }
     },
     //自定义头部
     head() {
       return {
-        title: "UI设计素材下载",
+        title: "有爱设计,5Windy。",
         meta: [{
             hid: '有爱设计',
             name: 'keywords',
@@ -68,50 +81,45 @@
           {
             hid: '有爱设计',
             name: 'description',
-            content: '有爱设计,武汉UI设计,武汉程序开发,APP开发,UI设计,UI素材,Sketch素材,PSD素材,XD素材,设计师学程序开发,sketch素材,sketch资源,sketch下载。'
+            content: this.about
           },
           {
             hid: '有爱设计',
             name: 'description',
             content: '欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。'
           },
-        ]
+        ],
+        link: [{
+          rel: "canonical",
+          href: "https://5windy.com/"
+        }]
       }
-    },
-    //父控件传过来的参数
-    props: {
-  
-    },
-    //监听函数
-    wacth: {
-  
     },
     //进入页面执行的函数
     mounted() {
-      //菜单选择
-      this.$store.commit('updateNavBarActive', '1');
-      //百度统计
-      baidu.baidu("我的案例");
+      document.documentElement.scrollTop = 0;
+      this.$store.commit('updateNavBarActive', '3');
+  
+      baidu.baidu("有爱首页");
+  
+      //获取素材列表
+      this.getDesignList();
+  
+  
       //默认footer需要显示1
       this.$store.commit('updateFooterWidth', 1);
-      //获取素材列表
-      this.getResourcesList();
-      //获取格式分类
-      this.getResourcesFormat();
     },
     //定义函数
     methods: {
-  
-  
       //请求分类列表
-      getResourcesList() {
+      getDesignList() {
         //获取projectId
         let params = 0;
         //let params = localStorage.getItem("projectId");
-        this.$store.dispatch('getResourcesList', params).then((response) => {
+        this.$store.dispatch('getDesignList', params).then((response) => {
           let res = response.data;
           if (res.state != "err") {
-            this.resourcesList = res;
+            this.designList = res;
             this.toListData(0, 20);
           } else {
             // alert("网络错误")
@@ -126,31 +134,6 @@
       },
   
   
-      //通过格式分类获取素材列表
-      postResourcesFormatList(key, format) {
-        this.formatIndex = key;
-        this.currentPage = 1;
-        if (format == "全部") {
-          this.getResourcesList();
-        } else {
-          let params = {
-            "type": format.toLowerCase(),
-            "cate": 0
-          };
-          this.$store.dispatch('postResourcesFormatList', params).then((response) => {
-            let res = response.data;
-            if (res.state != "err") {
-              this.resourcesList = res;
-              this.toListData(0, 20);
-            } else {
-              // alert("网络错误")
-              this.notfound = true;
-            }
-          }).catch((err) => {
-            console.error(err);
-          });
-        };
-      },
   
       //点击翻页
       handleCurrentChange(val) {
@@ -164,38 +147,46 @@
   
       //将列表传8条到listData
       toListData(start, end) {
-        this.newList = this.resourcesList.slice(start, end);
+        this.newList = this.designList.slice(start, end);
       },
   
-  
-      //请求格式分类
-      getResourcesFormat() {
-        let params = "";
-        this.$store.dispatch('getResourcesFormat', params).then((response) => {
-          let res = response.data;
-          // 将获得的数组加入到formatList里面去
-          for (var i = 0; i < res.length; i++) {
-            this.formatList.push(res[i].toUpperCase());
-            // console.log(this.formatList);
-          }
-        }).catch((err) => {
-          console.error(err);
-        });
-      },
   
   
     },
-    //增加控件
+  
     components: {
-      ScrollBar,
-      resourece
+  
     }
   }
 </script>
 
 <style scoped lang="css">
-  .container,
-  .tool-container {
+  @import '~/assets/css/index.css';
+  .text-title {
+    margin: 40px auto;
+    text-align: center;
+  }
+  
+  .text-title h2,
+  p {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+  }
+  
+  .text-title h2 {
+    font-size: 24px;
+    color: #1f2d3d;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  
+  .text-title p {
+    color: #8492A6;
+    font-weight: 350;
+    font-size: 14px;
+  }
+  
+  .bodylist {
     width: 1180px;
     overflow: hidden;
     margin: 0 auto;
@@ -237,6 +228,12 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
+    width:280px ;
+    overflow:hidden; /*内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis;
+    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    white-space: nowrap;
+    /*不换行 */
   }
   
   .img-list img {
@@ -272,49 +269,8 @@
     padding: 10px 0;
   }
   
-  
-  /*格式分类*/
-  
-  .design_format {
-    margin: 24px 0;
-    display: flex;
-    align-items: center;
-    color: #333;
-  }
-  
-  .design_format span {
-    font-weight: 400;
-    margin-right: 10px;
-    font-size: 18px;
-  }
-  
-  .format_btn {
-    display: inline-block;
-    height: 28px;
-    padding: 0 10px;
-    border-radius: 4px;
-    margin-right: 10px;
-    line-height: 28px;
-    transition: all 0.3s ease-out 0s;
-  }
-  
-  .format_btn_active {
-    background: #458CFF;
-    color: #fff;
-    transition: all 0.3s ease-out 0s;
-  }
-  
-  .format_btn:hover {
-    background: #D3DCE6;
-    color: #fff;
-    transition: all 0.3s ease-out 0s;
-  }
-  
-  
-  /*格式分类*/
-  
   @media screen and (max-width: 760px) {
-    .container {
+    .bodylist {
       width: 100%;
     }
     .img-list p a,
@@ -325,7 +281,7 @@
       white-space: nowrap;
       overflow: hidden;
     }
-    .design_format{
+    .design_format {
       margin-left: 2%;
     }
     .title-box {

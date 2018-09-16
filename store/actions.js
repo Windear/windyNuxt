@@ -20,7 +20,7 @@ export default {
   //请求设计列表
   async getDesignList({ commit, state }, params) {
     return await axios({
-      url: '/api/design/designList',
+      url: '/api/design/',
       method: 'get',
       params,
       adapter: cache({

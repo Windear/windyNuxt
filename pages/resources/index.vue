@@ -89,7 +89,7 @@
     //进入页面执行的函数
     mounted() {
       //菜单选择
-      this.$store.commit('updateNavBarActive', '3');
+      this.$store.commit('updateNavBarActive', '1');
       //百度统计
       baidu.baidu("我的案例");
       //默认footer需要显示1
@@ -324,6 +324,9 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+    }
+    .design_format{
+      margin-left: 2%;
     }
     .title-box {
       margin-left: 2%;

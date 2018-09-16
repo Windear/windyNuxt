@@ -3,10 +3,10 @@
     <div class="listHeader">
       <a href="javascript:;" v-for="(title,index) in listTitle" :key="title.index" :class="{'active':listTitleId==index}" @click="clickPage(index)">{{title.text}}</a>
     </div>
-    <div class="listBody" v-for="(body,index) in listTitle" v-if="listTitleId==index">
+    <div class="listBody" v-for="(body,index) in listTitle" :key="body.id" v-if="listTitleId==index">
       <div class="bodyitem" v-if="body.text=='UI设计'">
         <div>
-          <div class="listBox" v-for="(list,index) in UIlist" @click="openDetails(list.projectId)">
+          <div class="listBox" v-for="list in UIlist" :key="list.id" @click="openDetails(list.projectId)">
             <div class="listMask"></div>
             <div class="listImg" :style="'background-image: url('+ ip +'/media/' + list.listImg + ');'"></div>
             <div class="listText">{{list.listText}}</div>
@@ -20,7 +20,7 @@
       </div>
       <div class="bodyitem" v-if="body.text=='插画/原画'">
         <div>
-          <div class="listBox" v-for="(list,index) in CGlist" @click="openDetails(list.projectId)">
+          <div class="listBox" v-for="list in CGlist" :key="list.id" @click="openDetails(list.projectId)">
             <div class="listMask"></div>
             <div class="listImg" :style="'background-image: url('+ ip +'/media/' + list.listImg + ');'"></div>
             <div class="listText">{{list.listText}}</div>
@@ -34,7 +34,7 @@
       </div>
       <div class="bodyitem" v-if="body.text=='平面设计'">
         <div>
-          <div class="listBox" v-for="(list,index) in PMlist" @click="openDetails(list.projectId)">
+          <div class="listBox" v-for="list in PMlist" :key="list.id" @click="openDetails(list.projectId)">
             <div class="listMask"></div>
             <div class="listImg" :style="'background-image: url('+ ip +'/media/' + list.listImg + ');'"></div>
             <div class="listText">{{list.listText}}</div>
@@ -48,7 +48,7 @@
       </div>
       <div class="bodyitem" v-if="body.text=='3D设计'">
         <div>
-          <div class="listBox" v-for="(list,index) in DDDlist" @click="openDetails(list.projectId)">
+          <div class="listBox" v-for="(list,index) in DDDlist" :key="index" @click="openDetails(list.projectId)">
             <div class="listMask"></div>
             <div class="listImg" :style="'background-image: url('+ ip +'/media/' + list.listImg + ');'"></div>
             <div class="listText">{{list.listText}}</div>
@@ -62,7 +62,7 @@
       </div>
       <div class="bodyitem" v-if="body.text=='动效设计'">
         <div>
-          <div class="listBox" v-for="(list,index) in DXlist" @click="openDetails(list.projectId)">
+          <div class="listBox" v-for="(list,index) in DXlist" :key="index" @click="openDetails(list.projectId)">
             <div class="listMask"></div>
             <div class="listImg" :style="'background-image: url('+ ip +'/media/' + list.listImg + ');'"></div>
             <div class="listText">{{list.listText}}</div>
