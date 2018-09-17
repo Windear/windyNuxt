@@ -4,7 +4,7 @@
             <div class="left">
                 <div class="content">
                     <div class="title-box">
-                        <img v-lazy="ip +'/media/'+toolsData.toolsIcon" :alt="toolsData.toolsTitle">
+                        <img v-lazy="icon" :alt="toolsData.toolsTitle">
                         <h3>{{toolsData.toolsTitle}}</h3>
                     </div>
                     <div class="introduction">{{toolsData.toolsIntroduction}}</div>
@@ -15,8 +15,8 @@
             <div class="right">
                 <!-- 下载框 -->
                 <div class="download-box">
-                    <a href="javascript:;" class="download-btn download-box-btn">下载应用</a>
-                    <a href="javascript:;" class="pay-btn download-box-btn">打赏站长</a>
+                    <a href="javascript:;" class="download-btn download-box-btn" @click="dialogVisible = true">下载应用</a>
+                    <a href="javascript:;" class="pay-btn download-box-btn" @click="payMe = true">打赏站长</a>
                 </div>
                 <!-- 下载框 -->
                 <!-- 信息框 -->
@@ -41,15 +41,58 @@
                 <!-- 关键字框 -->
             </div>
         </div>
+        <!-- 下载弹出框 -->
+        <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="width:800px" custom-class="cloud_dialog">
+    
+            <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
+                <el-table-column prop="version" label="版本号" width="200">
+                </el-table-column>
+                <el-table-column prop="language" label="语言" width="100">
+                </el-table-column>
+                <el-table-column prop="update_time" label="更新时间" width="200">
+                </el-table-column>
+                <el-table-column prop="file_size" label="文件大小" width="120">
+                </el-table-column>
+                <el-table-column prop="drive_pw" label="下载密码" width="100">
+                </el-table-column>
+                <el-table-column label="操作" width="200">
+                    <template slot-scope="scope">
+                            <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
+                                <el-button  size="mini" >
+                                    <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
+                                    <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
+                                    <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
+                                </el-button>
+                            </a>
+                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getResourcesDownloads(scope.$index, downloadData)">
+                                <el-button type="primary" size="mini">前往下载</el-button>
+                            </a>
+                    </template>
+                </el-table-column>
+            </el-table>
+    
+            <span v-if="downloadData==0">此资源没有网盘链接哟~不好意思呀。</span>
+        </el-dialog>
+        <!-- 下载弹出框 -->
+        <!-- 打赏弹窗 -->
+        <el-dialog title="打赏站长" :visible.sync="payMe" width="500px"  center>  
+            <div style="text-align: center;" >
+            <img style="width:400px" src="~/assets/img/payMoney.png" alt="">   
+            <br>
+            <br>
+            <br>     
+            <span>打赏将减轻 5windy.com 服务器与加速流量负担，更好的提供优秀资源</span>    
+            </div>              
+        </el-dialog>
+        <!-- 打赏弹窗 -->
     </div>
 </template>
 
 <script type="text/javascript">
     // import changyan from "@/assets/js/changyan.js"
     //引入百度统计
-    import baidu from 'static/js/baidu.js'
+    import baidu from "static/js/baidu.js";
     export default {
-    
         //该页面的控制数据
         data() {
             return {
@@ -65,41 +108,44 @@
                 toolsData: "",
                 //该工具的tag
                 tags: [],
+                //该工具的icon
+                icon: "",
                 //工具类型
-                cate: '',
+                cate: "",
                 //title页面标题
                 title: "windy设计详情",
     
                 //网盘下载地址
-                cloudDown: [],
+                downloadData: [],
                 //是否显示弹出框
                 dialogVisible: false,
+                //是否显示打赏弹窗
+                payMe: false,
                 //复制剪切板按钮文字
-                clipboardVal: 'no',
-            }
+                clipboardVal: "no"
+            };
         },
         //自定义头部
         head() {
             return {
                 title: this.title,
                 meta: [{
-                        hid: '有爱设计',
-                        name: 'keywords',
-                        content: '有爱设计,武汉UI设计,武汉程序开发,APP开发,UI设计,UI素材,Sketch素材,PSD素材,XD素材,设计师学程序开发'
+                        hid: "有爱设计",
+                        name: "keywords",
+                        content: "有爱设计,武汉UI设计,武汉程序开发,APP开发,UI设计,UI素材,Sketch素材,PSD素材,XD素材,设计师学程序开发"
                     },
                     {
-                        hid: '有爱设计',
-                        name: 'description',
-                        // content: this.projectData.projectSynopsis
+                        hid: "有爱设计",
+                        name: "description",
+                        content: this.toolsData.toolsIntroduction
                     },
                     {
-                        hid: '有爱设计',
-                        name: 'description',
-                        content: '欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。'
+                        hid: "有爱设计",
+                        name: "description",
+                        content: "欢迎来到windy的设计小站，这里有各种各样的素材，这里接各种各样的APP、网站设计外包。这里可以找到从初学者到设计师的心得体会教程，欢迎来我的家里寻找吧。"
                     }
-    
                 ]
-            }
+            };
         },
         created() {
             // //this.showData();
@@ -108,9 +154,7 @@
             // });
         },
         //父控件传过来的参数
-        props: {
-    
-        },
+        props: {},
         //监听函数
         computed: {
             bodyWidth() {
@@ -122,15 +166,15 @@
             //百度统计
             baidu.baidu("工具详情");
             //传入navBar的选择状态
-            this.$store.commit('updateNavBarActive', '');
+            this.$store.commit("updateNavBarActive", "2");
             document.documentElement.scrollTop = 0;
             //this.changyan();
             this.getToolsDetails();
-            //   this.getResourcesCloud();
+            this.getToolsDownload();
             //访问量
             //   this.getResourcesLooked();
             //默认footer不需要显示0
-            this.$store.commit('updateFooterWidth', 0);
+            this.$store.commit("updateFooterWidth", 0);
         },
         //定义函数
         methods: {
@@ -139,8 +183,8 @@
             // },
             changyan() {
                 window.changyan.api.config({
-                    appid: 'cyt3crepq',
-                    conf: 'prod_a13b2e3f57b739f379a9d121e340340d'
+                    appid: "cyt3crepq",
+                    conf: "prod_a13b2e3f57b739f379a9d121e340340d"
                 });
             },
             //请求工具详情
@@ -148,98 +192,113 @@
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
-                    let aaa = String(window.location.href.split('/').pop());
+                    let aaa = String(window.location.href.split("/").pop());
                     this.projectId = aaa;
-                };
+                }
                 //获取projectId
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
-                this.$store.dispatch('getToolsDetails', params).then((response) => {
-                    let res = response.data;
-                    if (res.state != "err" && response.status === 200) {
-                        //console.log(res);
-                        this.toolsData = res;
-                        //传入页面标题
-                        this.title = res.toolsTitle;
-                        //将标签tag转为数组传入data
-                        this.tags = res.toolsTag.split(",");
-                        //将工具类型传入data
-                        this.cate = res.toolsCate[1];
-                    } else {
-                        alert("网络错误")
-                    }
-                }).catch((err) => {
-                    console.error(err);
-                    this.$router.push({
-                        path: '/404'
+                this.$store
+                    .dispatch("getToolsDetails", params)
+                    .then(response => {
+                        let res = response.data;
+                        if (res.state != "err" && response.status === 200) {
+                            //console.log(res);
+                            this.toolsData = res;
+                            //传入页面标题
+                            this.title = res.toolsTitle;
+                            //将标签tag转为数组传入data
+                            this.tags = res.toolsTag.split(",");
+                            //将工具类型传入data
+                            this.cate = res.toolsCate[1];
+                            //将工具的icon传入data
+                            this.icon = this.ip + "/media/" + res.toolsIcon;
+                        } else {
+                            alert("网络错误");
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        this.$router.push({
+                            path: "/404"
+                        });
                     });
-                });
             },
             //请求素材网盘地址
-            getResourcesCloud() {
+            getToolsDownload() {
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
-                    let aaa = String(window.location.href.split('/').pop());
+                    let aaa = String(window.location.href.split("/").pop());
                     this.projectId = aaa;
-                };
+                }
                 //获取projectId
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
-                this.$store.dispatch('getResourcesCloud', params).then((response) => {
-                    let res = response.data;
-                    if (res.state != "err") {
-                        //console.log(res);
-                        this.cloudDown = res;
-                    } else {
-                        this.cloudDown = 0;
-                    }
-                }).catch((err) => {
-                    console.error(err);
-                    //this.$router.push({ path: '/404' });
-                });
+                this.$store
+                    .dispatch("getToolsDownload", params)
+                    .then(response => {
+                        let res = response.data;
+                        if (res.state != "err") {
+                            //console.log(res);
+                            this.downloadData = res;
+                        } else {
+                            this.downloadData = 0;
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        //this.$router.push({ path: '/404' });
+                    });
             },
             //素材访问量
             getResourcesLooked() {
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
-                    let aaa = String(window.location.href.split('/').pop());
+                    let aaa = String(window.location.href.split("/").pop());
                     this.projectId = aaa;
-                };
+                }
                 //获取projectId
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
-                this.$store.dispatch('getResourcesLooked', params).then((response) => {
-                    let res = response.data;
-                    //以后有需要添加显示浏览量
-                }).catch((err) => {
-                    console.error(err);
-                    //this.$router.push({ path: '/404' });
-                });
+                this.$store
+                    .dispatch("getResourcesLooked", params)
+                    .then(response => {
+                        let res = response.data;
+                        //以后有需要添加显示浏览量
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        //this.$router.push({ path: '/404' });
+                    });
             },
             //素材下载量
-            getResourcesDownloads() {
+            getResourcesDownloads(index, rows) {
+                console.log(rows);
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
-                    let aaa = String(window.location.href.split('/').pop());
+                    let aaa = String(window.location.href.split("/").pop());
                     this.projectId = aaa;
-                };
+                }
                 //获取projectId
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
-                this.$store.dispatch('getResourcesDownloads', params).then((response) => {
-                    let res = response.data;
-                    //以后有需要添加显示浏览量
-                }).catch((err) => {
-                    console.error(err);
-                    //this.$router.push({ path: '/404' });
-                });
+                this.$store
+                    .dispatch("getResourcesDownloads", params)
+                    .then(response => {
+                        let res = response.data;
+                        //以后有需要添加显示浏览量
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        //this.$router.push({ path: '/404' });
+                    });
             },
             //弹出框函数
             handleClose(done) {
-                this.$confirm('确认关闭？')
+                this.$confirm("确认关闭？")
                     .then(_ => {
                         done();
                     })
@@ -251,14 +310,12 @@
             },
             // 复制失败
             onError(e) {
-                this.clipboardVal = 'err';
-            },
+                this.clipboardVal = "err";
+            }
         },
         //增加控件
-        components: {
-    
-        }
-    }
+        components: {}
+    };
 </script>
 
 <style lang="css">
@@ -306,9 +363,9 @@
     }
     
     .introduction {
-        background: #EFF2F7;
+        background: #eff2f7;
         padding: 20px;
-        color: #5E6D82;
+        color: #5e6d82;
         font-size: 14px;
         line-height: 24px;
         margin-top: 20px;
@@ -316,6 +373,25 @@
     
     .details {
         max-width: 720px;
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+    
+    .details p {
+        width: 840px;
+        font-size: 14px !important;
+        margin: 10px 0;
+    }
+    
+    .details img {
+        max-width: 840px;
+    }
+    
+    .details a:hover,
+    .details a:visited,
+    .details a:link,
+    .details a:active {
+        color: #0089ff !important;
     }
     
     
@@ -342,7 +418,7 @@
         display: inline-block;
         width: 240px;
         height: 44px;
-        color: #fff!important;
+        color: #fff !important;
         font-size: 16px;
         font-weight: 400;
         border-radius: 4px;
@@ -352,11 +428,23 @@
     }
     
     .download-btn {
-        background: #0089FF;
+        background: #0089ff;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    .download-btn:hover {
+        background: #007ce7;
+        transition: all 0.3s ease-out 0s;
     }
     
     .pay-btn {
-        background: #FF7676;
+        background: #ff7676;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    .pay-btn:hover {
+        background: #f84f4f;
+        transition: all 0.3s ease-out 0s;
     }
     
     .essential {
@@ -369,7 +457,7 @@
     
     .box-title {
         font-size: 18px;
-        color: #1F2D3D;
+        color: #1f2d3d;
         margin-bottom: 10px;
     }
     
@@ -381,7 +469,7 @@
     }
     
     .span-left {
-        color: #8492A6;
+        color: #8492a6;
     }
     
     .span-right {
@@ -402,8 +490,8 @@
     .tag-list {
         display: inline-block;
         height: 32px;
-        background: #F6F9FA;
-        color: #95A5A6!important;
+        background: #f6f9fa;
+        color: #95a5a6 !important;
         padding: 0 12px;
         margin: 5px 10px 5px 0;
         font-size: 14px;
@@ -416,4 +504,51 @@
     
     
     /* 右边框 */
+    
+    
+    /*网盘弹窗*/
+    
+    .cloud_dialog {
+        min-width: 320px;
+    }
+    
+    .cloud_down {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .cloud_down p {
+        line-height: 20px;
+        color: #00c58c;
+    }
+    
+    .baiduyun {
+        display: flex;
+        align-items: center;
+    }
+    
+    .baiduyun span {
+        margin-left: 10px;
+        line-height: 20px;
+        display: inline-block;
+    }
+    
+    .clipboard-btn:link {
+        color: #458cff;
+        text-decoration: underline;
+        margin-left: 20px;
+    }
+    
+    .clipboardVal-success {
+        color: #00c58c;
+    }
+    
+    .clipboardVal-err {
+        color: #f84f4f;
+    }
+    
+    
+    /*网盘弹窗*/
 </style>

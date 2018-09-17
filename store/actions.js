@@ -172,4 +172,14 @@ export default {
       })
     });
   },
+  //请求工具详情的下载地址
+  async getToolsDownload({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/download/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

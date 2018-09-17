@@ -118,8 +118,8 @@
             getToolsCateList(cate) {
                 //获取projectId
                 let params = 0;
-                
-                if (cate) {
+                // console.log(cate)
+                if (cate||cate==0) {
                     params = cate;
                     this.cateIndex = cate;
                 }
