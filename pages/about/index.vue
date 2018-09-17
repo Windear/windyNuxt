@@ -31,7 +31,7 @@
             <a :href="'/project/'+item.pk" target="_blank">
               <img v-lazy="ip +'/media/'+item.fields.picture" :key="item.pk" style="display: inline;">
             </a>
-            
+  
           </div>
           <p><a :href="'/project/'+item.pk" target="_blank">{{item.fields.title}}</a></p>
         </li>
@@ -228,8 +228,9 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
-    width:280px ;
-    overflow:hidden; /*内容超出宽度时隐藏超出部分的内容 */
+    width: 280px;
+    overflow: hidden;
+    /*内容超出宽度时隐藏超出部分的内容 */
     text-overflow: ellipsis;
     /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
     white-space: nowrap;

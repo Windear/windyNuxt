@@ -301,7 +301,7 @@
   }
   
   .detailBody img {
-    width: 1080px;
+    max-width: 1080px;
   }
   
   .detailsHeader {

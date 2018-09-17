@@ -2,7 +2,7 @@
   <div class="homeBody">
     <scroll-bar></scroll-bar>
     <div class="container">
-      <h2 class="title-box">素材</h2>
+      <h2 class="title-box">最新素材</h2>
       <div class="design_format">
         <span>格式:</span>
         <a v-for="(format,key) in formatList" :key="format.id" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format)">{{format}}</a>
@@ -11,7 +11,7 @@
         <li v-for="item in newList" :key="item.id">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
-              <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" style="display: inline;">
+              <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" alt="有爱设计素材,sketch素材" style="display: inline;">
             </a>
             <div class="info">
             </div>
@@ -237,6 +237,10 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
+    width: 280px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   
   .img-list img {
@@ -325,7 +329,7 @@
       white-space: nowrap;
       overflow: hidden;
     }
-    .design_format{
+    .design_format {
       margin-left: 2%;
     }
     .title-box {

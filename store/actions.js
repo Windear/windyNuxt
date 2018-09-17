@@ -141,4 +141,35 @@ export default {
       })
     });
   },
+  //工具模块api
+  //获取工具分类列表
+  async getToolsCate({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/cate',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取工具列表
+  async getToolsCateList({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/list/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+   //获取工具详情
+   async getToolsDetails({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/details/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }
