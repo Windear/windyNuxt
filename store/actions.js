@@ -182,4 +182,24 @@ export default {
       })
     });
   },
+  //工具访问量接口
+  async getToolsLooked({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/looked_num/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //工具下载量接口
+  async getToolsDownloads({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/download_num/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

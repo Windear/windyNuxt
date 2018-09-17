@@ -64,7 +64,7 @@
                                     <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
                                 </el-button>
                             </a>
-                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getResourcesDownloads(scope.$index, downloadData)">
+                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
                                 <el-button type="primary" size="mini">前往下载</el-button>
                             </a>
                     </template>
@@ -172,7 +172,7 @@
             this.getToolsDetails();
             this.getToolsDownload();
             //访问量
-            //   this.getResourcesLooked();
+            this.getToolsLooked();
             //默认footer不需要显示0
             this.$store.commit("updateFooterWidth", 0);
         },
@@ -252,7 +252,7 @@
                     });
             },
             //素材访问量
-            getResourcesLooked() {
+            getToolsLooked() {
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
@@ -263,7 +263,7 @@
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
                 this.$store
-                    .dispatch("getResourcesLooked", params)
+                    .dispatch("getToolsLooked", params)
                     .then(response => {
                         let res = response.data;
                         //以后有需要添加显示浏览量
@@ -274,8 +274,8 @@
                     });
             },
             //素材下载量
-            getResourcesDownloads(index, rows) {
-                console.log(rows);
+            getToolsDownloads(index, rows) {
+                //console.log(rows);
                 //如果projectId没有传过来，或者没有
                 if (this.projectId === undefined) {
                     //获取该页面URL最后一个数字，并赋值给这个页面的id
@@ -286,7 +286,7 @@
                 let params = this.projectId;
                 //let params = localStorage.getItem("projectId");
                 this.$store
-                    .dispatch("getResourcesDownloads", params)
+                    .dispatch("getToolsDownloads", params)
                     .then(response => {
                         let res = response.data;
                         //以后有需要添加显示浏览量
