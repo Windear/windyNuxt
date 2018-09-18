@@ -11,6 +11,7 @@
     
             <ul class="tools-list">
                 <li v-for="item in newList" :key="item.id" >
+                    <div class="box-body">
                     <a :href="'/tools/'+item.toolsId" target="_blank">
                         <img v-lazy="ip +'/media/'+item.toolsIcon" :alt="item.toolsTitle">
                         <div class="content-text">
@@ -19,6 +20,8 @@
                             <div class="cate">{{item.toolsCate[1]}}</div>
                         </div>
                     </a>
+                    </div>
+                    
                 </li>
             </ul>
             <not-found v-if="notfound"></not-found>
@@ -229,12 +232,8 @@
     }
     
     .tools-list li {
-        width: 180px;
-        background: #fff;
-        border-radius: 4px;
-        margin: 10px;
         float: left;
-        transition: all 0.3s ease-out 0s;
+        height: 305px;
     }
     
     .tools-list a {
@@ -242,11 +241,25 @@
         align-items: center;
         flex-flow: column;
     }
+
+    .box-body{
+        width: 180px;
+        background: #fff;
+        border-radius: 4px;
+        margin: 10px;
+        /* margin: 10px; */
+        transition: all 0.3s ease-out 0s;
+    }
+   
     
     
     /* hover事件 */
     
-    .tools-list li:hover {
+    .tools-list li:hover{
+       
+    }
+
+    .tools-list li:hover .box-body{
         background: #1e262e;
         margin-top: 5px;
         transition: all 0.3s ease-out 0s;
