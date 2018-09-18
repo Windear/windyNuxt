@@ -10,7 +10,7 @@
             </div>
     
             <ul class="tools-list">
-                <li v-for="item in newList" :key="item.id" >
+                <li v-for="item in newList" :key="item.toolsId" >
                     <div class="box-body">
                     <a :href="'/tools/'+item.toolsId" target="_blank">
                         <img v-lazy="ip +'/media/'+item.toolsIcon" :alt="item.toolsTitle">
@@ -26,7 +26,7 @@
             </ul>
             <not-found v-if="notfound"></not-found>
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="toolsList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+                <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="toolsList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
             </div>
         </div>
     </div>
@@ -133,7 +133,7 @@
                     if (res.state != "err") {
                         this.notfound = false;
                         this.toolsList = res;
-                        this.toListData(0, 20);
+                        this.toListData(0, 24);
                     } else {
                         // alert("网络错误")
                         this.notfound = true;
@@ -146,7 +146,7 @@
             //点击翻页
             handleCurrentChange(val) {
                 //console.log(`当前页: ${nowPage}`);
-                this.toListData((val - 1) * 20, val * 20);
+                this.toListData((val - 1) * 24, val * 24);
                 //回到顶部
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
@@ -341,7 +341,7 @@
     
     @media screen and (max-width: 760px) {
         
-        .tools-list li:hover {
+        .tools-list li:hover .box-body{
             background: #1e262e;
             margin-top: 0;
             transition: all 0.3s ease-out 0s;
@@ -365,8 +365,12 @@
             margin-left: 2%;
         }
         .tools-list li {
-            margin: 0 2% 4%;
-            width: 46%;
+             margin: 0 2% 4%;
+            width: 46%; 
+        }
+        .box-body{
+            width: 100%;
+             margin: 0;
         }
         .tools-list p a {
             width: 100%;

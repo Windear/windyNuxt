@@ -73,7 +73,7 @@
                 <el-table-column label="操作" min-width="190">
                     <template slot-scope="scope">
                         <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
-                            <el-button  size="mini" >
+                            <el-button  size="mini" v-if="downloadData[scope.$index].drive_pw">
                                 <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
                                 <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
                                 <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
