@@ -232,6 +232,7 @@
   .tool-list li a {
     display: block;
     line-height: 0;
+
   }
   
   .img-list p a,
@@ -241,6 +242,10 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
+        width: 280px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   
   .img-list img {
