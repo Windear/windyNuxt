@@ -10,7 +10,21 @@
                     <div class="introduction">{{toolsData.toolsIntroduction}}</div>
                     <div class="details" v-html="toolsData.toolsContent"></div>
                 </div>
-    
+                <div class="problem">
+                    <div class="problem-title">
+                        <span class="problem-line"></span>
+                        <h3>常见问题</h3>
+                    </div>
+                    <div class="problem-content">
+                        <ol>
+                            <li>如遇：<code>「xxx.app已损坏，打不开。你应该将它移到废纸篓」</code>，并非你安装的软件已损坏，而是Mac系统的安全设置问题。详见：<a href="http://xclient.info/a/74559ea2-7870-b992-ed53-52a9d988e382.html" target="_blank">MAC应用无法打开或文件损坏的处理方法</a></li>
+                            <li>激活工具在新系统10.12中打不开。参照 <a href="http://xclient.info/a/50ebed5d-9015-9340-893b-dfb9eaa275cc.html" target="_blank">让Special-K系列Patch工具运行在macOS sierra 10.12上</a> 与 <a href="http://xclient.info/a/a015de0d-acbd-a5c8-f5ca-bd78f6ae6bb4.html"
+                                    target="_blank">让CORE Keygen系列注册机成功运行在macOS sierra 10.12上的方法</a></li>
+                            <li>本站DMG、zip统一打开密码：<code>xclient.info</code></li>
+                            <li>关于激活方法，大部分文章都对不同版本做了不同的激活说明。不过，最终还是以dmg包中的实际情况为准，如果里面只有单独的 .app或者.pkg文件，说明不需要做任何激活操作。</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
             <div class="right">
                 <!-- 下载框 -->
@@ -37,36 +51,37 @@
                 <div class="tag">
                     <p class="box-title">标签</p>
                     <a v-for="tag in tags" :key="tag.id" href="javascript:;" class="tag-list">{{tag}}</a>
+    
                 </div>
                 <!-- 关键字框 -->
             </div>
         </div>
         <!-- 下载弹出框 -->
-        <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="width:800px" custom-class="cloud_dialog">
+        <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="60%" custom-class="cloud_dialog">
     
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
-                <el-table-column prop="version" label="版本号" width="200">
+                <el-table-column prop="version" label="版本号" min-width="130">
                 </el-table-column>
-                <el-table-column prop="language" label="语言" width="100">
+                <el-table-column prop="language" label="语言" min-width="80">
                 </el-table-column>
-                <el-table-column prop="update_time" label="更新时间" width="200">
+                <el-table-column prop="update_time" label="更新时间" min-width="160">
                 </el-table-column>
-                <el-table-column prop="file_size" label="文件大小" width="120">
+                <el-table-column prop="file_size" label="文件大小" min-width="80">
                 </el-table-column>
-                <el-table-column prop="drive_pw" label="下载密码" width="100">
+                <el-table-column prop="drive_pw" label="下载密码" min-width="80">
                 </el-table-column>
-                <el-table-column label="操作" width="200">
+                <el-table-column label="操作" min-width="190">
                     <template slot-scope="scope">
-                            <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
-                                <el-button  size="mini" >
-                                    <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
-                                    <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
-                                    <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
-                                </el-button>
-                            </a>
-                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
-                                <el-button type="primary" size="mini">前往下载</el-button>
-                            </a>
+                        <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
+                            <el-button  size="mini" >
+                                <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
+                                <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
+                                <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
+                            </el-button>
+                        </a>
+                        <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
+                            <el-button type="primary" size="mini">前往下载</el-button>
+                        </a>
                     </template>
                 </el-table-column>
             </el-table>
@@ -75,9 +90,9 @@
         </el-dialog>
         <!-- 下载弹出框 -->
         <!-- 打赏弹窗 -->
-        <el-dialog title="打赏站长" :visible.sync="payMe" width="500px"  center>  
+        <el-dialog title="打赏站长" custom-class="pay-dialog" :visible.sync="payMe" width="75%" center>  
             <div style="text-align: center;" >
-            <img style="width:400px" src="~/assets/img/payMoney.png" alt="">   
+            <img style="max-width:400px;width:100%;" src="~/assets/img/payMoney.png" alt="">   
             <br>
             <br>
             <br>     
@@ -113,7 +128,7 @@
                 //工具类型
                 cate: "",
                 //title页面标题
-                title: "windy设计详情",
+                title: "MAC工具详情",
     
                 //网盘下载地址
                 downloadData: [],
@@ -394,6 +409,47 @@
         color: #0089ff !important;
     }
     
+    .problem {
+        background: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        /* height: 100px; */
+        margin-top: 20px;
+    }
+    
+    .problem-title {
+        display: flex;
+        align-items: center;
+    }
+    
+    .problem-line {
+        width: 4px;
+        height: 20px;
+        border-radius: 2px;
+        background: #0089ff;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .problem-content ol {
+        color: #475669;
+        padding-inline-start: 20px;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    
+    .problem-content li {
+        margin-bottom: 10px;
+    }
+    
+    .problem-content code {
+        color: #ff7676;
+    }
+    
+    .problem-content a {
+        color: #007ce7;
+    }
+    
     
     /* 左边框 */
     
@@ -498,7 +554,9 @@
         line-height: 32px;
         border-radius: 4px;
     }
-    
+    .pay-dialog{
+        max-width: 500px;
+    }
     
     /* 标签框 */
     
@@ -551,4 +609,42 @@
     
     
     /*网盘弹窗*/
+    
+    @media screen and (max-width: 760px) {
+        .container {
+            width: 100%;
+        }
+        .left {
+            width: 100%;
+            border-radius: 0;
+        }
+        .right {
+            width: 100%;
+        }
+        .download-box {
+            width: 100%;
+        }
+        .download-box-btn {
+            width: 100%;
+        }
+        .tag {
+            background: #fff;
+            width: 100%;
+            border-radius: 0;
+        }
+        .essential {
+            background: #fff;
+            width: 100%;
+            border-radius: 0;
+        }
+        .details {
+            width: 100%;
+        }
+        .details p {
+            width: 100%;
+        }
+        .details img {
+            max-width: 100%;
+        }
+    }
 </style>

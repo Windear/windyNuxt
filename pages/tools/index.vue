@@ -58,11 +58,11 @@
         //自定义头部
         head() {
             return {
-                title: "UI设计素材下载",
+                title: "MAC软件下载",
                 meta: [{
                         hid: "有爱设计",
                         name: "keywords",
-                        content: "有爱设计,武汉UI设计,武汉程序开发,APP开发,UI设计,UI素材,Sketch素材,PSD素材,XD素材,设计师学程序开发"
+                        content: "有爱设计,武汉UI设计,武汉程序开发,APP开发,UI设计,UI素材,Sketch素材,PSD素材,XD素材,设计师学程序开发,MAC软件下载，小白设计师学MAC"
                     },
                     {
                         hid: "有爱设计",
