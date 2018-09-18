@@ -627,6 +627,11 @@
         .download-box-btn {
             width: 100%;
         }
+        .title-box img {
+            min-width: 80px;
+            width: 80px;
+            height: 80px;
+        }   
         .tag {
             background: #fff;
             width: 100%;
