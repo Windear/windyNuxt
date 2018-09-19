@@ -3,7 +3,9 @@
     <header class="nav" :class="{'navBarShadow':scrollType}" ref="nav">
       <div class="container_nav" :class="{'containerLitter':scrollType}">
         <div class="nav-left-box">
-          <a><img src="~/assets/img/logo.png" class="logo"></a>
+          <a class="pcNav" href="https://5windy.com/"><img src="~/assets/img/logo.png" class="logo"></a>
+          <a class="mobileNav" href="https://5windy.com/"><img src="~/static/LOGO.svg" class="logo"></a>
+          <!-- PC显示的目录标题 -->
           <ul class="text-link">
             <a href="javascript:;" @click="openIndex">
               <li :style="active==1?'color:#20A0FF;':''" class="resources">
@@ -22,6 +24,20 @@
               <li :style="active==3?'color:#20A0FF;':''">关于Windy</li>
             </a>
           </ul>
+          <!-- PC显示的目录标题 -->
+          <!-- 移动端显示的目录标题 -->
+          <div class="mobile-text-link">
+            <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">
+                      设计素材
+                    </a>
+            <a href="javascript:;" @click="openTools" :style="active==2?'color:#20A0FF;':''">
+                      MAC工具
+                    </a>
+            <a href="javascript:;" @click="openAbout" :style="active==3?'color:#20A0FF;':''">
+                      关于Windy
+                    </a>
+          </div>
+          <!-- 移动端显示的目录标题 -->
         </div>
         <div class="nav-right-box">
           <a href="javascript:;"><span class="text-span"></span></a>
@@ -35,23 +51,25 @@
             <div class="email chat"></div>
           </a>
         </div>
-        <div class="menu" @click="showMenu = !showMenu"><img src="~/assets/img/menu.svg" alt=""></div>
+        <!-- <div class="menu" @click="showMenu = !showMenu"><img src="~/assets/img/menu.svg" alt=""></div> -->
       </div>
     </header>
-    <div class="menu-list" v-if="showMenu">
-      <ul>
-        <a href="javascript:;">
-          <li :style="active==1?'color:#20A0FF;':''" @click="openIndex">设计素材</li>
-        </a>
   
-        <a href="javascript:;">
-          <li :style="active==2?'color:#20A0FF;':''" @click="openTools">MAC工具</li>
-        </a>
-        <a href="javascript:;">
-          <li :style="active==3?'color:#20A0FF;':''" @click="openAbout">关于windy</li>
-        </a>
-      </ul>
-    </div>
+    <!-- <div class="menu-list" v-if="showMenu">
+              <ul>
+                <a href="javascript:;">
+                  <li :style="active==1?'color:#20A0FF;':''" @click="openIndex">设计素材</li>
+                </a>
+          
+                <a href="javascript:;">
+                  <li :style="active==2?'color:#20A0FF;':''" @click="openTools">MAC工具</li>
+                </a>
+                <a href="javascript:;">
+                  <li :style="active==3?'color:#20A0FF;':''" @click="openAbout">关于windy</li>
+                </a>
+              </ul>
+            </div> -->
+  
     <!-- 素材分类移动列表 -->
     <div v-if="active==1" style="width: 100%;">
       <ul class="resources-list">
@@ -187,6 +205,19 @@
 </script>
 
 <style scoped lang="css">
+  /* logo图片 */
+  
+  .mobileNav {
+    display: none;
+    max-width: 40px;
+    max-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  
+  /* logo图片 */
+  
   .menu {
     width: 2rem;
     height: 2rem;
@@ -204,6 +235,9 @@
     height: 140px;
   }
   
+  
+  /* 菜单选项 */
+  
   .text-link li {
     height: 60px;
     line-height: 60px;
@@ -215,6 +249,13 @@
     color: #1F2D3D;
     margin-left: 20px;
   }
+  
+  .mobile-text-link {
+    display: none;
+  }
+  
+  
+  /* 菜单选项 */
   
   .navbox {
     position: fixed;
@@ -372,7 +413,6 @@
     background: #EFF2F7;
     height: 50px;
     -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
     -webkit-overflow-x: scroll;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -393,11 +433,35 @@
   /*当屏幕小于760*/
   
   @media screen and (max-width: 760px) {
+    /* logo图片 */
+    .pcNav {
+      display: none;
+    }
+    .mobileNav {
+      display: inline-block;
+    }
+    /* logo图片 */
+    /* 菜单选项 */
     .text-link {
       display: none;
     }
+    .mobile-text-link {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .mobile-text-link a {
+      color: #fff;
+      display: inline-block;
+    }
+    /* 菜单选项 */
     .menu {
       display: inline;
+    }
+    .nav-left-box {
+      width: 100%;
     }
     .nav-right-box {
       display: none;
