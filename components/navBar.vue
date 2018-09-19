@@ -20,22 +20,28 @@
             <a href="javascript:;" @click="openTools">
               <li :style="active==2?'color:#20A0FF;':''">MAC工具</li>
             </a>
+            <a href="javascript:;" @click="openBlog">
+              <li :style="active==3?'color:#20A0FF;':''">文章博客</li>
+            </a>
             <a href="javascript:;" @click="openAbout">
-              <li :style="active==3?'color:#20A0FF;':''">关于Windy</li>
+              <li :style="active==4?'color:#20A0FF;':''">关于Windy</li>
             </a>
           </ul>
           <!-- PC显示的目录标题 -->
           <!-- 移动端显示的目录标题 -->
           <div class="mobile-text-link">
             <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">
-                      设计素材
-                    </a>
+                          设计素材
+                        </a>
             <a href="javascript:;" @click="openTools" :style="active==2?'color:#20A0FF;':''">
-                      MAC工具
-                    </a>
-            <a href="javascript:;" @click="openAbout" :style="active==3?'color:#20A0FF;':''">
-                      关于Windy
-                    </a>
+                          MAC工具
+                        </a>
+            <a href="javascript:;" @click="openBlog" :style="active==3?'color:#20A0FF;':''">
+                          文章博客
+                        </a>
+            <a href="javascript:;" @click="openAbout" :style="active==4?'color:#20A0FF;':''">
+                          关于Windy
+                        </a>
           </div>
           <!-- 移动端显示的目录标题 -->
         </div>
@@ -56,19 +62,19 @@
     </header>
   
     <!-- <div class="menu-list" v-if="showMenu">
-              <ul>
-                <a href="javascript:;">
-                  <li :style="active==1?'color:#20A0FF;':''" @click="openIndex">设计素材</li>
-                </a>
-          
-                <a href="javascript:;">
-                  <li :style="active==2?'color:#20A0FF;':''" @click="openTools">MAC工具</li>
-                </a>
-                <a href="javascript:;">
-                  <li :style="active==3?'color:#20A0FF;':''" @click="openAbout">关于windy</li>
-                </a>
-              </ul>
-            </div> -->
+                  <ul>
+                    <a href="javascript:;">
+                      <li :style="active==1?'color:#20A0FF;':''" @click="openIndex">设计素材</li>
+                    </a>
+              
+                    <a href="javascript:;">
+                      <li :style="active==2?'color:#20A0FF;':''" @click="openTools">MAC工具</li>
+                    </a>
+                    <a href="javascript:;">
+                      <li :style="active==3?'color:#20A0FF;':''" @click="openAbout">关于windy</li>
+                    </a>
+                  </ul>
+                </div> -->
   
     <!-- 素材分类移动列表 -->
     <div v-if="active==1" style="width: 100%;">
@@ -138,7 +144,7 @@
       //进入关于windy
       openAbout() {
         this.showMenu = false;
-        this.$store.commit('updateNavBarActive', '3');
+        // this.$store.commit('updateNavBarActive', '4');
         this.$router.push({
           path: '/about'
         });
@@ -151,7 +157,14 @@
           path: '/tools'
         });
       },
-  
+      //进入文章博客
+      openBlog() {
+        this.showMenu = false;
+        this.$store.commit('updateNavBarActive', '3');
+        this.$router.push({
+          path: '/blog'
+        });
+      },
       //滚轮缩小事件
       onScroll() {
         let self = this;

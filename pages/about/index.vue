@@ -98,7 +98,7 @@
     //进入页面执行的函数
     mounted() {
       document.documentElement.scrollTop = 0;
-      this.$store.commit('updateNavBarActive', '3');
+      this.$store.commit('updateNavBarActive', '4');
   
       baidu.baidu("有爱首页");
   

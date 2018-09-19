@@ -4,10 +4,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const _590184d9 = () => import('../pages/tools/index.vue' /* webpackChunkName: "pages/tools/index" */).then(m => m.default || m)
-const _51cd33d7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
 const _0f98e80b = () => import('../pages/about/index.vue' /* webpackChunkName: "pages/about/index" */).then(m => m.default || m)
+const _51cd33d7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
 const _7b2e9b23 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
 const _c024c71a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
+const _b29feb8c = () => import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */).then(m => m.default || m)
 const _7bad3a94 = () => import('../pages/resources/data/_id.vue' /* webpackChunkName: "pages/resources/data/_id" */).then(m => m.default || m)
 const _bea62cfe = () => import('../pages/tools/_id.vue' /* webpackChunkName: "pages/tools/_id" */).then(m => m.default || m)
 const _98a0cf02 = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
@@ -79,14 +80,14 @@ export function createRouter () {
 			name: "tools"
 		},
 		{
-			path: "/project",
-			component: _51cd33d7,
-			name: "project"
-		},
-		{
 			path: "/about",
 			component: _0f98e80b,
 			name: "about"
+		},
+		{
+			path: "/project",
+			component: _51cd33d7,
+			name: "project"
 		},
 		{
 			path: "/resources",
@@ -97,6 +98,11 @@ export function createRouter () {
 			path: "/404",
 			component: _c024c71a,
 			name: "404"
+		},
+		{
+			path: "/blog",
+			component: _b29feb8c,
+			name: "blog"
 		},
 		{
 			path: "/resources/data/:id?",

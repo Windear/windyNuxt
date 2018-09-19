@@ -18,9 +18,7 @@
                     <div class="problem-content">
                         <ol>
                             <li>如遇：<code>「xxx.app已损坏，打不开。你应该将它移到废纸篓」</code>，并非你安装的软件已损坏，而是Mac系统的安全设置问题。详见：<a href="http://xclient.info/a/74559ea2-7870-b992-ed53-52a9d988e382.html" target="_blank">MAC应用无法打开或文件损坏的处理方法</a></li>
-                            <li>激活工具在新系统10.12中打不开。参照 <a href="http://xclient.info/a/50ebed5d-9015-9340-893b-dfb9eaa275cc.html" target="_blank">让Special-K系列Patch工具运行在macOS sierra 10.12上</a> 与 <a href="http://xclient.info/a/a015de0d-acbd-a5c8-f5ca-bd78f6ae6bb4.html"
-                                    target="_blank">让CORE Keygen系列注册机成功运行在macOS sierra 10.12上的方法</a></li>
-                            <li>本站DMG、zip统一打开密码：<code>xclient.info</code></li>
+                            <li>激活工具在新系统10.12中打不开。参照 <a href="https://5windy.com/tools/16" target="_blank">让Special-K系列Patch工具运行在macOS sierra 10.12上</a> 与 <a href="https://5windy.com/tools/17" target="_blank">让CORE Keygen系列注册机成功运行在macOS sierra 10.12上的方法</a></li>
                             <li>关于激活方法，大部分文章都对不同版本做了不同的激活说明。不过，最终还是以dmg包中的实际情况为准，如果里面只有单独的 .app或者.pkg文件，说明不需要做任何激活操作。</li>
                         </ol>
                     </div>
@@ -72,17 +70,17 @@
                 </el-table-column>
                 <el-table-column label="操作" min-width="190">
                     <template slot-scope="scope">
-                        <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
-                            <el-button  size="mini" v-if="downloadData[scope.$index].drive_pw">
-                                <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
-                                <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
-                                <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
-                            </el-button>
-                        </a>
-                        <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
-                            <el-button type="primary" size="mini">前往下载</el-button>
-                        </a>
-                    </template>
+                            <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
+                                <el-button  size="mini" v-if="downloadData[scope.$index].drive_pw">
+                                    <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
+                                    <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
+                                    <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
+                                </el-button>
+                            </a>
+                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
+                                <el-button type="primary" size="mini">前往下载</el-button>
+                            </a>
+</template>
                 </el-table-column>
             </el-table>
     
@@ -399,7 +397,7 @@
     }
     
     .details img {
-        max-width: 840px;
+        max-width: 720px;
     }
     
     .details a:hover,
@@ -554,9 +552,11 @@
         line-height: 32px;
         border-radius: 4px;
     }
-    .pay-dialog{
+    
+    .pay-dialog {
         max-width: 500px;
     }
+    
     
     /* 标签框 */
     
@@ -631,7 +631,7 @@
             min-width: 80px;
             width: 80px;
             height: 80px;
-        }   
+        }
         .tag {
             background: #fff;
             width: 100%;
