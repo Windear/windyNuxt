@@ -55,9 +55,14 @@
             </div>
         </div>
         <!-- 下载弹出框 -->
-        <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="60%" custom-class="cloud_dialog">
+        <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="80%" custom-class="cloud_dialog">
     
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
+                <el-table-column  label="系统" min-width="80">
+                    <template slot-scope="scope">
+                        <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i> 
+                    </template>
+                </el-table-column>
                 <el-table-column prop="version" label="版本号" min-width="130">
                 </el-table-column>
                 <el-table-column prop="language" label="语言" min-width="80">
@@ -446,6 +451,23 @@
     
     .problem-content a {
         color: #007ce7;
+    }
+
+    .tag-img {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        display: inline-block;
+        /* background: #458cff; */
+        margin-left: 5px;
+    }
+
+    .mac{
+        background-image: url(~/static/img/mac_icon2.svg)
+    }
+    
+    .microsoft{
+        background-image: url(~/static/img/wr_icon.svg)
     }
     
     

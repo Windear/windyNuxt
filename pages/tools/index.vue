@@ -10,18 +10,24 @@
             </div>
     
             <ul class="tools-list">
-                <li v-for="item in newList" :key="item.toolsId" >
+                <li v-for="item in newList" :key="item.toolsId">
                     <div class="box-body">
-                    <a :href="'/tools/'+item.toolsId" target="_blank">
-                        <img v-lazy="ip +'/media/'+item.toolsIcon" :alt="item.toolsTitle">
-                        <div class="content-text">
-                            <p>{{item.toolsTitle}}</p>
-                            <span>{{item.toolsIntroduction}}</span>
-                            <div class="cate">{{item.toolsCate[1]}}</div>
-                        </div>
-                    </a>
+                        <a :href="'/tools/'+item.toolsId" target="_blank">
+                            <img v-lazy="ip +'/media/'+item.toolsIcon" :alt="item.toolsTitle">
+                            <div class="content-text">
+                                <p>{{item.toolsTitle}}</p>
+                                <span>{{item.toolsIntroduction}}</span>
+                                <div class="content-tag">
+                                    <div class="cate">{{item.toolsCate[1]}}</div>
+                                    <div class="sys-tag">                                      
+                                        <i v-for="icon in item.toolsSys" :key="icon.id" class="tag-img" :class="icon==1?'mac':'microsoft'"></i>
+                                        <!-- <i class="tag-img mac" ></i> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    
+    
                 </li>
             </ul>
             <not-found v-if="notfound"></not-found>
@@ -122,7 +128,7 @@
                 //获取projectId
                 let params = 0;
                 // console.log(cate)
-                if (cate||cate==0) {
+                if (cate || cate == 0) {
                     params = cate;
                     this.cateIndex = cate;
                 }
@@ -241,8 +247,8 @@
         align-items: center;
         flex-flow: column;
     }
-
-    .box-body{
+    
+    .box-body {
         width: 180px;
         background: #fff;
         border-radius: 4px;
@@ -250,16 +256,13 @@
         /* margin: 10px; */
         transition: all 0.3s ease-out 0s;
     }
-   
     
     
     /* hover事件 */
     
-    .tools-list li:hover{
-       
-    }
-
-    .tools-list li:hover .box-body{
+    .tools-list li:hover {}
+    
+    .tools-list li:hover .box-body {
         background: #1e262e;
         margin-top: 5px;
         transition: all 0.3s ease-out 0s;
@@ -328,7 +331,7 @@
         background: #c0ccda;
         padding: 0 8px;
         display: inline-block;
-        margin-top: 10px;
+        /* margin-top: 10px; */
         border-radius: 2px;
         color: #fff;
         font-size: 12px;
@@ -336,17 +339,42 @@
         transition: all 0.3s ease-out 0s;
     }
     
+    .content-tag {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+    
+    .sys-tag {
+        height: 16px;
+    }
+    
+    .tag-img {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        display: inline-block;
+        /* background: #458cff; */
+        margin-left: 5px;
+    }
+
+    .mac{
+        background-image: url(~/static/img/mac_icon.svg)
+    }
+    
+    .microsoft{
+        background-image: url(~/static/img/wr_icon.svg)
+    }
     
     /* 工具列表 */
     
     @media screen and (max-width: 760px) {
-        
-        .tools-list li:hover .box-body{
+        .tools-list li:hover .box-body {
             background: #1e262e;
             margin-top: 0;
             transition: all 0.3s ease-out 0s;
         }
-       
         /* hover事件 */
         .container {
             width: 100%;
@@ -365,12 +393,12 @@
             margin-left: 2%;
         }
         .tools-list li {
-             margin: 0 2% 4%;
-            width: 46%; 
+            margin: 0 2% 4%;
+            width: 46%;
         }
-        .box-body{
+        .box-body {
             width: 100%;
-             margin: 0;
+            margin: 0;
         }
         .tools-list p a {
             width: 100%;

@@ -18,7 +18,7 @@
               </li>
             </a>
             <a href="javascript:;" @click="openTools">
-              <li :style="active==2?'color:#20A0FF;':''">MAC工具</li>
+              <li :style="active==2?'color:#20A0FF;':''">常用工具</li>
             </a>
             <a href="javascript:;" @click="openBlog">
               <li :style="active==3?'color:#20A0FF;':''">文章博客</li>
