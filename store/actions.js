@@ -202,4 +202,25 @@ export default {
       })
     });
   },
+  //博客模块api
+  //获取工具分类列表
+  async getBlogCate({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/cate',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取工具列表
+  async getBlogCateList({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/list/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

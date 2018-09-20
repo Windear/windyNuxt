@@ -30,6 +30,7 @@
     
                 </li>
             </ul>
+            
             <not-found v-if="notfound"></not-found>
             <div class="pagination">
                 <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="toolsList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
@@ -214,9 +215,14 @@
         transition: all 0.3s ease-out 0s;
     }
     
+    .tools_format a:link {
+        text-decoration: none;
+        color: #5E6D82;
+    }
+    
     .format_btn_active {
         background: #458cff;
-        color: #fff;
+        color: #fff!important;
         transition: all 0.3s ease-out 0s;
     }
     
@@ -260,7 +266,6 @@
     
     /* hover事件 */
     
-    .tools-list li:hover {}
     
     .tools-list li:hover .box-body {
         background: #1e262e;

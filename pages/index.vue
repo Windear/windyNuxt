@@ -304,7 +304,7 @@
   
   .format_btn_active {
     background: #458CFF;
-    color: #fff;
+    color: #fff!important;
     transition: all 0.3s ease-out 0s;
   }
   
@@ -312,6 +312,11 @@
     background: #D3DCE6;
     color: #fff;
     transition: all 0.3s ease-out 0s;
+  }
+  
+  .design_format a:link {
+    text-decoration: none;
+    color: #5E6D82;
   }
   
   

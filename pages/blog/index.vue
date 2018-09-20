@@ -1,28 +1,41 @@
 <template>
-    <uploading></uploading>
-    <!-- <div class="homeBody">
+    <!-- <uploading></uploading> -->
+    <div class="homeBody">
         <scroll-bar></scroll-bar>
         <div class="container">
-            <h2 class="title-box">最新工具</h2>
-            <div class="tools_format">               
-                <a v-for="(cate,key) in cateList" :key="cate.id" :class="{'format_btn_active':cateIndex==key} " class="format_btn" href="javascript:;" @click="getToolsCateList(key)">{{cate}}</a>
+            <h2 class="title-box">最新文章</h2>
+            <div class="tools_format">
+                <a v-for="(cate,key) in cateList" :key="cate.id" :class="{'format_btn_active':cateIndex==key} " class="format_btn" href="javascript:;" @click="getBlogCateList(key)">{{cate}}</a>
             </div>
     
-           
-            
+            <a class="list" href="javascript:;" v-for="item in newList" :key="item.articleId">
+                <div class="blogList">
+                    <img :src="ip +'/media/'+item.articlePicture" alt="">
+                    <div class="blog-text">
+                        <h3>{{item.articleTitle}}</h3>
+                        <p>{{item.articleIntroduction}}</p>
+                        <div class="text-other">
+                            <div class="blog-cate">{{item.articleOriginal[1]}}</div>·
+                            <span class="blog-author">{{item.articleAuthor}}</span>·
+                            <span class="blog-create-time">{{item.createTime}}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <not-found v-if="notfound"></not-found>
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="toolsList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+                <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="blogList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
 
 <script type="text/javascript">
     //引入百度统计
     import baidu from "static/js/baidu.js";
     import uploading from "~/components/uploading.vue"; //建设中
-    // import ScrollBar from "~/components/scroll_bar.vue"; //通知栏
-    // import notFound from '~/components/not_found.vue' //未找到
+    import ScrollBar from "~/components/scroll_bar.vue"; //通知栏
+    import notFound from '~/components/not_found.vue' //未找到
     export default {
         //该页面的控制数据
         data() {
@@ -31,10 +44,10 @@
                 ip: this.$store.state.ip,
                 //是否显示notfound
                 notfound: false,
-                //工具类型列表
+                //博客类型列表
                 cateList: ['全部'],
-                //当前页面的工具列表
-                toolsList: [],
+                //当前页面的博客列表
+                blogList: [],
                 //分页后的新工具列表
                 newList: [],
                 //工具类型选中的类型筛选
@@ -73,10 +86,10 @@
         mounted() {
             //菜单选择
             this.$store.commit("updateNavBarActive", "3");
-            //获取工具分类列表
-            //this.getToolsCate();
-            //获取工具列表
-            //this.getToolsCateList();
+            //获取文章分类列表
+            this.getBlogCate();
+            //获取文章列表
+            this.getBlogCateList();
             //百度统计
             baidu.baidu("文章博客");
             //默认footer需要显示1
@@ -85,9 +98,9 @@
         //定义函数
         methods: {
             //获取工具分类列表
-            getToolsCate() {
+            getBlogCate() {
                 let params = '';
-                this.$store.dispatch("getToolsCate", params).then(response => {
+                this.$store.dispatch("getBlogCate", params).then(response => {
                         let res = response.data;
                         if (res.state != "err") {
                             for (var i = 0; i < res.length; i++) {
@@ -103,21 +116,21 @@
             },
     
             //获取工具列表
-            getToolsCateList(cate) {
+            getBlogCateList(cate) {
                 //获取projectId
                 let params = 0;
                 // console.log(cate)
-                if (cate||cate==0) {
+                if (cate || cate == 0) {
                     params = cate;
                     this.cateIndex = cate;
                 }
                 //let params = localStorage.getItem("projectId");
-                this.$store.dispatch('getToolsCateList', params).then((response) => {
+                this.$store.dispatch('getBlogCateList', params).then((response) => {
                     this.newList = [];
                     let res = response.data;
                     if (res.state != "err") {
                         this.notfound = false;
-                        this.toolsList = res;
+                        this.blogList = res;
                         this.toListData(0, 24);
                     } else {
                         // alert("网络错误")
@@ -138,15 +151,211 @@
             },
             //将列表传8条到listData
             toListData(start, end) {
-                this.newList = this.toolsList.slice(start, end);
+                this.newList = this.blogList.slice(start, end);
             }
         },
         //增加控件
         components: {
-uploading,
+            uploading,
+            ScrollBar,
+            notFound,
         }
     };
 </script>
 
 <style scoped lang="css">
+    .homeBody {
+        background: #fff;
+    }
+    
+    .container {
+        width: 1200px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    
+    .title-box {
+        margin: 20px 10px 0;
+        font-size: 24px;
+        color: #1f2d3d;
+    }
+    
+    
+    /*格式分类*/
+    
+    .tools_format {
+        margin: 24px 10px;
+        display: flex;
+        align-items: center;
+        color: #333;
+    }
+    
+    .tools_format span {
+        font-weight: 400;
+        margin-right: 10px;
+        font-size: 18px;
+    }
+    
+    .format_btn {
+        display: inline-block;
+        height: 28px;
+        padding: 0 10px;
+        border-radius: 4px;
+        margin-right: 10px;
+        line-height: 28px;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    .format_btn:hover {
+        background: #d3dce6;
+        color: #fff;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    .tools_format a:link {
+        text-decoration: none;
+        color: #5E6D82;
+    }
+    
+    .format_btn_active {
+        background: #458cff;
+        color: #fff!important;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    
+    /*格式分类*/
+    
+    
+    /* 文章列表 */
+    
+    .blogList {
+        display: flex;
+        padding: 20px 10px;
+        border-bottom: 1px solid #F5F7FA;
+        transition: all 0.3s ease-out 0s;
+    }
+    
+    .blogList img {
+        transition: all 0.3s ease-out 0s;
+        width: 160px;
+        min-width: 160px;
+        height: 120px;
+        border-radius: 4px;
+        margin-right: 20px;
+    }
+    
+    .blog-text h3 {
+        transition: all 0.3s ease-out 0s;
+        font-size: 20px;
+        color: #1F2D3D;
+        letter-spacing: 0;
+        font-weight: 400;
+    }
+    
+    .blog-text p {
+        transition: all 0.3s ease-out 0s;
+        /* font-family: PingFangSC-Regular; */
+        font-size: 15px;
+        color: #5E6D82;
+        letter-spacing: 0;
+        line-height: 22px;
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .blog-text {
+        transition: all 0.3s ease-out 0s;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+    
+    .text-other {
+        transition: all 0.3s ease-out 0s;
+        color: #99A9BF;
+        font-size: 14px;
+        letter-spacing: 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    .blog-cate {
+        transition: all 0.3s ease-out 0s;
+        display: inline-block;
+        height: 20px;
+        padding: 0 10px;
+        font-size: 10px!important;
+        border-radius: 10px;
+        margin-right: 10px;
+        line-height: 20px;
+        transition: all 0.3s ease-out 0s;
+        background: linear-gradient(105deg, #43BFFF 0%, #20A0FF 100%);
+        color: #fff;
+    }
+    
+    
+    /* hover事件 */
+    
+    .list:hover .blogList img {
+        transition: all 0.3s ease-out 0s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        /* border: #20A0FF solid 1px; */
+    }
+    
+    .list:hover .blogList h3 {
+        transition: all 0.3s ease-out 0s;
+        color: #20A0FF;
+    }
+    
+    .list:hover .blogList p {
+        transition: all 0.3s ease-out 0s;
+        color: #1f2d3d;
+    }
+    
+    .list:hover .blog-cate {
+        transition: all 0.3s ease-out 0s;
+        box-shadow: 0 4px 6px rgba(32, 160, 255, 0.5);
+    }
+    
+    
+    /* 文章列表 */
+    
+    @media screen and (max-width: 760px) {
+        .tools-list li:hover .box-body {
+            background: #1e262e;
+            margin-top: 0;
+            transition: all 0.3s ease-out 0s;
+        }
+        /* hover事件 */
+        .container {
+            width: 100%;
+        }
+        .tools_format {
+            -webkit-overflow-scrolling: touch;
+            -webkit-overflow-x: scroll;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        .format_btn {
+            width: 220px;
+            white-space: nowrap;
+        }
+        /* 博客列表 */
+        .blogList img {
+            width: 30%;
+            min-width: 30%;
+            height: 18%;
+        }
+        .blogList h3 {
+            font-size: 18px;
+        }
+        .blogList p {
+            display: none;
+        }
+        /* 博客列表 */
+    }
 </style>

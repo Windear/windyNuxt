@@ -232,7 +232,6 @@
   .tool-list li a {
     display: block;
     line-height: 0;
-
   }
   
   .img-list p a,
@@ -242,7 +241,7 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
-        width: 280px;
+    width: 280px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -309,7 +308,7 @@
   
   .format_btn_active {
     background: #458CFF;
-    color: #fff;
+    color: #fff!important;
     transition: all 0.3s ease-out 0s;
   }
   
@@ -317,6 +316,11 @@
     background: #D3DCE6;
     color: #fff;
     transition: all 0.3s ease-out 0s;
+  }
+  
+  .design_format a:link {
+    text-decoration: none;
+    color: #5E6D82;
   }
   
   
