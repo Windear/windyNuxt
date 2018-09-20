@@ -60,7 +60,7 @@
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
                 <el-table-column label="系统" min-width="80">
                     <template slot-scope="scope">
-                            <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
+                                <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
 </template>
                 </el-table-column>
                 <el-table-column prop="version" label="版本号" min-width="130">
@@ -402,10 +402,10 @@
     }
     
     .details span {
-        max-width: 800px;
-        display: inline-block;
-        white-space:pre-wrap;
-        word-wrap : break-word ;
+        max-width: 840px;
+        display: block;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
     
     .details img {

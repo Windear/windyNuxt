@@ -331,8 +331,8 @@
         /* margin: 10px 0; */
     }
     .details span {
-        max-width: 800px;
-        display: inline-block;
+        max-width: 840px;
+        display: block;
         white-space:pre-wrap;
         word-wrap : break-word ;
     }
