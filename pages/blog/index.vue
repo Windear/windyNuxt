@@ -8,9 +8,9 @@
                 <a v-for="(cate,key) in cateList" :key="cate.id" :class="{'format_btn_active':cateIndex==key} " class="format_btn" href="javascript:;" @click="getBlogCateList(key)">{{cate}}</a>
             </div>
     
-            <a class="list" href="javascript:;" v-for="item in newList" :key="item.articleId">
+            <a class="list" :href="'/blog/'+item.articleId" v-for="item in newList" :key="item.articleId" >
                 <div class="blogList">
-                    <img :src="ip +'/media/'+item.articlePicture" alt="">
+                    <img v-lazy="ip +'/media/'+item.articlePicture" alt="">
                     <div class="blog-text">
                         <h3>{{item.articleTitle}}</h3>
                         <p>{{item.articleIntroduction}}</p>
@@ -24,7 +24,7 @@
             </a>
             <not-found v-if="notfound"></not-found>
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="blogList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+                <el-pagination background @current-change="handleCurrentChange" :page-size="10" layout="total,prev, pager, next" :total="blogList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
         },
         //定义函数
         methods: {
-            //获取工具分类列表
+            //获取博客分类列表
             getBlogCate() {
                 let params = '';
                 this.$store.dispatch("getBlogCate", params).then(response => {
@@ -115,7 +115,7 @@
                     });
             },
     
-            //获取工具列表
+            //获取博客列表
             getBlogCateList(cate) {
                 //获取projectId
                 let params = 0;
@@ -131,7 +131,7 @@
                     if (res.state != "err") {
                         this.notfound = false;
                         this.blogList = res;
-                        this.toListData(0, 24);
+                        this.toListData(0, 10);
                     } else {
                         // alert("网络错误")
                         this.notfound = true;
@@ -144,7 +144,7 @@
             //点击翻页
             handleCurrentChange(val) {
                 //console.log(`当前页: ${nowPage}`);
-                this.toListData((val - 1) * 24, val * 24);
+                this.toListData((val - 1) * 10, val * 10);
                 //回到顶部
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
@@ -321,6 +321,9 @@
         box-shadow: 0 4px 6px rgba(32, 160, 255, 0.5);
     }
     
+    .pagination{
+        margin: 20px 0;
+    }
     
     /* 文章列表 */
     

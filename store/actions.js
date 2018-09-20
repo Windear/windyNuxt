@@ -135,7 +135,7 @@ export default {
     return await axios({
       url: '/api/resources/type',
       method: 'post',
-      data:params,
+      data: params,
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
       })
@@ -162,8 +162,8 @@ export default {
       })
     });
   },
-   //获取工具详情
-   async getToolsDetails({ commit, state }, params) {
+  //获取工具详情
+  async getToolsDetails({ commit, state }, params) {
     return await axios({
       url: '/api/tools/details/' + params,
       method: 'get',
@@ -203,7 +203,7 @@ export default {
     });
   },
   //博客模块api
-  //获取工具分类列表
+  //获取文章分类列表
   async getBlogCate({ commit, state }, params) {
     return await axios({
       url: '/api/blog/cate',
@@ -213,10 +213,30 @@ export default {
       })
     });
   },
-  //获取工具列表
+  //获取文章列表
   async getBlogCateList({ commit, state }, params) {
     return await axios({
       url: '/api/blog/list/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取文章详情
+  async getBlogDetails({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/details/' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //文章访问量接口
+  async getBlogLooked({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/looked_num/' + params,
       method: 'get',
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
