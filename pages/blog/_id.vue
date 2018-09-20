@@ -326,11 +326,16 @@
     }
     
     .details p {
-        width: 840px;
+        max-width: 840px;
         /* font-size: 14px !important; */
         /* margin: 10px 0; */
     }
-    
+    .details span {
+        max-width: 800px;
+        display: inline-block;
+        white-space:pre-wrap;
+        word-wrap : break-word ;
+    }
     .details img {
         max-width: 720px;
     }

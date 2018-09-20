@@ -58,10 +58,10 @@
         <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="80%" custom-class="cloud_dialog">
     
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
-                <el-table-column  label="系统" min-width="80">
+                <el-table-column label="系统" min-width="80">
                     <template slot-scope="scope">
-                        <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i> 
-                    </template>
+                            <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
+</template>
                 </el-table-column>
                 <el-table-column prop="version" label="版本号" min-width="130">
                 </el-table-column>
@@ -74,17 +74,17 @@
                 <el-table-column prop="drive_pw" label="下载密码" min-width="80">
                 </el-table-column>
                 <el-table-column label="操作" min-width="190">
-                    <template slot-scope="scope">
-                            <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
-                                <el-button  size="mini" v-if="downloadData[scope.$index].drive_pw">
-                                    <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
-                                    <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
-                                    <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
-                                </el-button>
-                            </a>
-                            <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
-                                <el-button type="primary" size="mini">前往下载</el-button>
-                            </a>
+<template slot-scope="scope">
+    <a href="javascript:;" style="margin-right:10px;" v-clipboard="downloadData[scope.$index].drive_pw" @success="onCopy(scope.$index)" @error="onError(scope.$index)">
+        <el-button size="mini" v-if="downloadData[scope.$index].drive_pw">
+            <span v-if="clipboardVal!=scope.$index&&clipboardVal!='err'">复制密码</span>
+            <span class="clipboardVal-success" v-if="clipboardVal==scope.$index">复制成功</span>
+            <span class="clipboardVal-err" v-if="clipboardVal=='err'">复制失败</span>
+        </el-button>
+    </a>
+    <a :href="downloadData[scope.$index].drive_url" target="_blank" @click="getToolsDownloads(scope.$index, downloadData)">
+        <el-button type="primary" size="mini">前往下载</el-button>
+    </a>
 </template>
                 </el-table-column>
             </el-table>
@@ -401,6 +401,13 @@
         margin: 10px 0;
     }
     
+    .details span {
+        max-width: 800px;
+        display: inline-block;
+        white-space:pre-wrap;
+        word-wrap : break-word ;
+    }
+    
     .details img {
         max-width: 720px;
     }
@@ -452,7 +459,7 @@
     .problem-content a {
         color: #007ce7;
     }
-
+    
     .tag-img {
         width: 16px;
         height: 16px;
@@ -461,12 +468,12 @@
         /* background: #458cff; */
         margin-left: 5px;
     }
-
-    .mac{
+    
+    .mac {
         background-image: url(~/static/img/mac_icon2.svg)
     }
     
-    .microsoft{
+    .microsoft {
         background-image: url(~/static/img/wr_icon.svg)
     }
     
