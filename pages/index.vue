@@ -25,7 +25,7 @@
     <div class="tools-box static-block">
       <div class="box-title">
         <h2 class="title-box">最新工具</h2>
-        <a href="" class="more">更多></a>
+        <a href="/tools" class="more">更多></a>
       </div>
   
       <ul class="tools-list">
@@ -55,7 +55,7 @@
     <div class="blog-box static-block">
       <div class="box-title">
         <h2 class="title-box">最新文章</h2>
-        <a href="" class="more">更多></a>
+        <a href="/blog" class="more">更多></a>
       </div>
     </div>
   
