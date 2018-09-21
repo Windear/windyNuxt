@@ -8,7 +8,10 @@
           <!-- PC显示的目录标题 -->
           <ul class="text-link">
             <a href="javascript:;" @click="openIndex">
-              <li :style="active==1?'color:#20A0FF;':''" class="resources">
+              <li :style="active==1?'color:#20A0FF;':''">有爱首页</li>
+            </a>
+            <a href="javascript:;" @click="openResource">
+              <li :style="active==2?'color:#20A0FF;':''" class="resources">
                 设计素材
                 <ul>
                   <a v-for="cate in resource_type" :key="cate.id" :href="'/resources/'+ cate.num">
@@ -18,29 +21,32 @@
               </li>
             </a>
             <a href="javascript:;" @click="openTools">
-              <li :style="active==2?'color:#20A0FF;':''">常用工具</li>
+              <li :style="active==3?'color:#20A0FF;':''">常用工具</li>
             </a>
             <a href="javascript:;" @click="openBlog">
-              <li :style="active==3?'color:#20A0FF;':''">文章博客</li>
+              <li :style="active==4?'color:#20A0FF;':''">文章博客</li>
             </a>
             <a href="javascript:;" @click="openAbout">
-              <li :style="active==4?'color:#20A0FF;':''">关于Windy</li>
+              <li :style="active==5?'color:#20A0FF;':''">关于Windy</li>
             </a>
           </ul>
           <!-- PC显示的目录标题 -->
           <!-- 移动端显示的目录标题 -->
           <div class="mobile-text-link">
             <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">
-                          设计素材
+                          首页
                         </a>
-            <a href="javascript:;" @click="openTools" :style="active==2?'color:#20A0FF;':''">
-                          MAC工具
+            <a href="javascript:;" @click="openResource" :style="active==2?'color:#20A0FF;':''">
+                          素材
                         </a>
-            <a href="javascript:;" @click="openBlog" :style="active==3?'color:#20A0FF;':''">
-                          文章博客
+            <a href="javascript:;" @click="openTools" :style="active==3?'color:#20A0FF;':''">
+                          工具
                         </a>
-            <a href="javascript:;" @click="openAbout" :style="active==4?'color:#20A0FF;':''">
-                          关于Windy
+            <a href="javascript:;" @click="openBlog" :style="active==4?'color:#20A0FF;':''">
+                          文章
+                        </a>
+            <a href="javascript:;" @click="openAbout" :style="active==5?'color:#20A0FF;':''">
+                          关于
                         </a>
           </div>
           <!-- 移动端显示的目录标题 -->
@@ -57,27 +63,12 @@
             <div class="email chat"></div>
           </a>
         </div>
-        <!-- <div class="menu" @click="showMenu = !showMenu"><img src="~/assets/img/menu.svg" alt=""></div> -->
+
       </div>
     </header>
   
-    <!-- <div class="menu-list" v-if="showMenu">
-                  <ul>
-                    <a href="javascript:;">
-                      <li :style="active==1?'color:#20A0FF;':''" @click="openIndex">设计素材</li>
-                    </a>
-              
-                    <a href="javascript:;">
-                      <li :style="active==2?'color:#20A0FF;':''" @click="openTools">MAC工具</li>
-                    </a>
-                    <a href="javascript:;">
-                      <li :style="active==3?'color:#20A0FF;':''" @click="openAbout">关于windy</li>
-                    </a>
-                  </ul>
-                </div> -->
-  
     <!-- 素材分类移动列表 -->
-    <div v-if="active==1" style="width: 100%;">
+    <div v-if="active==2" style="width: 100%;">
       <ul class="resources-list">
         <a v-for="cate in resource_type" :key="cate.id" :href="'/resources/'+ cate.num">
           <li @click="uploadCate(cate.num)" :style="resources_active == cate.num?'color:#20A0FF;':''">{{cate.val}}</li>
@@ -141,6 +132,31 @@
           path: '/'
         });
       },
+
+      // 进入素材页面
+      openResource(){
+        this.showMenu = false;
+        this.$store.commit('updateNavBarActive', '2');
+        this.$router.push({
+          path: '/resources'
+        });
+      },
+      //进入MAC工具页
+      openTools() {
+        this.showMenu = false;
+        this.$store.commit('updateNavBarActive', '3');
+        this.$router.push({
+          path: '/tools'
+        });
+      },
+      //进入文章博客
+      openBlog() {
+        this.showMenu = false;
+        this.$store.commit('updateNavBarActive', '4');
+        this.$router.push({
+          path: '/blog'
+        });
+      },
       //进入关于windy
       openAbout() {
         this.showMenu = false;
@@ -149,22 +165,8 @@
           path: '/about'
         });
       },
-      //进入MAC工具页
-      openTools() {
-        this.showMenu = false;
-        this.$store.commit('updateNavBarActive', '2');
-        this.$router.push({
-          path: '/tools'
-        });
-      },
-      //进入文章博客
-      openBlog() {
-        this.showMenu = false;
-        this.$store.commit('updateNavBarActive', '3');
-        this.$router.push({
-          path: '/blog'
-        });
-      },
+     
+      
       //滚轮缩小事件
       onScroll() {
         let self = this;

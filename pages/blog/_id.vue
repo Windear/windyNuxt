@@ -16,12 +16,12 @@
                     <div class="details" v-html="blogData.articleContent"></div>
                 </div>
                 <!-- <div class="problem">
-                            <div class="problem-title">
-                                <span class="problem-line"></span>
-                                <h3>常见问题</h3>
-                            </div>
-            
-                        </div> -->
+                                <div class="problem-title">
+                                    <span class="problem-line"></span>
+                                    <h3>常见问题</h3>
+                                </div>
+                
+                            </div> -->
             </div>
             <div class="right">
                 <!-- 图片框 -->
@@ -152,7 +152,7 @@
             //百度统计
             baidu.baidu("工具详情");
             //传入navBar的选择状态
-            this.$store.commit("updateNavBarActive", "3");
+            this.$store.commit("updateNavBarActive", "4");
             document.documentElement.scrollTop = 0;
             //this.changyan();
             this.getBlogDetails();
@@ -320,22 +320,13 @@
     }
     
     .details {
-        max-width: 720px;
         margin-top: 40px;
-        padding: 0 10px;
     }
     
     .details p {
         max-width: 840px;
-        /* font-size: 14px !important; */
-        /* margin: 10px 0; */
     }
-    .details span {
-        max-width: 840px;
-        display: block;
-        white-space:pre-wrap;
-        word-wrap : break-word ;
-    }
+    
     .details img {
         max-width: 720px;
     }

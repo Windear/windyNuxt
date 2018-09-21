@@ -94,7 +94,7 @@
         //进入页面执行的函数
         mounted() {
             //菜单选择
-            this.$store.commit("updateNavBarActive", "2");
+            this.$store.commit("updateNavBarActive", "3");
             //获取工具分类列表
             this.getToolsCate();
             //获取工具列表

@@ -13,8 +13,8 @@
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
               <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" style="display: inline;">
             </a>
-            <div class="info">
-            </div>
+            <!-- <div class="info">
+            </div> -->
           </div>
           <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
         </li>

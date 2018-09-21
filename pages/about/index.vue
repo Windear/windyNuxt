@@ -98,9 +98,9 @@
     //进入页面执行的函数
     mounted() {
       document.documentElement.scrollTop = 0;
-      this.$store.commit('updateNavBarActive', '4');
+      this.$store.commit('updateNavBarActive', '5');
   
-      baidu.baidu("有爱首页");
+      baidu.baidu("关于windy");
   
       //获取素材列表
       this.getDesignList();

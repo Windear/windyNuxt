@@ -139,7 +139,7 @@
       //百度统计
       baidu.baidu("素材详情");
       //传入navBar的选择状态
-      this.$store.commit('updateNavBarActive', '');
+      this.$store.commit('updateNavBarActive', '2');
       document.documentElement.scrollTop = 0;
       //this.changyan();
       this.getResourcesData();

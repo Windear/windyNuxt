@@ -108,7 +108,7 @@
       //百度统计
       baidu.baidu("案例详情");
       //传入navBar的选择状态
-      this.$store.commit('updateNavBarActive', '');
+      this.$store.commit('updateNavBarActive', '5');
       document.documentElement.scrollTop = 0;
       //this.changyan();
       this.getDesignData();

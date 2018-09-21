@@ -1,29 +1,80 @@
 <template>
-  <div class="homeBody">
-    <scroll-bar></scroll-bar>
-    <div class="container">
-      <h2 class="title-box">最新素材</h2>
-      <div class="design_format">
-        <span>格式:</span>
-        <a v-for="(format,key) in formatList" :key="format.id" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format)">{{format}}</a>
+  <div class="home-body">
+    <scroll-bar/>
+    <!-- 素材模块 -->
+    <div class="resources-box static-block">
+      <div class="box-title">
+        <h2 class="title-box">最新素材</h2>
+        <a href="/resources" class="more">更多></a>
       </div>
       <ul class="img-list">
-        <li v-for="item in newList" :key="item.id">
+        <li v-for="item in resourcesList" :key="item.id">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
               <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" alt="有爱设计素材,sketch素材" style="display: inline;">
             </a>
-            <div class="info">
-            </div>
+            <!-- <div class="info">
+                      </div> -->
           </div>
           <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
         </li>
       </ul>
-      <not-found v-if="notfound"></not-found>
-      <div class="pagination">
-        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+    </div>
+    <!-- 素材模块 -->
+    <!-- 工具模块 -->
+    <div class="tools-box static-block">
+      <div class="box-title">
+        <h2 class="title-box">最新工具</h2>
+        <a href="" class="more">更多></a>
+      </div>
+  
+      <ul class="tools-list">
+        <li v-for="item in toolsList" :key="item.toolsId">
+          <div class="box-body">
+            <a :href="'/tools/'+item.toolsId" target="_blank">
+              <img v-lazy="ip +'/media/'+item.toolsIcon" :alt="item.toolsTitle">
+              <div class="content-text">
+                <p>{{item.toolsTitle}}</p>
+                <span>{{item.toolsIntroduction}}</span>
+                <div class="content-tag">
+                  <div class="cate">{{item.toolsCate[1]}}</div>
+                  <div class="sys-tag">
+                    <i v-for="icon in item.toolsSys" :key="icon.id" class="tag-img" :class="icon==1?'mac':'microsoft'"></i>
+                    <!-- <i class="tag-img mac" ></i> -->
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </li>
+      </ul>
+  
+    </div>
+    <!-- 工具模块 -->
+    <!-- 文章模块 -->
+    <div class="blog-box static-block">
+      <div class="box-title">
+        <h2 class="title-box">最新文章</h2>
+        <a href="" class="more">更多></a>
       </div>
     </div>
+  
+    <a class="list" :href="'/blog/'+item.articleId" v-for="item in blogList" :key="item.articleId" target="_blank">
+      <div class="blogList">
+        <img v-lazy="ip +'/media/'+item.articlePicture" alt="">
+        <div class="blog-text">
+          <h3>{{item.articleTitle}}</h3>
+          <p>{{item.articleIntroduction}}</p>
+          <div class="text-other">
+            <div class="blog-cate">{{item.articleOriginal[1]}}</div>·
+            <span class="blog-author">{{item.articleAuthor}}</span>·
+            <span class="blog-create-time">{{item.createTime}}</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  
+    <!-- 文章模块 -->
   </div>
 </template>
 
@@ -40,26 +91,20 @@
       return {
         //ip地址
         ip: this.$store.state.ip,
-        //传过来的值
-        resourcesCate: this.$route.query.resourcesCate,
         //素材列表
         resourcesList: [],
-        //新分页素材列表
-        newList: [],
+        //工具列表
+        toolsList: [],
+        //文章列表
+        blogList: [],
         //是否显示notfound
         notfound: false,
-        //格式列表
-        formatList: ["全部"],
-        //选中的格式筛选
-        formatIndex: 0,
-        //分页当前页数
-        currentPage: 1,
       }
     },
     //自定义头部
     head() {
       return {
-        title: "UI设计素材下载",
+        title: "有爱设计",
         meta: [{
             hid: '有爱设计',
             name: 'keywords',
@@ -91,98 +136,63 @@
       //菜单选择
       this.$store.commit('updateNavBarActive', '1');
       //百度统计
-      baidu.baidu("我的案例");
+      baidu.baidu("有爱首页");
       //默认footer需要显示1
       this.$store.commit('updateFooterWidth', 1);
       //获取素材列表
-      this.getResourcesList();
-      //获取格式分类
-      this.getResourcesFormat();
+      this.getNewResources();
+      //获取工具列表
+      this.getNewTools();
+      //获取文章列表
+      this.getNewblog();
     },
     //定义函数
     methods: {
-  
-  
-      //请求分类列表
-      getResourcesList() {
-        //获取projectId
-        let params = 0;
-        //let params = localStorage.getItem("projectId");
-        this.$store.dispatch('getResourcesList', params).then((response) => {
+      //获取最新8条素材列表
+      getNewResources() {
+        let params = '';
+        this.$store.dispatch('getNewResources', params).then((response) => {
           let res = response.data;
           if (res.state != "err") {
             this.resourcesList = res;
-            this.toListData(0, 20);
           } else {
             // alert("网络错误")
             this.notfound = true;
           }
         }).catch((err) => {
           console.error(err);
-          this.$router.push({
-            path: '/404'
-          });
         });
       },
-  
-  
-      //通过格式分类获取素材列表
-      postResourcesFormatList(key, format) {
-        this.formatIndex = key;
-        this.currentPage = 1;
-        if (format == "全部") {
-          this.getResourcesList();
-        } else {
-          let params = {
-            "type": format.toLowerCase(),
-            "cate": 0
-          };
-          this.$store.dispatch('postResourcesFormatList', params).then((response) => {
-            let res = response.data;
-            if (res.state != "err") {
-              this.resourcesList = res;
-              this.toListData(0, 20);
-            } else {
-              // alert("网络错误")
-              this.notfound = true;
-            }
-          }).catch((err) => {
-            console.error(err);
-          });
-        };
-      },
-  
-      //点击翻页
-      handleCurrentChange(val) {
-        //console.log(`当前页: ${nowPage}`);
-        this.toListData((val - 1) * 20, val * 20);
-        //回到顶部
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-      },
-  
-  
-      //将列表传8条到listData
-      toListData(start, end) {
-        this.newList = this.resourcesList.slice(start, end);
-      },
-  
-  
-      //请求格式分类
-      getResourcesFormat() {
-        let params = "";
-        this.$store.dispatch('getResourcesFormat', params).then((response) => {
+      //获取最新6条工具列表
+      getNewTools() {
+        let params = '';
+        this.$store.dispatch('getNewTools', params).then((response) => {
           let res = response.data;
-          // 将获得的数组加入到formatList里面去
-          for (var i = 0; i < res.length; i++) {
-            this.formatList.push(res[i].toUpperCase());
-            // console.log(this.formatList);
+          if (res.state != "err") {
+            this.toolsList = res;
+          } else {
+            // alert("网络错误")
+            this.notfound = true;
           }
         }).catch((err) => {
           console.error(err);
         });
       },
-  
+      //获取最新6条工具列表
+      getNewblog() {
+        let params = '';
+        this.$store.dispatch('getNewblog', params).then((response) => {
+          let res = response.data;
+          if (res.state != "err") {
+            this.blogList = res;
+          } else {
+            // alert("网络错误")
+            this.notfound = true;
+          }
+        }).catch((err) => {
+          console.error(err);
+        });
+      },
   
     },
     //增加控件
@@ -194,27 +204,66 @@
 </script>
 
 <style scoped lang="css">
-  .container,
-  .tool-container {
-    width: 1180px;
-    overflow: hidden;
-    margin: 0 auto;
+  /* 公共模块 */
+  
+  .static-block {
+    /* background: #fff; */
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
   }
   
-  .title-box {
-    margin-top: 20px;
-    font-size: 24px;
-    color: #333;
+  .box-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    padding: 0 10px;
+    margin: 40px auto 20px;
   }
+  
+  .box-title h2 {
+    font-weight: 400;
+    font-size: 24px;
+    color: #5E6D82;
+  }
+  
+  .more {
+    /* Rectangle 3: */
+    background: linear-gradient(-135deg, #43BFFF 0%, #20A0FF 100%);
+    box-shadow: 0 2px 6px 0 rgba(60, 172, 255, 0.50);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #fff;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 8px;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .more:hover {
+    /* color: #000; */
+    box-shadow: 0 2px 12px 0 rgba(60, 172, 255, 0.60);
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  
+  /* 公共模块 */
+  
+  
+  /*素材模块*/
   
   .img-list {
+    width: 1200px;
     margin-top: 20px;
     overflow: hidden;
+    display: block;
+    margin: 0 auto 40px;
   }
   
   .img-list li {
     float: left;
-    margin: 0 20px 20px 0;
+    margin: 10px;
   }
   
   .img-list img:hover {
@@ -222,18 +271,12 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
-  .img-list li a,
-  .plugin-list li a,
-  .video-list li a,
-  .tool-list li a {
+  .img-list li a {
     display: block;
     line-height: 0;
   }
   
-  .img-list p a,
-  .plugin-list p a,
-  .video-list p a,
-  .tool-list p a {
+  .img-list p a {
     margin-top: 15px;
     font-size: 16px;
     line-height: 16px;
@@ -251,16 +294,11 @@
     transition: all 0.3s ease-out 0s;
   }
   
-  .img-list li:nth-child(4n),
-  .plugin-list li:nth-child(4n),
-  .video-list li:nth-child(4n),
-  .tool-list li:nth-child(5n) {
+  .img-list li:nth-child(4n) {
     margin-right: 0;
   }
   
-  .img-list .thumbnail .info,
-  .plugin-list .thumbnail .info,
-  .tool-list .thumbnail .info {
+  .img-list .thumbnail .info {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -272,70 +310,271 @@
     transition: opacity 0.2s;
   }
   
-  .pagination {
-    padding: 10px 0;
+  
+  /*素材模块*/
+  
+  
+  /* 工具模块 */
+  
+  .tools-box {
+    background: #F3F4F5;
   }
   
+  .tools-list {
+    margin-top: 20px;
+    width: 1200px;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto 40px;
+  }
   
-  /*格式分类*/
+  .tools-list li {
+    float: left;
+    height: 305px;
+  }
   
-  .design_format {
-    margin: 24px 0;
+  .tools-list a {
     display: flex;
     align-items: center;
-    color: #333;
+    flex-flow: column;
   }
   
-  .design_format span {
-    font-weight: 400;
-    margin-right: 10px;
-    font-size: 18px;
-  }
-  
-  .format_btn {
-    display: inline-block;
-    height: 28px;
-    padding: 0 10px;
+  .box-body {
+    width: 180px;
+    background: #fff;
     border-radius: 4px;
-    margin-right: 10px;
-    line-height: 28px;
+    margin: 10px;
+    /* margin: 10px; */
     transition: all 0.3s ease-out 0s;
   }
   
-  .format_btn_active {
-    background: #458CFF;
-    color: #fff!important;
+  
+  /* hover事件 */
+  
+  .tools-list li:hover .box-body {
+    background: #1e262e;
+    margin-top: 5px;
     transition: all 0.3s ease-out 0s;
   }
   
-  .format_btn:hover {
-    background: #D3DCE6;
+  .tools-list li:hover .content-text p {
     color: #fff;
     transition: all 0.3s ease-out 0s;
   }
   
-  .design_format a:link {
-    text-decoration: none;
-    color: #5E6D82;
+  .tools-list li:hover .content-text span {
+    color: #fff;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .tools-list li:hover img {
+    transform: rotate(6deg);
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .tools-list li:hover .cate {
+    background: #458cff;
+    transition: all 0.3s ease-out 0s;
   }
   
   
-  /*格式分类*/
+  /* hover事件 */
+  
+  .tools-list li img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .content-text {
+    margin-bottom: 20px;
+  }
+  
+  .content-text p,
+  .content-text span {
+    width: 160px;
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: 22px;
+    height: 44px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  .content-text p {
+    color: #1f2d3d;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .content-text span {
+    color: #5e6d82;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .cate {
+    height: 20px;
+    background: #c0ccda;
+    padding: 0 8px;
+    display: inline-block;
+    /* margin-top: 10px; */
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .content-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .sys-tag {
+    height: 16px;
+  }
+  
+  .tag-img {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    display: inline-block;
+    /* background: #458cff; */
+    margin-left: 5px;
+  }
+  
+  .mac {
+    background-image: url(~/static/img/mac_icon.svg)
+  }
+  
+  .microsoft {
+    background-image: url(~/static/img/wr_icon.svg)
+  }
+  
+  
+  /* 工具模块 */
+  
+  
+  /* 文章模块 */
+  
+  .list {
+    /* margin-top: 20px; */
+    width: 1200px;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .blogList {
+    display: flex;
+    padding: 20px 10px;
+    border-bottom: 1px solid #F5F7FA;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .blogList img {
+    transition: all 0.3s ease-out 0s;
+    width: 160px;
+    min-width: 160px;
+    height: 120px;
+    border-radius: 4px;
+    margin-right: 20px;
+  }
+  
+  .blog-text h3 {
+    transition: all 0.3s ease-out 0s;
+    font-size: 20px;
+    color: #1F2D3D;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  
+  .blog-text p {
+    transition: all 0.3s ease-out 0s;
+    /* font-family: PingFangSC-Regular; */
+    font-size: 15px;
+    color: #5E6D82;
+    letter-spacing: 0;
+    line-height: 22px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  .blog-text {
+    transition: all 0.3s ease-out 0s;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+  
+  .text-other {
+    transition: all 0.3s ease-out 0s;
+    color: #99A9BF;
+    font-size: 14px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .blog-cate {
+    transition: all 0.3s ease-out 0s;
+    display: inline-block;
+    height: 20px;
+    padding: 0 10px;
+    font-size: 10px!important;
+    border-radius: 10px;
+    margin-right: 10px;
+    line-height: 20px;
+    transition: all 0.3s ease-out 0s;
+    background: linear-gradient(105deg, #43BFFF 0%, #20A0FF 100%);
+    color: #fff;
+  }
+  
+  
+  /* hover事件 */
+  
+  .list:hover .blogList img {
+    transition: all 0.3s ease-out 0s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* border: #20A0FF solid 1px; */
+  }
+  
+  .list:hover .blogList h3 {
+    transition: all 0.3s ease-out 0s;
+    color: #20A0FF;
+  }
+  
+  .list:hover .blogList p {
+    transition: all 0.3s ease-out 0s;
+    color: #1f2d3d;
+  }
+  
+  .list:hover .blog-cate {
+    transition: all 0.3s ease-out 0s;
+    box-shadow: 0 4px 6px rgba(32, 160, 255, 0.5);
+  }
+  
+  
+  /* 文章模块 */
   
   @media screen and (max-width: 760px) {
-    .container {
+    /* 公共模块 */
+    .box-title {
       width: 100%;
+      padding: 0 2%;
     }
-    .img-list p a,
-    .plugin-list p a,
-    .video-list p a {
+    /* 公共模块 */
+    /*素材模块*/
+    .img-list {
       width: 100%;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .design_format {
-      margin-left: 2%;
     }
     .title-box {
       margin-left: 2%;
@@ -344,10 +583,88 @@
       margin: 0 2% 4%;
       width: 46%;
     }
+    .img-list p a {
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
     .img-list img {
       display: block;
       width: 100%;
       height: auto;
     }
+    /*素材模块*/
+    /* 工具模块 */
+    .tools-list {
+      width: 100%;
+    }
+    .tools-list li:hover .box-body {
+      background: #1e262e;
+      margin-top: 0;
+      transition: all 0.3s ease-out 0s;
+    }
+    .tools_format {
+      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-x: scroll;
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .format_btn {
+      width: 220px;
+      white-space: nowrap;
+    }
+    .title-box {
+      margin-left: 2%;
+    }
+    .tools-list li {
+      margin: 0 2% 4%;
+      width: 46%;
+    }
+    .box-body {
+      width: 100%;
+      margin: 0;
+    }
+    .tools-list p a {
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    /* 工具模块 */
+    /* 文章模块 */
+    .list{
+      width: 100%;
+    }
+    .tools-list li:hover .box-body {
+      background: #1e262e;
+      margin-top: 0;
+      transition: all 0.3s ease-out 0s;
+    }
+    /* hover事件 */
+    .tools_format {
+      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-x: scroll;
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .format_btn {
+      width: 220px;
+      white-space: nowrap;
+    }
+    /* 博客列表 */
+    .blogList img {
+      width: 30%;
+      min-width: 30%;
+      height: 18%;
+    }
+    .blogList h3 {
+      font-size: 18px;
+    }
+    .blogList p {
+      display: none;
+    }
+    /* 博客列表 */
+    /* 文章模块 */
   }
 </style>

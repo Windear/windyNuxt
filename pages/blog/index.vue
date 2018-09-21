@@ -85,7 +85,7 @@
         //进入页面执行的函数
         mounted() {
             //菜单选择
-            this.$store.commit("updateNavBarActive", "3");
+            this.$store.commit("updateNavBarActive", "4");
             //获取文章分类列表
             this.getBlogCate();
             //获取文章列表

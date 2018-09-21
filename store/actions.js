@@ -243,4 +243,35 @@ export default {
       })
     });
   },
+  //首页模块
+  //获取最新素材前8条
+  async getNewResources({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/new',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取最新工具前6条
+  async getNewTools({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/new',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取最新文章前3条
+  async getNewblog({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/new',
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

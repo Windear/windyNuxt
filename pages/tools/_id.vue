@@ -184,7 +184,7 @@
             //百度统计
             baidu.baidu("工具详情");
             //传入navBar的选择状态
-            this.$store.commit("updateNavBarActive", "2");
+            this.$store.commit("updateNavBarActive", "3");
             document.documentElement.scrollTop = 0;
             //this.changyan();
             this.getToolsDetails();
@@ -390,9 +390,9 @@
     }
     
     .details {
-        max-width: 720px;
+  
         margin-top: 40px;
-        padding: 0 10px;
+
     }
     
     .details p {
@@ -401,13 +401,7 @@
         margin: 10px 0;
     }
     
-    .details span {
-        max-width: 840px;
-        display: block;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-    
+  
     .details img {
         max-width: 720px;
     }
