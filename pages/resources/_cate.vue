@@ -86,7 +86,7 @@
     //进入页面执行的函数
     mounted() {
       //菜单选择
-      this.$store.commit('updateNavBarActive', '1');
+      this.$store.commit('updateNavBarActive', '2');
       //百度统计
       baidu.baidu("我的素材");
       //默认footer需要显示1

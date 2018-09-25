@@ -23,6 +23,9 @@
                         </ol>
                     </div>
                 </div>
+                <div class="comment">
+                    <div id="SOHUCS" :sid="toolsData.sid"></div>
+                </div>
             </div>
             <div class="right">
                 <!-- 下载框 -->
@@ -110,6 +113,8 @@
     // import changyan from "@/assets/js/changyan.js"
     //引入百度统计
     import baidu from "static/js/baidu.js";
+    //引入畅言
+    import changyan from "static/js/changyan.js";
     export default {
         //该页面的控制数据
         data() {
@@ -166,10 +171,7 @@
             };
         },
         created() {
-            // //this.showData();
-            // this.$nextTick(() => {
-            //   this.changyan();
-            // });
+      
         },
         //父控件传过来的参数
         props: {},
@@ -193,6 +195,8 @@
             this.getToolsLooked();
             //默认footer不需要显示0
             this.$store.commit("updateFooterWidth", 0);
+            //畅言
+            changyan.changyan();
         },
         //定义函数
         methods: {
@@ -471,7 +475,11 @@
         background-image: url(~/static/img/wr_icon.svg)
     }
     
-    
+     .comment {
+        padding: 20px;
+        background: #fff;
+        margin-top: 20px;
+    }
     /* 左边框 */
     
     

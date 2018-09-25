@@ -16,12 +16,15 @@
                     <div class="details" v-html="blogData.articleContent"></div>
                 </div>
                 <!-- <div class="problem">
-                                <div class="problem-title">
-                                    <span class="problem-line"></span>
-                                    <h3>常见问题</h3>
-                                </div>
-                
-                            </div> -->
+                                        <div class="problem-title">
+                                            <span class="problem-line"></span>
+                                            <h3>常见问题</h3>
+                                        </div>
+                        
+                                    </div> -->
+                <div class="comment">
+                    <div id="SOHUCS" :sid="blogData.sid"></div>
+                </div>
             </div>
             <div class="right">
                 <!-- 图片框 -->
@@ -80,6 +83,7 @@
     // import changyan from "@/assets/js/changyan.js"
     //引入百度统计
     import baidu from "static/js/baidu.js";
+    import changyan from "static/js/changyan.js";
     export default {
         //该页面的控制数据
         data() {
@@ -134,10 +138,7 @@
             };
         },
         created() {
-            // //this.showData();
-            // this.$nextTick(() => {
-            //   this.changyan();
-            // });
+   
         },
         //父控件传过来的参数
         props: {},
@@ -149,8 +150,8 @@
         },
         //进入页面执行的函数
         mounted() {
-            //百度统计
-            baidu.baidu("工具详情");
+             //畅言
+            changyan.changyan();
             //传入navBar的选择状态
             this.$store.commit("updateNavBarActive", "4");
             document.documentElement.scrollTop = 0;
@@ -161,6 +162,9 @@
             this.getBlogLooked();
             //默认footer不需要显示0
             this.$store.commit("updateFooterWidth", 0);
+            //百度统计
+            baidu.baidu("工具详情");
+            
         },
         //定义函数
         methods: {
@@ -394,6 +398,12 @@
     
     .microsoft {
         background-image: url(~/static/img/wr_icon.svg)
+    }
+    
+    .comment {
+        padding: 20px;
+        background: #fff;
+        margin-top: 20px;
     }
     
     

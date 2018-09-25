@@ -10,5 +10,5 @@ export default {
     })();
     console.log("当前页面："+ web)
   }
-
+ 
 }

@@ -29,9 +29,9 @@
         <a href="javascript:;" @click="showPayBox=!showPayBox">
           <div class="payBtn">赏</div>
         </a>
-        <a href="javascript:;">
+        <!-- <a href="javascript:;">
           <div class="pinlun">评论</div>
-        </a>
+        </a> -->
       </div>
       <transition name="payBox">
         <div v-if="showPayBox">
@@ -40,6 +40,9 @@
         </div>
       </transition>
       <!-- <div id="SOHUCS" :sid="projectId"></div> -->
+  
+      <div id="SOHUCS" :sid="projectData.sid"></div>
+  
     </div>
     <!-- 弹出框 -->
     <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="40%" custom-class="cloud_dialog">
@@ -62,9 +65,10 @@
 </template>
 
 <script type="text/javascript">
-  // import changyan from "@/assets/js/changyan.js"
   //引入百度统计
   import baidu from 'static/js/baidu.js'
+  //引入畅言
+  import changyan from 'static/js/changyan.js'
   export default {
   
     //该页面的控制数据
@@ -119,10 +123,7 @@
       }
     },
     created() {
-      // //this.showData();
-      // this.$nextTick(() => {
-      //   this.changyan();
-      // });
+  
     },
     //父控件传过来的参数
     props: {
@@ -148,6 +149,8 @@
       this.getResourcesLooked();
       //默认footer不需要显示0
       this.$store.commit('updateFooterWidth', 0);
+      //畅言
+      changyan.changyan();
     },
     //定义函数
     methods: {
