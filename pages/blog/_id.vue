@@ -588,5 +588,11 @@
         .details img {
             max-width: 100%;
         }
+         .details ol {
+            max-width: 100%;
+        }
+        .details ul {
+            max-width: 100%;
+        }
     }
 </style>
