@@ -34,24 +34,25 @@
           <!-- 移动端显示的目录标题 -->
           <div class="mobile-text-link">
             <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">
-                          首页
-                        </a>
+                              首页
+                            </a>
             <a href="javascript:;" @click="openResource" :style="active==2?'color:#20A0FF;':''">
-                          素材
-                        </a>
+                              素材
+                            </a>
             <a href="javascript:;" @click="openTools" :style="active==3?'color:#20A0FF;':''">
-                          工具
-                        </a>
+                              工具
+                            </a>
             <a href="javascript:;" @click="openBlog" :style="active==4?'color:#20A0FF;':''">
-                          文章
-                        </a>
+                              文章
+                            </a>
             <a href="javascript:;" @click="openAbout" :style="active==5?'color:#20A0FF;':''">
-                          关于
-                        </a>
+                              关于
+                            </a>
           </div>
           <!-- 移动端显示的目录标题 -->
         </div>
-        <div class="nav-right-box">
+        <!-- 联系方式 -->
+        <div class="nav-right-box" v-if="active==5">
           <a href="javascript:;"><span class="text-span"></span></a>
           <a href="javascript:;" @click="postWeChatCenterDialogVisibleTrue">
             <div class="wechat chat"></div>
@@ -63,7 +64,14 @@
             <div class="email chat"></div>
           </a>
         </div>
-
+        <!-- 联系方式 -->
+        <!-- 搜索框 -->
+        <div class="search-box" v-if="active!=5">
+          <el-input placeholder="输入要查找的内容" v-model="searchVal" @keyup.enter.native="toSearch()">
+            <i slot="suffix" class="el-input__icon el-icon-search" @click="toSearch()"></i>
+          </el-input>
+        </div>
+        <!-- 搜索框 -->
       </div>
     </header>
   
@@ -90,6 +98,8 @@
         //素材分类
         resource_type: [],
         resources_active: 0,
+        //搜索字段
+        searchVal:'',
       }
     },
     //父控件传过来的参数
@@ -128,15 +138,17 @@
       openIndex() {
         this.showMenu = false;
         this.$store.commit('updateNavBarActive', '1');
+        this.searchVal = '';
         this.$router.push({
           path: '/'
         });
       },
-
+  
       // 进入素材页面
-      openResource(){
+      openResource() {
         this.showMenu = false;
         this.$store.commit('updateNavBarActive', '2');
+        this.searchVal = '';
         this.$router.push({
           path: '/resources'
         });
@@ -145,6 +157,7 @@
       openTools() {
         this.showMenu = false;
         this.$store.commit('updateNavBarActive', '3');
+        this.searchVal = '';
         this.$router.push({
           path: '/tools'
         });
@@ -160,13 +173,14 @@
       //进入关于windy
       openAbout() {
         this.showMenu = false;
-        // this.$store.commit('updateNavBarActive', '4');
+        this.$store.commit('updateNavBarActive', '5');
+        this.searchVal = '';
         this.$router.push({
           path: '/about'
         });
       },
-     
-      
+  
+  
       //滚轮缩小事件
       onScroll() {
         let self = this;
@@ -210,6 +224,12 @@
       sendEmail() {
         window.open('mailto:197299278@qq.com', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');
       },
+      //跳转搜索页面
+      toSearch(){
+        this.$router.push({
+          path: '/search' + '?q=' + this.searchVal
+        });
+      },
   
     },
     //增加控件
@@ -219,7 +239,7 @@
   }
 </script>
 
-<style scoped lang="css">
+<style lang="css">
   /* logo图片 */
   
   .mobileNav {
@@ -388,6 +408,28 @@
     background-image: url('~assets/img/email.png');
     background-size: 100%;
   }
+  
+  
+  /* 搜索模块 */
+  
+  .el-input__inner {
+    border-radius: 20px;
+    background-color: #020E1C;
+    border: 0;
+
+    width: 280px;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  .el-input__inner::-webkit-input-placeholder {
+    color: #475669;
+  }
+  .el-input__inner:focus{
+    background-color: #fff;
+    transition: all 0.3s ease-out 0s;
+  }
+  
+  /* 搜索模块 */
   
   
   /*素材模块弹出*/
