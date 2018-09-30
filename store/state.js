@@ -15,4 +15,6 @@ export default {
     footerWidth:"1",
     //素材请求分类
     resourcesCate:"0",
+    //搜索關鍵字
+    searchVal:'',
 }

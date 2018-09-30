@@ -33,21 +33,12 @@
           <!-- PC显示的目录标题 -->
           <!-- 移动端显示的目录标题 -->
           <div class="mobile-text-link">
-            <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">
-                              首页
-                            </a>
-            <a href="javascript:;" @click="openResource" :style="active==2?'color:#20A0FF;':''">
-                              素材
-                            </a>
-            <a href="javascript:;" @click="openTools" :style="active==3?'color:#20A0FF;':''">
-                              工具
-                            </a>
-            <a href="javascript:;" @click="openBlog" :style="active==4?'color:#20A0FF;':''">
-                              文章
-                            </a>
-            <a href="javascript:;" @click="openAbout" :style="active==5?'color:#20A0FF;':''">
-                              关于
-                            </a>
+            <a href="javascript:;" @click="openIndex" :style="active==1?'color:#20A0FF;':''">首页</a>
+            <a href="javascript:;" @click="openResource" :style="active==2?'color:#20A0FF;':''">素材</a>
+            <a href="javascript:;" @click="openTools" :style="active==3?'color:#20A0FF;':''">工具</a>
+            <a href="javascript:;" @click="openBlog" :style="active==4?'color:#20A0FF;':''">文章</a>
+            <a href="javascript:;" @click="openAbout" :style="active==5?'color:#20A0FF;':''">关于</a>
+            <i style="color:#fff;" slot="suffix" class="el-input__icon el-icon-search" @click="showMenu=!showMenu"></i>
           </div>
           <!-- 移动端显示的目录标题 -->
         </div>
@@ -72,9 +63,16 @@
           </el-input>
         </div>
         <!-- 搜索框 -->
+  
       </div>
     </header>
-  
+    <!-- 移动端搜索框 -->
+    <div class="mobile-search-box" v-if="showMenu">
+      <el-input placeholder="输入要查找的内容" v-model="searchVal" @keyup.enter.native="toSearch()">
+        <i slot="suffix" class="el-input__icon el-icon-search" @click="toSearch()"></i>
+      </el-input>
+    </div>
+    <!-- 移动端搜索框 -->
     <!-- 素材分类移动列表 -->
     <div v-if="active==2" style="width: 100%;">
       <ul class="resources-list">
@@ -99,7 +97,7 @@
         resource_type: [],
         resources_active: 0,
         //搜索字段
-        searchVal:'',
+        searchVal: '',
       }
     },
     //父控件传过来的参数
@@ -179,6 +177,14 @@
           path: '/about'
         });
       },
+      //跳转搜索页面
+      toSearch() {
+        this.$store.commit('updateSearchVal', this.searchVal);
+        this.$router.push({
+          path: '/search' + '?q=' + this.searchVal
+        });
+  
+      },
   
   
       //滚轮缩小事件
@@ -224,12 +230,7 @@
       sendEmail() {
         window.open('mailto:197299278@qq.com', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');
       },
-      //跳转搜索页面
-      toSearch(){
-        this.$router.push({
-          path: '/search' + '?q=' + this.searchVal
-        });
-      },
+  
   
     },
     //增加控件
@@ -416,7 +417,6 @@
     border-radius: 20px;
     background-color: #020E1C;
     border: 0;
-
     width: 280px;
     transition: all 0.3s ease-out 0s;
   }
@@ -424,12 +424,38 @@
   .el-input__inner::-webkit-input-placeholder {
     color: #475669;
   }
-  .el-input__inner:focus{
+  
+  .el-input__inner:focus {
     background-color: #fff;
     transition: all 0.3s ease-out 0s;
   }
   
+  
   /* 搜索模块 */
+  
+  
+  /* 搜索移动端 */
+  
+  .mobile-search-box {
+    background: #fff;
+    height: 60px;
+    width: 100%;
+    padding: 0 10px;
+    display: none;
+  }
+  
+  .mobile-search-box .el-input__inner {
+    width: 100%;
+    background-color: #EFF2F7;
+    margin: 10px auto;
+  }
+
+   .mobile-search-box .el-input__inner::-webkit-input-placeholder {
+    color: #C0CCDA;
+  }
+  
+  
+  /* 搜索移动端 */
   
   
   /*素材模块弹出*/
@@ -490,6 +516,9 @@
   /*当屏幕小于760*/
   
   @media screen and (max-width: 760px) {
+    .mobile-search-box {
+      display: block;
+    }
     /* logo图片 */
     .pcNav {
       display: none;
@@ -526,6 +555,10 @@
     .resources-list {
       /*display: -webkit-box;*/
       display: flex;
+    }
+    /* 搜索框 */
+    .search-box {
+      display: none;
     }
   }
   

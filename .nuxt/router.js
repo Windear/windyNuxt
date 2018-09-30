@@ -3,21 +3,21 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _590184d9 = () => import('../pages/tools/index.vue' /* webpackChunkName: "pages/tools/index" */).then(m => m.default || m)
-const _7b2e9b23 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
-const _0f98e80b = () => import('../pages/about/index.vue' /* webpackChunkName: "pages/about/index" */).then(m => m.default || m)
-const _51cd33d7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
-const _69813500 = () => import('../pages/search/index.vue' /* webpackChunkName: "pages/search/index" */).then(m => m.default || m)
-const _b29feb8c = () => import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */).then(m => m.default || m)
-const _c024c71a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
-const _7bad3a94 = () => import('../pages/resources/data/_id.vue' /* webpackChunkName: "pages/resources/data/_id" */).then(m => m.default || m)
-const _bea62cfe = () => import('../pages/tools/_id.vue' /* webpackChunkName: "pages/tools/_id" */).then(m => m.default || m)
-const _98a0cf02 = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
-const _e56159bc = () => import('../pages/blog/_id.vue' /* webpackChunkName: "pages/blog/_id" */).then(m => m.default || m)
-const _64178002 = () => import('../pages/project/_id.vue' /* webpackChunkName: "pages/project/_id" */).then(m => m.default || m)
-const _0ed5ed96 = () => import('../pages/index_old.vue' /* webpackChunkName: "pages/index_old" */).then(m => m.default || m)
-const _1a23c6cd = () => import('../pages/index_old2.vue' /* webpackChunkName: "pages/index_old2" */).then(m => m.default || m)
-const _7eae024d = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _c71d4e8e = () => import('../pages/tools/index.vue' /* webpackChunkName: "pages/tools/index" */).then(m => m.default || m)
+const _18d17f03 = () => import('../pages/resources/index.vue' /* webpackChunkName: "pages/resources/index" */).then(m => m.default || m)
+const _5308bbeb = () => import('../pages/about/index.vue' /* webpackChunkName: "pages/about/index" */).then(m => m.default || m)
+const _78978fb7 = () => import('../pages/project/index.vue' /* webpackChunkName: "pages/project/index" */).then(m => m.default || m)
+const _146be4c0 = () => import('../pages/search/index.vue' /* webpackChunkName: "pages/search/index" */).then(m => m.default || m)
+const _4e063a5a = () => import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */).then(m => m.default || m)
+const _62415f5a = () => import('../pages/404.vue' /* webpackChunkName: "pages/404" */).then(m => m.default || m)
+const _6b3d6a98 = () => import('../pages/resources/data/_id.vue' /* webpackChunkName: "pages/resources/data/_id" */).then(m => m.default || m)
+const _5bc03561 = () => import('../pages/tools/_id.vue' /* webpackChunkName: "pages/tools/_id" */).then(m => m.default || m)
+const _51527c5f = () => import('../pages/resources/_cate.vue' /* webpackChunkName: "pages/resources/_cate" */).then(m => m.default || m)
+const _0299e97c = () => import('../pages/blog/_id.vue' /* webpackChunkName: "pages/blog/_id" */).then(m => m.default || m)
+const _116413df = () => import('../pages/project/_id.vue' /* webpackChunkName: "pages/project/_id" */).then(m => m.default || m)
+const _98af55d6 = () => import('../pages/index_old.vue' /* webpackChunkName: "pages/index_old" */).then(m => m.default || m)
+const _7d0c1226 = () => import('../pages/index_old2.vue' /* webpackChunkName: "pages/index_old2" */).then(m => m.default || m)
+const _8ffb83a6 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -79,82 +79,82 @@ export function createRouter () {
     routes: [
 		{
 			path: "/tools",
-			component: _590184d9,
+			component: _c71d4e8e,
 			name: "tools"
 		},
 		{
 			path: "/resources",
-			component: _7b2e9b23,
+			component: _18d17f03,
 			name: "resources"
 		},
 		{
 			path: "/about",
-			component: _0f98e80b,
+			component: _5308bbeb,
 			name: "about"
 		},
 		{
 			path: "/project",
-			component: _51cd33d7,
+			component: _78978fb7,
 			name: "project"
 		},
 		{
 			path: "/search",
-			component: _69813500,
+			component: _146be4c0,
 			name: "search"
 		},
 		{
 			path: "/blog",
-			component: _b29feb8c,
+			component: _4e063a5a,
 			name: "blog"
 		},
 		{
 			path: "/404",
-			component: _c024c71a,
+			component: _62415f5a,
 			name: "404"
 		},
 		{
 			path: "/resources/data/:id?",
-			component: _7bad3a94,
+			component: _6b3d6a98,
 			name: "resources-data-id"
 		},
 		{
 			path: "/tools/:id",
-			component: _bea62cfe,
+			component: _5bc03561,
 			name: "tools-id"
 		},
 		{
 			path: "/resources/:cate",
-			component: _98a0cf02,
+			component: _51527c5f,
 			name: "resources-cate"
 		},
 		{
 			path: "/blog/:id",
-			component: _e56159bc,
+			component: _0299e97c,
 			name: "blog-id"
 		},
 		{
 			path: "/project/:id",
-			component: _64178002,
+			component: _116413df,
 			name: "project-id"
 		},
 		{
 			path: "/index:old",
-			component: _0ed5ed96,
+			component: _98af55d6,
 			name: "indexold"
 		},
 		{
 			path: "/index:old2",
-			component: _1a23c6cd,
+			component: _7d0c1226,
 			name: "indexold2"
 		},
 		{
 			path: "/",
-			component: _7eae024d,
+			component: _8ffb83a6,
 			name: "index"
 		},
 		{
 			path: "*",
-			component: _c024c71a,
+			component: _62415f5a,
 			name: "custom"
 		}
     ],

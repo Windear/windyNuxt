@@ -22,4 +22,8 @@ export default {
   getResourcesCate(state) {
     return state.resourcesCate;
   },
+  //返回搜索字段
+  getSearchVal(state){
+    return state.searchVal;
+  }
 }

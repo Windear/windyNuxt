@@ -8,7 +8,7 @@
           <div class="textTitle">{{projectData.resourcesTitle}}</div>
           <div class="dateAndCopyright">© {{projectData.resourcesCopyright}}</div>
           <div class="detailsTag">
-            <a v-for="tag in tags" :key="tag.id" class="tag" href="javascript:;">{{tag}}</a>
+            <a v-for="tag in tags" :key="tag.id" class="tag" href="javascript:;" @click="searchTag(tag)">{{tag}}</a>
           </div>
         </div>
         <div class="btn-box">
@@ -272,6 +272,13 @@
       // 复制失败
       onError(e) {
         this.clipboardVal = 'err';
+      },
+      //搜索标签
+      searchTag(tag){
+        this.$store.commit('updateSearchVal', tag);
+        this.$router.push({
+          path: '/search' + '?q=' + tag
+        });
       },
     },
     //增加控件

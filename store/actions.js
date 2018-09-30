@@ -274,4 +274,35 @@ export default {
       })
     });
   },
+  //搜索模块
+  //搜索素材api
+  async searchResources({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/search_resources/?search='+params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //搜索工具api
+  async searchTools({ commit, state }, params) {
+    return await axios({
+      url: '/api/tools/search_tools/?search='+params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //搜索文章api
+  async searchBlogs({ commit, state }, params) {
+    return await axios({
+      url: '/api/blog/search_blogs/?search='+params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
 }

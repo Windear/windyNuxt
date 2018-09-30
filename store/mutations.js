@@ -27,4 +27,8 @@ export default {
   updateResourcesCate(state, resourcesCate) {
     state.resourcesCate = resourcesCate;
   },
+  //搜索字段
+  updateSearchVal(state, searchVal) {
+    state.searchVal = searchVal;
+  },
 }

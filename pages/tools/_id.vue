@@ -51,7 +51,7 @@
                 <!-- 关键字框 -->
                 <div class="tag">
                     <p class="box-title">标签</p>
-                    <a v-for="tag in tags" :key="tag.id" href="javascript:;" class="tag-list">{{tag}}</a>
+                    <a v-for="tag in tags" :key="tag.id" href="javascript:;" class="tag-list" @click="searchTag(tag)">{{tag}}</a>
     
                 </div>
                 <!-- 关键字框 -->
@@ -63,7 +63,7 @@
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
                 <el-table-column label="系统" min-width="80">
                     <template slot-scope="scope">
-                                <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
+                                    <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
 </template>
                 </el-table-column>
                 <el-table-column prop="version" label="版本号" min-width="130">
@@ -171,7 +171,7 @@
             };
         },
         created() {
-      
+    
         },
         //父控件传过来的参数
         props: {},
@@ -333,7 +333,14 @@
             // 复制失败
             onError(e) {
                 this.clipboardVal = "err";
-            }
+            },
+            //搜索标签
+            searchTag(tag) {
+                this.$store.commit('updateSearchVal', tag);
+                this.$router.push({
+                    path: '/search' + '?q=' + tag
+                });
+            },
         },
         //增加控件
         components: {}
@@ -394,9 +401,7 @@
     }
     
     .details {
-  
         margin-top: 40px;
-
     }
     
     .details p {
@@ -405,7 +410,6 @@
         margin: 10px 0;
     }
     
-  
     .details img {
         max-width: 720px;
     }
@@ -475,11 +479,13 @@
         background-image: url(~/static/img/wr_icon.svg)
     }
     
-     .comment {
+    .comment {
         padding: 20px;
         background: #fff;
         margin-top: 20px;
     }
+    
+    
     /* 左边框 */
     
     

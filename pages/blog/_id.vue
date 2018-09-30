@@ -58,7 +58,7 @@
                 <!-- 关键字框 -->
                 <div class="tag">
                     <p class="box-title">标签</p>
-                    <a v-for="tag in articleTag" :key="tag.id" href="javascript:;" class="tag-list">{{tag}}</a>
+                    <a v-for="tag in articleTag" :key="tag.id" href="javascript:;" class="tag-list" @click="searchTag(tag)">{{tag}}</a>
     
                 </div>
                 <!-- 关键字框 -->
@@ -255,7 +255,14 @@
             // 复制失败
             onError(e) {
                 this.clipboardVal = "err";
-            }
+            },
+            //搜索标签
+            searchTag(tag) {
+                this.$store.commit('updateSearchVal', tag);
+                this.$router.push({
+                    path: '/search' + '?q=' + tag
+                });
+            },
         },
         //增加控件
         components: {}
