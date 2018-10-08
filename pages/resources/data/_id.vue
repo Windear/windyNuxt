@@ -154,15 +154,6 @@
     },
     //定义函数
     methods: {
-      // refish() {
-      //   location.reload();
-      // },
-      changyan() {
-        window.changyan.api.config({
-          appid: 'cyt3crepq',
-          conf: 'prod_a13b2e3f57b739f379a9d121e340340d'
-        });
-      },
       //请求素材详情
       getResourcesData() {
         //如果projectId没有传过来，或者没有
@@ -289,6 +280,7 @@
 </script>
 
 <style lang="css">
+@import '~/static/css/noAd.css';
   .tag {
     height: 32px;
     background: #f6f9fa;

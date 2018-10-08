@@ -348,6 +348,7 @@
 </script>
 
 <style lang="css">
+@import '~/static/css/noAd.css';
     .homeBody {
         background: #f3f4f5;
         padding-top: 20px;

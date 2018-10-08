@@ -34,13 +34,11 @@
           <div class="payText">打赏将支持作者提供更好的服务与更优质的资源</div>
         </div>
       </transition>
-      <!-- <div id="SOHUCS" :sid="projectId"></div> -->
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  // import changyan from "@/assets/js/changyan.js"
   //引入百度统计
   import baidu from 'static/js/baidu.js'
   export default {

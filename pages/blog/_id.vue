@@ -16,12 +16,12 @@
                     <div class="details" v-html="blogData.articleContent"></div>
                 </div>
                 <!-- <div class="problem">
-                                        <div class="problem-title">
-                                            <span class="problem-line"></span>
-                                            <h3>常见问题</h3>
-                                        </div>
-                        
-                                    </div> -->
+                                                <div class="problem-title">
+                                                    <span class="problem-line"></span>
+                                                    <h3>常见问题</h3>
+                                                </div>
+                                
+                                            </div> -->
                 <div class="comment">
                     <div id="SOHUCS" :sid="blogData.sid"></div>
                 </div>
@@ -138,7 +138,7 @@
             };
         },
         created() {
-   
+    
         },
         //父控件传过来的参数
         props: {},
@@ -150,7 +150,7 @@
         },
         //进入页面执行的函数
         mounted() {
-             //畅言
+            //畅言
             changyan.changyan();
             //传入navBar的选择状态
             this.$store.commit("updateNavBarActive", "4");
@@ -164,7 +164,7 @@
             this.$store.commit("updateFooterWidth", 0);
             //百度统计
             baidu.baidu("工具详情");
-            
+    
         },
         //定义函数
         methods: {
@@ -270,6 +270,8 @@
 </script>
 
 <style lang="css">
+
+    @import '~/static/css/noAd.css';
     .homeBody {
         background: #f3f4f5;
         padding-top: 20px;
@@ -595,7 +597,7 @@
         .details img {
             max-width: 100%;
         }
-         .details ol {
+        .details ol {
             max-width: 100%;
         }
         .details ul {
