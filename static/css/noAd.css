@@ -2,3 +2,11 @@
     margin-top: -250px !important;
     transform: scale(0);
 }
+
+#MZAD_POP_PLACEHOLDER {
+    display: none !important;
+}
+
+#pop_ad{
+    display: none !important;
+}

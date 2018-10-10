@@ -24,7 +24,7 @@
     <div class="link">
       <div class="linkTitle">友情链接</div>
       <div class="linkText">
-        <a href="http://5windy.com/" target="view_window">有爱设计</a>
+        <a href="http://www.leeon.me/" target="view_window">@leeon | 分享未来 - 互联网技术</a>
       </div>
     </div>
     <div class="line"></div>
