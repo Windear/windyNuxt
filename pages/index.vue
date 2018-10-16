@@ -8,16 +8,20 @@
         <a href="/resources" class="more">更多></a>
       </div>
       <ul class="img-list">
+  
+        <li v-for="item in 8" :key="item.id" v-if="resourcesList==''">
+          <img src="~/static/img/loading_img1.png" alt="预加载">
+        </li>
+  
         <li v-for="item in resourcesList" :key="item.id">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.resourcesId" target="_blank">
               <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" alt="有爱设计素材,sketch素材" style="display: inline;">
             </a>
-            <!-- <div class="info">
-                      </div> -->
           </div>
           <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
         </li>
+  
       </ul>
     </div>
     <!-- 素材模块 -->
@@ -29,6 +33,10 @@
       </div>
   
       <ul class="tools-list">
+        <div v-for="item in 6" :key="item.id" v-if="toolsList==''" style="float:left; margin-right:20px;">
+          <img width="180" height="308" src="~/static/img/loading_img2.png" alt="预加载">
+        </div>
+  
         <li v-for="item in toolsList" :key="item.toolsId">
           <div class="box-body">
             <a :href="'/tools/'+item.toolsId" target="_blank">
@@ -52,11 +60,16 @@
     </div>
     <!-- 工具模块 -->
     <!-- 文章模块 -->
+
     <div class="blog-box static-block">
       <div class="box-title">
         <h2 class="title-box">最新文章</h2>
         <a href="/blog" class="more">更多></a>
       </div>
+    </div>
+  
+    <div class="list" v-for="item in 5" :key="item.id" v-if="blogList==''" style="margin-bottom: 20px; padding:10px;">
+      <img src="~/static/img/loading_img3.png" alt="预加载">
     </div>
   
     <a class="list" :href="'/blog/'+item.articleId" v-for="item in blogList" :key="item.articleId" target="_blank">
@@ -245,6 +258,7 @@
     /* color: #000; */
     box-shadow: 0 2px 12px 0 rgba(60, 172, 255, 0.60);
     transition: all 0.3s ease-out 0s;
+     
   }
   
   
@@ -272,6 +286,7 @@
   }
   
   .img-list li a {
+    
     display: block;
     line-height: 0;
   }
@@ -557,10 +572,10 @@
     color: #1f2d3d;
   }
   
-  .list:hover .blog-cate {
+  /* .list:hover .blog-cate {
     transition: all 0.3s ease-out 0s;
     box-shadow: 0 4px 6px rgba(32, 160, 255, 0.5);
-  }
+  } */
   
   
   /* 文章模块 */
@@ -599,17 +614,20 @@
     .tools-list {
       width: 100%;
     }
+
     .tools-list li:hover .box-body {
       background: #1e262e;
       margin-top: 0;
       transition: all 0.3s ease-out 0s;
     }
+
     .tools_format {
       -webkit-overflow-scrolling: touch;
       -webkit-overflow-x: scroll;
       overflow-x: scroll;
       overflow-y: hidden;
     }
+
     .format_btn {
       width: 220px;
       white-space: nowrap;
@@ -633,14 +651,16 @@
     }
     /* 工具模块 */
     /* 文章模块 */
-    .list{
+    .list {
       width: 100%;
     }
+
     .tools-list li:hover .box-body {
       background: #1e262e;
       margin-top: 0;
       transition: all 0.3s ease-out 0s;
     }
+
     /* hover事件 */
     .tools_format {
       -webkit-overflow-scrolling: touch;
@@ -648,22 +668,27 @@
       overflow-x: scroll;
       overflow-y: hidden;
     }
+
     .format_btn {
       width: 220px;
       white-space: nowrap;
     }
+
     /* 博客列表 */
     .blogList img {
       width: 30%;
       min-width: 30%;
       height: 18%;
     }
+
     .blogList h3 {
       font-size: 18px;
     }
+
     .blogList p {
       display: none;
     }
+
     /* 博客列表 */
     /* 文章模块 */
   }
