@@ -278,7 +278,7 @@ export default {
   //搜索素材api
   async searchResources({ commit, state }, params) {
     return await axios({
-      url: '/api/resources/search_resources/?search='+params,
+      url: '/api/resources/search_resources/?search=' + params,
       method: 'get',
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
@@ -288,7 +288,7 @@ export default {
   //搜索工具api
   async searchTools({ commit, state }, params) {
     return await axios({
-      url: '/api/tools/search_tools/?search='+params,
+      url: '/api/tools/search_tools/?search=' + params,
       method: 'get',
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
@@ -298,7 +298,28 @@ export default {
   //搜索文章api
   async searchBlogs({ commit, state }, params) {
     return await axios({
-      url: '/api/blog/search_blogs/?search='+params,
+      url: '/api/blog/search_blogs/?search=' + params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //链接模块
+  //获取常用网站列表
+  async getCollectionNet({ commit, state }, params) {
+    return await axios({
+      url: '/api/myLinks/collection/'+ params,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //获取友情链接列表
+  async getFriendsNet({ commit, state }, params) {
+    return await axios({
+      url: '/api/myLinks/friends/'+ params,
       method: 'get',
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false

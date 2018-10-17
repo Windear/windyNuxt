@@ -11,7 +11,7 @@
 </template>
 <script type="text/javascript">
 import navBar from '~/components/navBar'; //顶部栏
-import pageFooter from '~/components/pageFooter'; //底部栏
+import pageFooter from '~/components/footer'; //底部栏
 import wechat from '~/components/WeChatModal'; //微信弹窗
 import Lodash from 'lodash';
 
