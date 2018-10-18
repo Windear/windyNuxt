@@ -1,5 +1,6 @@
 const resolve = require('path').resolve
 const LRU = require('lru-cache')
+const webpack = require('webpack')
 
 module.exports = {
   /*
@@ -35,9 +36,17 @@ module.exports = {
    */
   build: {
     vender: [
-      'element-ui',
+      'element-ui','jquery'
     ],
-
+    plugins:[
+      new webpack.ProvidePlugin(
+        {
+          '$': 'jquery',
+          'jQuery':'jquery',
+          'window.jQuery':'jquery'
+        }
+      )
+    ],
     /*
      ** Run ESLint on save
      */
