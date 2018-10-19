@@ -1,6 +1,11 @@
 <template>
   <div class="home-body">
     <scroll-bar/>
+    <!-- 广告模块 -->
+    <div class="ad">
+      <a href="/screen/phone"><img src="~/static/img/screenAD.png" alt=""></a>
+    </div>
+    <!-- 广告模块 -->
     <!-- 素材模块 -->
     <div class="resources-box static-block">
       <div class="box-title">
@@ -218,7 +223,10 @@
 
 <style scoped lang="css">
   /* 公共模块 */
-  
+  .ad{
+     width: 1200px;
+     margin: 40px auto 0;
+  }
   .static-block {
     /* background: #fff; */
     display: flex;
@@ -585,6 +593,13 @@
     .box-title {
       width: 100%;
       padding: 0 2%;
+    }
+    .ad{
+      width: 100%;
+      margin: 10px 2% 0;
+    }
+     .ad img{
+      width: 96%;
     }
     /* 公共模块 */
     /*素材模块*/
