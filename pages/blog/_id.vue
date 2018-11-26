@@ -28,18 +28,18 @@
             </div>
             <div class="right">
                 <!-- 图片框 -->
-                <div class="image-box">
+                <div class="image-box" :style="scrollType?'position: fixed;top:80px;':''">
                     <img v-lazy="articlePicture" :alt="articleTitle">
                 </div>
                 <!-- 图片框 -->
                 <!-- 下载框 -->
-                <div class="download-box">
+                <div class="download-box" :style="scrollType?'position: fixed;top:340px;':''">
                     <!-- <a href="javascript:;" class="download-btn download-box-btn" @click="dialogVisible = true">下载应用</a> -->
                     <a href="javascript:;" class="pay-btn download-box-btn" @click="payMe = true">打赏站长</a>
                 </div>
                 <!-- 下载框 -->
                 <!-- 信息框 -->
-                <div class="essential">
+                <div class="essential" :style="scrollType?'position: fixed;top:444px;':''">
                     <p class="box-title">基本信息</p>
                     <div class="box-content">
                         <span class="span-left">作者</span><span class="span-right">{{blogData.articleAuthor}}</span>
@@ -56,7 +56,7 @@
                 </div>
                 <!-- 信息框 -->
                 <!-- 关键字框 -->
-                <div class="tag">
+                <div class="tag" :style="scrollType?'position: fixed;top:649px;':''">
                     <p class="box-title">标签</p>
                     <a v-for="tag in articleTag" :key="tag.id" href="javascript:;" class="tag-list" @click="searchTag(tag)">{{tag}}</a>
     
@@ -112,7 +112,8 @@
                 dialogVisible: false,
                 //是否显示打赏弹窗
                 payMe: false,
-    
+                 //滚轮滚动
+                scrollType: false,
             };
         },
         //自定义头部
@@ -164,10 +165,23 @@
             this.$store.commit("updateFooterWidth", 0);
             //百度统计
             baidu.baidu("工具详情");
-    
+            //监听滚轮
+            this.$nextTick(() => {
+                window.addEventListener('scroll', this.onScroll)
+            });
         },
         //定义函数
         methods: {
+              //滚轮缩小事件
+            onScroll() {
+                let self = this;
+                let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+                if (scrolled >= 80) {
+                    self.scrollType = true;
+                } else {
+                    self.scrollType = false;
+                }
+            },
             // refish() {
             //   location.reload();
             // },

@@ -1,6 +1,7 @@
 <template>
     <div class="homeBody">
         <div class="container">
+    
             <div class="left">
                 <div class="content">
                     <div class="title-box">
@@ -23,19 +24,22 @@
                         </ol>
                     </div>
                 </div>
+    
                 <div class="comment">
                     <div id="SOHUCS" :sid="toolsData.sid"></div>
                 </div>
+    
             </div>
+    
             <div class="right">
                 <!-- 下载框 -->
-                <div class="download-box">
+                <div class="download-box" :style="scrollType?'position: fixed;top:80px;':''">
                     <a href="javascript:;" class="download-btn download-box-btn" @click="dialogVisible = true">下载应用</a>
                     <a href="javascript:;" class="pay-btn download-box-btn" @click="payMe = true">打赏站长</a>
                 </div>
                 <!-- 下载框 -->
                 <!-- 信息框 -->
-                <div class="essential">
+                <div class="essential" :style="scrollType?'position: fixed;top:236px;':''">
                     <p class="box-title">基本信息</p>
                     <div class="box-content">
                         <span class="span-left">最新版本</span><span class="span-right">{{toolsData.toolsNewVersion}}</span>
@@ -49,21 +53,22 @@
                 </div>
                 <!-- 信息框 -->
                 <!-- 关键字框 -->
-                <div class="tag">
+                <div class="tag" :style="scrollType?'position: fixed;top:412px;':''">
                     <p class="box-title">标签</p>
                     <a v-for="tag in tags" :key="tag.id" href="javascript:;" class="tag-list" @click="searchTag(tag)">{{tag}}</a>
-    
                 </div>
                 <!-- 关键字框 -->
+    
             </div>
         </div>
+    
         <!-- 下载弹出框 -->
         <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="80%" custom-class="cloud_dialog">
     
             <el-table :data="downloadData" style="width:100%" v-if="downloadData!=0">
                 <el-table-column label="系统" min-width="80">
                     <template slot-scope="scope">
-                                    <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
+                                            <i class="tag-img" :class="downloadData[scope.$index].drive_type==1?'mac':'microsoft'"></i>
 </template>
                 </el-table-column>
                 <el-table-column prop="version" label="版本号" min-width="130">
@@ -145,7 +150,10 @@
                 //是否显示打赏弹窗
                 payMe: false,
                 //复制剪切板按钮文字
-                clipboardVal: "no"
+                clipboardVal: "no",
+                //滚轮滚动
+                scrollType: false,
+
             };
         },
         //自定义头部
@@ -197,9 +205,23 @@
             this.$store.commit("updateFooterWidth", 0);
             //畅言
             changyan.changyan();
+            //监听滚轮
+            this.$nextTick(() => {
+                window.addEventListener('scroll', this.onScroll)
+            });
         },
         //定义函数
         methods: {
+            //滚轮缩小事件
+            onScroll() {
+                let self = this;
+                let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+                if (scrolled >= 80) {
+                    self.scrollType = true;
+                } else {
+                    self.scrollType = false;
+                }
+            },
             // refish() {
             //   location.reload();
             // },
@@ -348,7 +370,7 @@
 </script>
 
 <style lang="css">
-@import '~/static/css/noAd.css';
+    @import '~/static/css/noAd.css';
     .homeBody {
         background: #f3f4f5;
         padding-top: 20px;
@@ -359,6 +381,7 @@
         width: 1200px;
         overflow: hidden;
         margin: 0 auto;
+        position: relative;
     }
     
     
@@ -496,6 +519,10 @@
         /*  */
         width: 280px;
         float: right;
+    }
+    
+    .right-float {
+        
     }
     
     .download-box {

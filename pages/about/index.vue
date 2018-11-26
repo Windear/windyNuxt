@@ -8,7 +8,7 @@
         </div>
         <div class="author-text">
           <p class="author-name">Windy</p>
-          <span class="author-company">现任职于 东风设计研究院有限公司 高级UI设计师/前端工程师</span>
+          <span class="author-company">现任职于 东风设计研究院有限公司 产品经理/软件工程师/UI设计师</span>
           <br>
           <span>2011年毕业于武汉轻工大学，艺术设计专业。7年互联网产品开发经验，全栈产品设计师。</span>
           <br>
