@@ -20,7 +20,7 @@ export default {
   //请求设计列表
   async getDesignList({ commit, state }, params) {
     return await axios({
-      url: '/api/design/',
+      url: '/api/mydesign/designList/',
       method: 'get',
       params,
       adapter: cache({
@@ -31,7 +31,7 @@ export default {
   //请求设计详情
   async getDesignData({ commit, state }, params) {
     return await axios({
-      url: '/api/design/details/' + params,
+      url: '/api/mydesign/designDetail/' + params +'/',
       method: 'get',
       //params,
       adapter: cache({
@@ -45,7 +45,6 @@ export default {
       url: '/api/design/project',
       method: 'post',
       data: params,
-
     });
   },
   //请求案例列表

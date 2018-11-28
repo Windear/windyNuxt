@@ -5,9 +5,9 @@
         <!-- <img class="litterImg" :src="litterImg"> -->
         <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
         <div class="detailsTextBox">
-          <div class="textTitle">{{projectData.projectTitle}}</div>
-          <div class="dateAndCopyright">{{projectData.projectDate}} ©{{projectData.projectCopyright}}</div>
-          <div class="textSynopsis">{{projectData.projectSynopsis}}</div>
+          <div class="textTitle">{{projectData.title}}</div>
+          <div class="dateAndCopyright">{{projectData.dgndatetime}} ©{{projectData.copyright}}</div>
+          <div class="textSynopsis">{{projectData.introduction}}</div>
         </div>
         <a href="javascript:;">
           <div class="downloadBtn" v-if="author!= 'windy'">
@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="details">
-      <div class="detailBody" v-html="projectData.projectDetail" style="color:#000!important;"></div>
-      <div class="text">如果您觉得本狗做的不错，或者资源对您有用，欢迎任意金额打赏支持</div>
+      <div class="detailBody" v-html="projectData.content" style="color:#000!important;"></div>
+      <!-- <div class="text">如果您觉得本狗做的不错，或者资源对您有用，欢迎任意金额打赏支持</div>
       <div style="display: flex; margin: auto; width: 180px;">
         <a href="javascript:;" @click="showPayBox=!showPayBox">
           <div class="payBtn">赏</div>
@@ -33,7 +33,7 @@
           <div class="payBox"></div>
           <div class="payText">打赏将支持作者提供更好的服务与更优质的资源</div>
         </div>
-      </transition>
+      </transition> -->
     </div>
   </div>
 </template>
@@ -137,13 +137,15 @@
         //let params = localStorage.getItem("projectId");
         this.$store.dispatch('getDesignData', params).then((response) => {
           let res = response.data;
+          //console.log(response);
           if (response.statusText === "OK" && response.status === 200) {
-            //console.log(res);
+            
             this.projectData = res;
-            this.author = this.projectData.projectCopyright.toLowerCase();
-            this.litterImg = this.ip + '/media/' + this.projectData.projectPic;
+            this.author = this.projectData.copyright.toLowerCase();
+            //console.log(this.author);
+            this.litterImg = this.projectData.picture;
             //传入页面标题
-            this.title = res.projectTitle;
+            this.title = res.title;
           } else {
             alert("网络错误")
           }

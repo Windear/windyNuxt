@@ -28,18 +28,19 @@
       <ul class="img-list">
         <li v-for="item in newList" :key="item.id">
           <div class="thumbnail">
-            <a :href="'/project/'+item.pk" target="_blank">
-              <img v-lazy="ip +'/media/'+item.fields.picture" :key="item.pk" style="display: inline;">
+            <a :href="'/project/'+item.id" target="_blank">
+              <img v-lazy="item.picture" :key="item.id" style="display: inline;">
             </a>
-  
           </div>
-          <p><a :href="'/project/'+item.pk" target="_blank">{{item.fields.title}}</a></p>
+          <p><a :href="'/project/'+item.id" target="_blank">{{item.title}}</a></p>
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
+      <!-- 分页控件 -->
       <div class="pagination">
         <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="designList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
+      <!-- 分页控件 -->
     </div>
     <!-- 作品模块 -->
   </div>
@@ -119,7 +120,7 @@
         this.$store.dispatch('getDesignList', params).then((response) => {
           let res = response.data;
           if (res.state != "err") {
-            this.designList = res;
+            this.designList = res.results;
             this.toListData(0, 20);
           } else {
             // alert("网络错误")
@@ -128,7 +129,7 @@
         }).catch((err) => {
           console.error(err);
           this.$router.push({
-            path: '/404'
+            //path: '/404'
           });
         });
       },
