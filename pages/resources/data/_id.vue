@@ -12,13 +12,13 @@
           </div>
         </div>
         <div class="btn-box">
-          <a :href="this.ip + '/media/' + projectData.resourcesDownload" class="download" v-if="author!= 'windy'" @click="getResourcesDownloads()">
+          <a href="javascript:;"  class="download" v-if="author!= 'windy'"  @click="dialogVisible = true">
             <div class="downloadBtn">
               <div class="btnIcon"></div>
-              <div class="btnText">本地下载</div>
+              <div class="btnText">云盘下载</div>
             </div>
           </a>
-          <a href="javascript:;" class="baiducloud" @click="dialogVisible = true"></a>
+          <a class="baiducloud" :href="this.ip + '/media/' + projectData.resourcesDownload" @click="getResourcesDownloads()"></a>
         </div>
       </div>
     </div>
@@ -50,6 +50,9 @@
       <div class="cloud_down" v-if="cloudDown!=0" v-for="(item,key) in cloudDown" :key="item.id">
         <div class="baiduyun" v-if="item.drive_type==1">
           <img src="~/static/img/cloud.png" width="20px"><span>百度云盘</span>
+        </div>
+        <div class="baiduyun" v-if="item.drive_type==2">
+          <img src="~/static/img/weiyun.jpg" width="20px"><span>腾讯微云<span style="color:#FF4949;">(推荐)</span></span>
         </div>
         <p v-if="item.drive_pw">提取码"{{item.drive_pw}}"<a href="javascript:;" class="clipboard-btn" v-clipboard="item.drive_pw" @success="onCopy(key)" @error="onError(key)"><span v-if="clipboardVal!=key&&clipboardVal!='err'">点击复制</span><span class="clipboardVal-success" v-if="clipboardVal==key">复制成功</span><span v-if="clipboardVal=='err'">复制失败，请自行复制</span></a></p>
         <p v-if="!item.drive_pw">该资源可直接下载</p>
@@ -373,7 +376,7 @@
   .btnIcon {
     width: 20px;
     height: 20px;
-    background-image: url(~/assets/img/downloadIcon.png);
+    background-image: url(~/assets/img/cloud-download.svg);
     background-size: 100%;
   }
   
@@ -507,7 +510,7 @@
     width: 45px;
     height: 45px;
     margin-left: 10px;
-    background: url(~/static/img/cloud.png) no-repeat 50% 50% / 22px 22px;
+    background: url(~/static/img/download_icon.png) no-repeat 50% 50% / 22px 22px;
     font-size: 0;
     vertical-align: middle;
     border: 1px solid #458CFF;
