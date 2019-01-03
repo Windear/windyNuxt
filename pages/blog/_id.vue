@@ -28,7 +28,7 @@
             </div>
             <div class="right">
                 <!-- 图片框 -->
-                <div class="image-box" :style="scrollType?'position: fixed;top:80px;':''">
+                <div class="image-box" :style="scrollType?'position: fixed;top:80px;':''" >
                     <img v-lazy="articlePicture" :alt="articleTitle">
                 </div>
                 <!-- 图片框 -->
@@ -583,6 +583,7 @@
         }
         .download-box {
             width: 100%;
+            position:static!important;
         }
         .download-box-btn {
             width: 100%;
@@ -596,11 +597,13 @@
             background: #fff;
             width: 100%;
             border-radius: 0;
+             position:static!important;
         }
         .essential {
             background: #fff;
             width: 100%;
             border-radius: 0;
+             position:static!important;
         }
         .details {
             width: 100%;

@@ -688,6 +688,7 @@
         }
         .download-box {
             width: 100%;
+            position:static!important;
         }
         .download-box-btn {
             width: 100%;
@@ -701,11 +702,13 @@
             background: #fff;
             width: 100%;
             border-radius: 0;
+            position:static!important;
         }
         .essential {
             background: #fff;
             width: 100%;
             border-radius: 0;
+            position:static!important;
         }
         .details {
             width: 100%;

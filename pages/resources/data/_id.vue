@@ -45,9 +45,10 @@
   
     </div>
     <!-- 弹出框 -->
-    <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="40%" custom-class="cloud_dialog">
+    <el-dialog title="网盘下载" :visible.sync="dialogVisible" width="40%" custom-class="cloud_dialog" v-if="cloudDown!==0">
   
-      <div class="cloud_down" v-if="cloudDown!=0" v-for="(item,key) in cloudDown" :key="item.id">
+      <div class="cloud_down"  v-for="(item,key) in cloudDown" :key="item.id">
+
         <div class="baiduyun" v-if="item.drive_type==1">
           <img src="~/static/img/cloud.png" width="20px"><span>百度云盘</span>
         </div>
@@ -59,6 +60,7 @@
         <a :href="item.drive_url" target="_blank" @click="getResourcesDownloads()">
           <el-button type="primary" size="mini">前往下载</el-button>
         </a>
+
       </div>
   
       <span v-if="cloudDown==0">此资源没有网盘链接哟~不好意思呀。</span>
