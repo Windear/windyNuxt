@@ -93,6 +93,42 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td class="td01" valign="middle">iPhone XS</td>
+                            <td class="td02" valign="middle">iOS</td>
+                            <td class="td03" valign="middle">5.8</td>
+                            <td class="td04" valign="middle">458</td>
+                            <td class="td05" valign="middle">19 : 9</td>
+                            <td class="td06" valign="middle">375 x 812</td>
+                            <td class="td07" valign="middle">1125 x 2436</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxhdpi</font>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="td01" valign="middle">iPhone XS Max</td>
+                            <td class="td02" valign="middle">iOS</td>
+                            <td class="td03" valign="middle">6.5</td>
+                            <td class="td04" valign="middle">458</td>
+                            <td class="td05" valign="middle">19 : 9</td>
+                            <td class="td06" valign="middle">414 x 896</td>
+                            <td class="td07" valign="middle">1242 x 2688</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxhdpi</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td01" valign="middle">iPhone XR</td>
+                            <td class="td02" valign="middle">iOS</td>
+                            <td class="td03" valign="middle">6.1</td>
+                            <td class="td04" valign="middle">326</td>
+                            <td class="td05" valign="middle">19 : 9</td>
+                            <td class="td06" valign="middle">414 x 896</td>
+                            <td class="td07" valign="middle">828 x 1792</td>
+                            <td class="td08" valign="middle">2.0
+                                <font class="gray01">xxhdpi</font>
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="td01" valign="middle">iPhone X</td>
                             <td class="td02" valign="middle">iOS</td>
                             <td class="td03" valign="middle">5.8</td>
@@ -631,7 +667,67 @@
                             <td class="td08" valign="middle">4.0
                                 <font class="gray01">xxxhdpi</font>
                             </td>
+                        </tr>
+                        <tr>
+                            <td class="td01" valign="middle">HUAWEI P20</td>
+                            <td class="td02" valign="middle">Android</td>
+                            <td class="td03" valign="middle">5.8</td>
+                            <td class="td04" valign="middle">529</td>
+                            <td class="td05" valign="middle">18 : 9</td>
+                            <td class="td06" valign="middle">360 x 748</td>
+                            <td class="td07" valign="middle">1080 x 2244</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxxhdpi</font>
+                            </td>
                         </tr>    
+                        <tr>
+                            <td class="td01" valign="middle">HUAWEI P20 Pro</td>
+                            <td class="td02" valign="middle">Android</td>
+                            <td class="td03" valign="middle">6.1</td>
+                            <td class="td04" valign="middle">408</td>
+                            <td class="td05" valign="middle">18 : 9</td>
+                            <td class="td06" valign="middle">360 x 748</td>
+                            <td class="td07" valign="middle">1080 x 2240</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxxhdpi</font>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <td class="td01" valign="middle">HUAWEI Mate20</td>
+                            <td class="td02" valign="middle">Android</td>
+                            <td class="td03" valign="middle">6.53</td>
+                            <td class="td04" valign="middle">381</td>
+                            <td class="td05" valign="middle">18 : 9</td>
+                            <td class="td06" valign="middle">360 x 748</td>
+                            <td class="td07" valign="middle">1080 x 2244</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxxhdpi</font>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <td class="td01" valign="middle">HUAWEI Mate20 Pro</td>
+                            <td class="td02" valign="middle">Android</td>
+                            <td class="td03" valign="middle">6.39</td>
+                            <td class="td04" valign="middle">538</td>
+                            <td class="td05" valign="middle">19 : 9</td>
+                            <td class="td06" valign="middle">360 x 780</td>
+                            <td class="td07" valign="middle">1440 x 3120</td>
+                            <td class="td08" valign="middle">4.0
+                                <font class="gray01">xxxhdpi</font>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <td class="td01" valign="middle">HUAWEI Mate20 X</td>
+                            <td class="td02" valign="middle">Android</td>
+                            <td class="td03" valign="middle">7.2</td>
+                            <td class="td04" valign="middle">345</td>
+                            <td class="td05" valign="middle">18 : 9</td>
+                            <td class="td06" valign="middle">360 x 748</td>
+                            <td class="td07" valign="middle">1080 x 2244</td>
+                            <td class="td08" valign="middle">3.0
+                                <font class="gray01">xxxhdpi</font>
+                            </td>
+                        </tr>   
                     </tbody>
                 </table>
             </div>
