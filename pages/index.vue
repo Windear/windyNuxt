@@ -251,11 +251,11 @@
   
   .more {
     /* Rectangle 3: */
-    background: linear-gradient(-135deg, #43BFFF 0%, #20A0FF 100%);
-    box-shadow: 0 2px 6px 0 rgba(60, 172, 255, 0.50);
+    /* background: linear-gradient(-135deg, #43BFFF 0%, #20A0FF 100%); */
+    /* box-shadow: 0 2px 6px 0 rgba(60, 172, 255, 0.50); */
     border-radius: 12px;
     font-size: 12px;
-    color: #fff;
+    color: #99a9bf;
     height: 24px;
     line-height: 24px;
     padding: 0 8px;
@@ -263,10 +263,9 @@
   }
   
   .more:hover {
-    /* color: #000; */
-    box-shadow: 0 2px 12px 0 rgba(60, 172, 255, 0.60);
+    /* box-shadow: 0 2px 12px 0 rgba(60, 172, 255, 0.60); */
     transition: all 0.3s ease-out 0s;
-     
+    color: #5E6D82;
   }
   
   
