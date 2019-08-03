@@ -1,6 +1,6 @@
 export default {
     //IP地址
-    ip:"http://5windy.com:5001",
+    ip:"http://127.0.0.1:8000",
 	//页面宽度
 	bodyWidth:"",
   	//首页弹窗

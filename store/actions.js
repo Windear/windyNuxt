@@ -68,10 +68,20 @@ export default {
       })
     });
   },
+  // 根据分类请求素材列表
+  async getCateResourcesList({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/list/cate/?p=' + params.p +'&search='+params.search,
+      method: 'get',
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
   //请求素材列表
   async getResourcesList({ commit, state }, params) {
     return await axios({
-      url: '/api/resources/list/' + params,
+      url: '/api/resources/list/?p=' + params,
       method: 'get',
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
@@ -132,9 +142,21 @@ export default {
   //获取格式分类列表
   async postResourcesFormatList({ commit, state }, params) {
     return await axios({
-      url: '/api/resources/type',
-      method: 'post',
-      data: params,
+      url: '/api/resources/list/?p='+ params.p +'&search='+params.search,
+      method: 'get',
+      // data: ,
+      adapter: cache({
+        local: false // 是否永久保留在本地，默认为false
+      })
+    });
+  },
+  //通过素材分类获取格式分类列表
+  
+  async postCateResourcesFormatList({ commit, state }, params) {
+    return await axios({
+      url: '/api/resources/list/cate/format/?p='+ params.p +'&cate='+params.cate +'&file_type='+params.file_type,
+      method: 'get',
+      // data: ,
       adapter: cache({
         local: false // 是否永久保留在本地，默认为false
       })

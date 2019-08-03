@@ -79,8 +79,8 @@ module.exports = {
     [
       '/api',
       {
-        //target: 'http://127.0.0.1:8000/',
-        target: 'http://5windy.com:5001/',
+        target: 'http://127.0.0.1:8000/',
+        // target: 'http://5windy.com:5001/',
         pathRewrite: {
           '^/api': '/',
         }

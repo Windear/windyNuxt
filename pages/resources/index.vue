@@ -5,23 +5,23 @@
       <h2 class="title-box">最新素材</h2>
       <div class="design_format">
         <span>格式:</span>
-        <a v-for="(format,key) in formatList" :key="format.id" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format)">{{format}}</a>
+        <a v-for="(format,key) in formatList" :key="format.id" class="format_btn " :class="{'format_btn_active':formatIndex==key}" href="javascript:;" @click="postResourcesFormatList(key,format,true)">{{format}}</a>
       </div>
       <ul class="img-list">
-        <li v-for="item in newList" :key="item.id">
+        <li v-for="item in resourcesList" :key="item.id">
           <div class="thumbnail">
-            <a :href="'/resources/data/'+item.resourcesId" target="_blank">
-              <img v-lazy="ip +'/media/'+item.resourcesImg" :key="item.resourcesImg" alt="有爱设计素材,sketch素材" style="display: inline;">
+            <a :href="'/resources/data/'+item.id" target="_blank">
+              <img v-lazy="item.picture" :key="item.picture" alt="有爱设计素材,sketch素材" style="display: inline;">
             </a>
             <div class="info">
             </div>
           </div>
-          <p><a :href="'/resources/data/'+item.resourcesId" target="_blank">{{item.resourcesTitle}}</a></p>
+          <p><a :href="'/resources/data/'+item.id" target="_blank">{{item.title}}</a></p>
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
       <div class="pagination">
-        <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="resourcesList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
+        <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="total" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
     </div>
   </div>
@@ -50,10 +50,13 @@
         notfound: false,
         //格式列表
         formatList: ["全部"],
+        //选中的格式
+        format:'全部',
         //选中的格式筛选
         formatIndex: 0,
         //分页当前页数
         currentPage: 1,
+        total:''
       }
     },
     //自定义头部
@@ -95,7 +98,7 @@
       //默认footer需要显示1
       this.$store.commit('updateFooterWidth', 1);
       //获取素材列表
-      this.getResourcesList();
+      this.getResourcesList(1);
       //获取格式分类
       this.getResourcesFormat();
     },
@@ -104,15 +107,21 @@
   
   
       //请求分类列表
-      getResourcesList() {
+      getResourcesList(val) {
         //获取projectId
-        let params = 0;
+        let params = 1
+        if(val!=''){
+            params = val
+        }
         //let params = localStorage.getItem("projectId");
         this.$store.dispatch('getResourcesList', params).then((response) => {
           let res = response.data;
+          
           if (res.state != "err") {
-            this.resourcesList = res;
-            this.toListData(0, 20);
+            this.resourcesList = res.results;
+            this.total = res.count;
+            console.log(this.resourcesList)
+            // this.toListData(0, 20);
           } else {
             // alert("网络错误")
             this.notfound = true;
@@ -120,28 +129,34 @@
         }).catch((err) => {
           console.error(err);
           this.$router.push({
-            path: '/404'
+            // path: '/404'
           });
         });
       },
   
   
       //通过格式分类获取素材列表
-      postResourcesFormatList(key, format) {
+      postResourcesFormatList(key, format,currentPage) {
         this.formatIndex = key;
-        this.currentPage = 1;
+        this.format = format;
+        if(currentPage){
+           this.currentPage = 1;
+        }
+       
         if (format == "全部") {
-          this.getResourcesList();
+          this.getResourcesList(1);
         } else {
           let params = {
-            "type": format.toLowerCase(),
-            "cate": 0
-          };
+            'p':this.currentPage,
+            'search':format.toLowerCase()
+          }
+
           this.$store.dispatch('postResourcesFormatList', params).then((response) => {
             let res = response.data;
             if (res.state != "err") {
-              this.resourcesList = res;
-              this.toListData(0, 20);
+              this.resourcesList = res.results;
+              this.total = res.count;
+              // this.toListData(0, 20);
             } else {
               // alert("网络错误")
               this.notfound = true;
@@ -155,7 +170,14 @@
       //点击翻页
       handleCurrentChange(val) {
         //console.log(`当前页: ${nowPage}`);
-        this.toListData((val - 1) * 20, val * 20);
+        // this.toListData((val - 1) * 20, val * 20);
+        if(this.format=='全部'){
+          this.getResourcesList(val)
+        }else{
+          this.postResourcesFormatList(this.formatIndex, this.format,false)
+        }
+        
+ 
         //回到顶部
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
