@@ -3,7 +3,7 @@
     <div class="detailsHeader">
       <div class="detailsTop">
         <!-- <img class="litterImg" :src="litterImg"> -->
-        <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
+        <div class="litterImg" :style="'background-image: url('+ ip +'/media/'+ litterImg +');'"></div>
         <div class="detailsTextBox">
           <div class="textTitle">{{projectData.projectTitle}}</div>
           <div class="dateAndCopyright">{{projectData.projectDate}} ©{{projectData.projectCopyright}}</div>
