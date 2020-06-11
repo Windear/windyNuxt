@@ -20,7 +20,7 @@
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
-      <div class="pagination">
+      <div class="pagination" v-if="total">
         <el-pagination background @current-change="handleCurrentChange" :page-size="24" layout="total,prev, pager, next" :total="total" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
     </div>

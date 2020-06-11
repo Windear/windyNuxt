@@ -33,7 +33,7 @@
         </li>
       </ul>
       <not-found v-if="resourcesList==''"></not-found>
-      <div class="pagination">
+      <div class="pagination" v-if="total">
         <el-pagination
           background
           @current-change="handleCurrentChange"

@@ -28,16 +28,16 @@
       <ul class="img-list">
         <li v-for="item in newList" :key="item.id">
           <div class="thumbnail">
-            <a :href="'/project/'+item.id" target="_blank">
-              <img v-lazy="item.picture" :key="item.id" style="display: inline;">
+            <a :href="'/project/'+item.pk" target="_blank">
+              <img v-lazy="ip +'/media/' + item.fields.picture" :key="item.id" style="display: inline;">
             </a>
           </div>
-          <p><a :href="'/project/'+item.id" target="_blank">{{item.title}}</a></p>
+          <p><a :href="'/project/'+item.pk" target="_blank">{{item.fields.title}}</a></p>
         </li>
       </ul>
       <not-found v-if="notfound"></not-found>
       <!-- 分页控件 -->
-      <div class="pagination">
+      <div class="pagination" v-if="designList">
         <el-pagination background @current-change="handleCurrentChange" :page-size="20" layout="total,prev, pager, next" :total="designList.length" style="margin-left: 5px;white-space: normal;" :current-page.sync="currentPage"></el-pagination>
       </div>
       <!-- 分页控件 -->
@@ -96,6 +96,10 @@
         }]
       }
     },
+    created(){
+       //获取素材列表
+      this.getDesignList();
+    },
     //进入页面执行的函数
     mounted() {
       document.documentElement.scrollTop = 0;
@@ -103,8 +107,7 @@
   
       baidu.baidu("关于windy");
   
-      //获取素材列表
-      this.getDesignList();
+     
   
   
       //默认footer需要显示1
@@ -120,7 +123,7 @@
         this.$store.dispatch('getDesignList', params).then((response) => {
           let res = response.data;
           if (res.state != "err") {
-            this.designList = res.results;
+            this.designList = res;
             this.toListData(0, 20);
           } else {
             // alert("网络错误")

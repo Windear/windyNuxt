@@ -5,9 +5,9 @@
         <!-- <img class="litterImg" :src="litterImg"> -->
         <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div>
         <div class="detailsTextBox">
-          <div class="textTitle">{{projectData.title}}</div>
-          <div class="dateAndCopyright">{{projectData.dgndatetime}} ©{{projectData.copyright}}</div>
-          <div class="textSynopsis">{{projectData.introduction}}</div>
+          <div class="textTitle">{{projectData.projectTitle}}</div>
+          <div class="dateAndCopyright">{{projectData.projectDate}} ©{{projectData.projectCopyright}}</div>
+          <div class="textSynopsis">{{projectData.projectSynopsis}}</div>
         </div>
         <a href="javascript:;">
           <div class="downloadBtn" v-if="author!= 'windy'">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="details">
-      <div class="detailBody" v-html="projectData.content" style="color:#000!important;"></div>
+      <div class="detailBody" v-html="projectData.projectDetail" style="color:#000!important;"></div>
       <!-- <div class="text">如果您觉得本狗做的不错，或者资源对您有用，欢迎任意金额打赏支持</div>
       <div style="display: flex; margin: auto; width: 180px;">
         <a href="javascript:;" @click="showPayBox=!showPayBox">
@@ -141,19 +141,19 @@
           if (response.statusText === "OK" && response.status === 200) {
             
             this.projectData = res;
-            this.author = this.projectData.copyright.toLowerCase();
+            this.author = this.projectData.projectCopyright.toLowerCase();
             //console.log(this.author);
-            this.litterImg = this.projectData.picture;
+            this.litterImg = this.projectData.projectPic;
             //传入页面标题
-            this.title = res.title;
+            this.title = res.projectTitle;
           } else {
             alert("网络错误")
           }
         }).catch((err) => {
           console.error(err);
-          this.$router.push({
-            path: '/404'
-          });
+          // this.$router.push({
+          //   path: '/404'
+          // });
         });
       },
       //字符串转HTML

@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <p>Copyright © 2018 ~ 2023 <a style="color:#57739A;" href="http://5windy.com/">有爱设计</a> 鄂ICP备15003372号 By Windy.</p>
+            <p>Copyright © 2018 ~ 2023 <a style="color:#57739A;" href="http://5windy.com/">有爱设计</a> <a style="color:#fff;" href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备15003372号</a> By Windy.</p>
         </div>
     </div>
 </template>
