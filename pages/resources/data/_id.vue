@@ -4,7 +4,7 @@
       <div class="detailsTop">
         <!-- <img class="litterImg" :src="litterImg"> -->
         <!-- <div class="litterImg" :style="'background-image: url('+ litterImg +');'"></div> -->
-        <img :src="litterImg" class="litterImg" alt />
+        <img :src="ip +'/media/' + litterImg" class="litterImg" alt />
         <div class="detailsTextBox">
           <div class="textTitle">{{projectData.resourcesTitle}}</div>
           <div class="dateAndCopyright">© {{projectData.resourcesCopyright}}</div>
@@ -41,7 +41,7 @@
     <div class="details">
       <div v-if="content" class="detailBody" v-html="projectData.resourcesDetail" style="color:#000!important;"></div>
       <div v-if="!content" class="detailBody" style="color:#000!important;">
-        <img class="lazyloaded" v-lazy="this.ip + '/media/'+ projectData.resourcesDetail" :data-src="this.ip + '/media/'+ projectData.resourcesDetail">
+        <img class="lazyloaded" v-lazy="ip +'/media/' + projectData.resourcesDetail" :data-src="ip +'/media/' +  projectData.resourcesDetail">
       </div>
       <div class="text">如果您觉得本狗做的不错，或者资源对您有用，欢迎任意金额打赏支持</div>
       <div style="display: flex; margin: auto; width: 180px;">
@@ -221,7 +221,7 @@ export default {
               this.content = false;
             }
             
-            this.litterImg = this.ip + "/media/" + this.projectData.resourcesPic;
+            this.litterImg = this.projectData.resourcesPic;
             console.log(this.projectData.resourcesDetail);
             //传入页面标题
             this.title = res.resourcesTitle;

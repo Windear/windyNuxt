@@ -11,7 +11,7 @@
         <li v-for="item in resourcesList" :key="item.id">
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.id" target="_blank">
-              <img v-lazy="item.picture" :key="item.picture" alt="有爱设计素材,sketch素材" style="display: inline;">
+              <img v-lazy="ip +'/media/' + item.picture" :key="item.picture" alt="有爱设计素材,sketch素材" style="display: inline;">
             </a>
             <div class="info">
             </div>

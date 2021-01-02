@@ -3,8 +3,8 @@
     <header class="nav" :class="{'navBarShadow':scrollType}" ref="nav">
       <div class="container_nav" :class="{'containerLitter':scrollType}">
         <div class="nav-left-box">
-          <a class="pcNav" href="https://5windy.com/"><img src="~/assets/img/logo.png" class="logo"></a>
-          <a class="mobileNav" href="https://5windy.com/"><img src="~/static/LOGO.svg" class="logo"></a>
+          <a class="pcNav" href="http://home.5windy.com:3000/"><img src="~/assets/img/logo.png" class="logo"></a>
+          <a class="mobileNav" href="http://home.5windy.com:3000/"><img src="~/static/LOGO.svg" class="logo"></a>
           <!-- PC显示的目录标题 -->
           <ul class="text-link">
             <a href="javascript:;" @click="openIndex">

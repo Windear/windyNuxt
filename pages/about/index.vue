@@ -92,7 +92,7 @@
         ],
         link: [{
           rel: "canonical",
-          href: "https://5windy.com/"
+          href: "http://home.5windy.com:3000/"
         }]
       }
     },

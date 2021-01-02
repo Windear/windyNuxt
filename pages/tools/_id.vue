@@ -5,7 +5,7 @@
             <div class="left">
                 <div class="content">
                     <div class="title-box">
-                        <img v-lazy="icon" :alt="toolsData.toolsTitle">
+                        <img v-lazy="ip +'/media/' + icon" :alt="toolsData.toolsTitle">
                         <h3>{{toolsData.toolsTitle}}</h3>
                     </div>
                     <div class="introduction">{{toolsData.toolsIntroduction}}</div>
@@ -18,8 +18,8 @@
                     </div>
                     <div class="problem-content">
                         <ol>
-                            <li>如遇：<code>「xxx.app已损坏，打不开。你应该将它移到废纸篓」</code>，并非你安装的软件已损坏，而是Mac系统的安全设置问题。详见：<a href="http://5windy.com/blog/1" target="_blank">MAC应用无法打开或文件损坏的处理方法</a></li>
-                            <li>激活工具在新系统10.12中打不开。参照 <a href="https://5windy.com/tools/16" target="_blank">让Special-K系列Patch工具运行在macOS sierra 10.12上</a> 与 <a href="https://5windy.com/tools/17" target="_blank">让CORE Keygen系列注册机成功运行在macOS sierra 10.12上的方法</a></li>
+                            <li>如遇：<code>「xxx.app已损坏，打不开。你应该将它移到废纸篓」</code>，并非你安装的软件已损坏，而是Mac系统的安全设置问题。详见：<a href="http://home.5windy.com:3000/blog/1" target="_blank">MAC应用无法打开或文件损坏的处理方法</a></li>
+                            <li>激活工具在新系统10.12中打不开。参照 <a href="http://home.5windy.com:3000/tools/16" target="_blank">让Special-K系列Patch工具运行在macOS sierra 10.12上</a> 与 <a href="http://home.5windy.com:3000/tools/17" target="_blank">让CORE Keygen系列注册机成功运行在macOS sierra 10.12上的方法</a></li>
                             <li>关于激活方法，大部分文章都对不同版本做了不同的激活说明。不过，最终还是以dmg包中的实际情况为准，如果里面只有单独的 .app或者.pkg文件，说明不需要做任何激活操作。</li>
                         </ol>
                     </div>
@@ -256,7 +256,7 @@
                             //将工具类型传入data
                             this.cate = res.toolsCate[1];
                             //将工具的icon传入data
-                            this.icon = this.ip + "/media/" + res.toolsIcon;
+                            this.icon = res.toolsIcon;
                         } else {
                             alert("网络错误");
                         }

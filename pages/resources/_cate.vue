@@ -19,7 +19,7 @@
           <div class="thumbnail">
             <a :href="'/resources/data/'+item.id" target="_blank">
               <img
-                v-lazy="item.picture"
+                v-lazy="ip +'/media/' + item.picture"
                 :key="item.picture"
                 alt="有爱设计素材,sketch素材"
                 style="display: inline;"

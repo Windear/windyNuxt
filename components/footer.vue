@@ -5,14 +5,14 @@
                 <p class="footer-title">实用网站导航</p>
                 <ul>   
                     <li v-for="item in CollectionNetListP1" :key="item.id">
-                        <img :src="item.icon" :title="item.net_name">
+                        <img :src="ip+ '/media/'+item.icon" :title="item.net_name">
                         <a :href="item.link_url" :title="item.net_name" target="_blank">{{item.net_name}}</a>
     
                     </li>
                 </ul>
                 <ul>
                     <li v-for="item in CollectionNetListP2" :key="item.id">
-                        <img :src="item.icon" :title="item.net_name">
+                        <img :src="ip+ '/media/'+item.icon" :title="item.net_name">
                         <a :href="item.link_url" :title="item.net_name" target="_blank">{{item.net_name}}</a>
                     </li>
     
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <p>Copyright © 2018 ~ 2023 <a style="color:#57739A;" href="http://5windy.com/">有爱设计</a> <a style="color:#fff;" href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备15003372号</a> By Windy.</p>
+            <p>Copyright © 2018 ~ 2023 <a style="color:#57739A;" href="http://home.5windy.com:3000/">有爱设计</a> <a style="color:#fff;" href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备15003372号</a> By Windy.</p>
         </div>
     </div>
 </template>
@@ -71,6 +71,8 @@
         //该页面的控制数据
         data() {
             return {
+                //ip地址
+                ip: this.$store.state.ip,
                 CollectionNetListP1: '',
                 CollectionNetListP2: '',
                 friendsNetList: ''

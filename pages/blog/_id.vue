@@ -4,7 +4,7 @@
             <div class="left">
                 <!-- 图片框 -->
                 <div class="image-box-left">
-                    <img v-lazy="articlePicture" :alt="articleTitle">
+                    <img v-lazy="ip +'/media/' + articlePicture" :alt="articleTitle">
                 </div>
                 <!-- 图片框 -->
                 <div class="content">
@@ -29,7 +29,7 @@
             <div class="right">
                 <!-- 图片框 -->
                 <div class="image-box" :style="scrollType?'position: fixed;top:80px;':''" >
-                    <img v-lazy="articlePicture" :alt="articleTitle">
+                    <img v-lazy="ip +'/media/' + articlePicture" :alt="articleTitle">
                 </div>
                 <!-- 图片框 -->
                 <!-- 下载框 -->
@@ -216,7 +216,7 @@
                             //将博客类型传入data
                             this.articleCate = res.articleCate[1];
                             //将博客文章的图片传入data
-                            this.articlePicture = this.ip + "/media/" + res.articlePicture;
+                            this.articlePicture = res.articlePicture;
                             //是否原创
                             this.articleOriginal = res.articleOriginal[1];
                         } else {

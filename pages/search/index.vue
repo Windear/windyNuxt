@@ -13,7 +13,7 @@
                     <li v-for="item in resourcesList" :key="item.id">
                         <div class="thumbnail">
                             <a :href="'/resources/data/'+item.id" target="_blank">
-                                <img v-lazy="item.picture" :key="item.picture" alt="item.title" style="display: inline;">
+                                <img v-lazy="ip +'/media/' + item.picture" :key="item.picture" alt="item.title" style="display: inline;">
                             </a>
                         </div>
                         <p><a :href="'/resources/data/'+item.id" target="_blank">{{item.title}}</a></p>
@@ -33,7 +33,7 @@
                     <li v-for="item in toolsList" :key="item.id">
                         <div class="box-body">
                             <a :href="'/tools/'+item.id" target="_blank">
-                                <img v-lazy="item.icon" :alt="item.title">
+                                <img v-lazy="ip +'/media/' + item.icon" :alt="item.title">
                                 <div class="content-text">
                                     <p>{{item.title}}</p>
                                     <span>{{item.introduction}}</span>
@@ -68,7 +68,7 @@
             <el-tab-pane label="文章搜索" name="third">
                 <a class="list" :href="'/blog/'+item.id" v-for="item in blogsList" :key="item.id" target="_blank">
                     <div class="blogList">
-                        <img v-lazy="item.picture" :alt="item.title">
+                        <img v-lazy="ip +'/media/' + item.picture" :alt="item.title">
                         <div class="blog-text">
                             <h3>{{item.title}}</h3>
                             <p>{{item.introduction}}</p>
